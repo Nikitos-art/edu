@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load message_app_tags %}
+{% load tz %}
+
+ <div class="container">
+    <div class="row clearfix">
+        <div class="col-lg-12">
+            <div class="card chat-app">
+                {% if chats.count == 0 %}
+                    <div class="panel panel-body">"No initiated dialogues"</div>
+                {% endif %}
+                <div class="people-list" style="padding: 0; position: unset; width: auto;">
+                    {% for chat in chats %}
+                        {% if chat.message_set.count != 0 %}
+                            {% with last_message=chat.message_set.last %}
+                                {% get_companion user chat as companion %}
+                                <ul class="list-unstyled chat-list mt-2 mb-0">
+                                    <li class="clearfix">
+                                        <a class="clearfix {% if companion == last_message.author and not last_message.is_read %} unread {% endif %}"
+                                            href="{{ chat.get_absolute_url }}" style="text-decoration:none">
+                                            <div class="dialogs">
+                                            <div class="context">
+                                                <div class="name">{{ companion.username }}</div>
+                                                {% if companion != last_message.author %}
+                                                    <div>
+                                                        <img class="status"
+                                                                src="{{ last_message.author.name }}">
+                                                        <div class="attached-reply-body {% if not last_message.is_read %}unread{% endif %}">{{ last_message.message|truncatechars_html:"200"|safe|striptags }}</div>
+                                                    </div>
+                                                {% else %}
+                                                    <div>{{ last_message.message|truncatechars_html:"200"|safe|striptags }}</div>
+                                                {% endif %}
+                                            </div>
+                                                <div class="status"><i
+                                                        class="fa fa-circle offline"></i> {{ last_message.pub_date|utc }}
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            {% endwith %}
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

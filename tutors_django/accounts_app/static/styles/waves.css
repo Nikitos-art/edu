@@ -1,0 +1,159 @@
+
+#waves-header {
+  position:relative;
+  text-align:center;
+  background: linear-gradient(60deg, rgba(84,58,183,1) 0%, rgba(0,172,193,1) 100%);
+  color:white;
+}
+.logo {
+  width:50px;
+  fill:white;
+  padding-right:15px;
+  display:inline-block;
+  vertical-align: middle;
+}
+
+.inner-header {
+  height: 400px;
+  width:100%;
+  margin: 0;
+  padding: 0;
+}
+
+.key-icons-block {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  margin-left: 50px;
+}
+
+.icon-adv {
+  display: flex;
+  margin-top: 30px;
+}
+
+.adv-image {
+  width:50px;
+  height: auto;
+  fill: #ffffff !important;
+}
+
+.keys-adv-title {
+  position: relative;
+  color:rgb(255, 255, 255);
+  padding-top: 30px;
+  font-weight: 600;
+  font-size: 3rem;
+}
+
+.icon-text {
+  margin-top: 10px;
+  margin-left: 10px;
+  color:white;
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+
+/*Flexbox for containers*/
+.flex { 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.waves {
+  position:relative;
+  width: 100%;
+  height:15vh;
+  margin-bottom:-7px; /*Fix for safari gap*/
+  min-height:100px;
+  max-height:150px;
+}
+
+.content {
+  position:relative;
+  height:20vh;
+  text-align:center;
+  background-color: white;
+}
+
+/* Animation */
+
+.parallax > use {
+  animation: move-forever 25s cubic-bezier(.55,.5,.45,.5)     infinite;
+}
+#wave-fill-1 {
+  animation-delay: -2s;
+  animation-duration: 7s;
+}
+#wave-fill-2 {
+  animation-delay: -3s;
+  animation-duration: 10s;
+}
+#wave-fill-3 {
+  animation-delay: -4s;
+  animation-duration: 13s;
+}
+#wave-fill-4 {
+  animation-delay: -5s;
+  animation-duration: 20s;
+}
+@keyframes move-forever {
+  0% {
+   transform: translate3d(-90px,0,0);
+  }
+  100% { 
+    transform: translate3d(85px,0,0);
+  }
+}
+/*Shrinking for mobile*/
+
+@media screen and (min-width: 350px) and (max-width: 900px) {
+  .waves {
+    height:40px;
+    min-height:40px;
+  }
+  .content {
+    height:30vh;
+  }
+  h1 {
+    font-size:24px;
+  }
+  .logo {
+    width:30px;
+    padding-right:8px;
+  }
+  
+  .inner-header {
+    height: 200px;
+    width:100%;
+  }
+  
+  .key-icons-block {
+    margin-left: 15px;
+    top: -10%;
+    position: relative;
+  }
+  
+  .icon-adv {
+    margin-top: 18px;
+  }
+  
+  .adv-image {
+    width:28px;
+    height: 28px;
+  }
+  
+  .keys-adv-title {
+    padding-bottom: 5px;
+    font-size: 1.1rem;
+    top: -0.8em;
+  }
+  
+  .icon-text {
+    margin-top: 6px;
+    margin-left: 5px;
+    font-size: 0.55rem;
+  }
+}

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'styles/quiz-create.css' %}">
+{% endblock %}
+
+{% block header %}
+{% include 'includes/inc_header.html' %}
+{% endblock %}
+
+{% block site_content %}
+<div class="quiz-create-page">
+    <div class="quiz-create-block">
+        <div class="quiz-main-title">Quiz</div>
+        <form method="post" class="quiz-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="sub-btn" type="submit"><img
+                src="{% static 'img/check.svg' %}"
+                alt="check-svg"
+                id="check-svg"
+              />Done</button>
+        </form>
+    </div>
+    <img 
+        src="{% static 'img/quiz.svg' %}"
+        alt="quiz-svg"
+        id="quiz-svg"
+    >
+</div>
+{% endblock %}
+
+{% block footer %}
+{% include 'includes/inc_footer.html' %}
+{% endblock %}

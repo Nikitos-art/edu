@@ -1,0 +1,53 @@
+{% load static %} 
+{% block site_content %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'styles/schedule.css' %}">
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/schedule.js' %}"></script>
+{% endblock %} 
+
+
+<div id="schedule-menu-block">
+    {{ cal|safe }}
+</div>
+
+{% if user.user_roles == "tutor" %}
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" id="mod-dia">
+            <div class="modal-content" id="mod-cont">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Please fill in the details for your new lesson</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <img id="add-lesson-svg" src="{% static 'img/add-lesson.svg' %}">
+                <div class="modal-body">
+                    <form id="lessonForm" method="post" action="{% url 'add_lesson' %}">
+                        {% csrf_token %}
+                        Lesson Date: <input type="date" name="lesson_date">
+                        <br>
+                        Start Time: <input type="text" name="start_time">
+                        <br>
+                        Finish Time: <input type="text" name="finish_time">
+                        <br>
+                        <label for="student_name">Student:</label>
+                        <select name="student_name" id="student_name">
+                            {% for student in students %}
+                                <option value="{{ student.full_name }}">{{ student.full_name }}</option>
+                            {% endfor %}
+                        </select>
+                        Description: <input type="text" name="description"><br>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Create Lesson</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
+
+{% endblock %}

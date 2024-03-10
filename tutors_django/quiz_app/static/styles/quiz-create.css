@@ -1,0 +1,218 @@
+.quiz-create-page {
+  position: relative;
+  background-color: rgb(219, 219, 219);
+  overflow: hidden;
+}
+
+.quiz-create-block {
+  position: relative;
+  left: 10%;
+  padding-top: 50px;
+  padding-bottom: 100px;
+}
+
+.quiz-main-title {
+  font-family: "Coiny", cursive;
+  font-size: 2em;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+#id_difficulty {
+  width: 200px;
+}
+
+#quiz-svg {
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    left: 55%;
+    bottom: 35%;
+}
+
+.quiz-form {
+  border-style: solid;
+  border-width: 3px;
+  border-color: #333;
+  width: 600px;
+  padding: 10px;
+}
+
+.quiz-form label {
+  display: inline-block;
+  text-align: left;
+  width: 300px;
+  margin-right: 10px; /* Add space between label and input */
+  font-family: "Coiny", cursive;
+  font-size: 1.5em;
+  font-weight: 600;
+  color: #333;
+}
+
+.quiz-form input {
+  width: 200px;
+}
+
+/***************************** Questions Create form ********************************/
+.questions-create-page {
+    position: relative;
+    background-color: rgb(219, 219, 219);
+    overflow: hidden;
+    font-family: "Coiny", cursive;
+}
+
+.questions-create-block {
+    position: relative;
+    padding-bottom: 100px;
+    padding: 50px;
+    left: 50px;
+}
+
+.existing-questions-block {
+  position: absolute;
+  list-style-type: none;
+  padding: 0;
+  width: 300px;
+  left: 65%;
+  top: 10%;
+}
+
+.existing-questions-items {
+  background-color: #f0f0f0;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.questions-main-title {
+    position: relative;
+    font-family: "Coiny", cursive;
+    font-size: 2em;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 50px;
+    left: 20px;
+}
+
+.q-a-form {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 800px;
+}
+
+.questions-form label {
+    display: inline-block;
+    text-align: left;
+    width: 300px;
+    margin-right: 10px; /* Add space between label and input */
+    font-family: "Coiny", cursive;
+    font-size: 1.5em;
+    font-weight: 600;
+    color: #333;
+}
+
+.questions-form input {
+    width: 420px;
+}
+
+#question-svg {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    left: 35%;
+    top: 8%;
+}
+
+#id_quiz.form-control {
+  max-width: 350px;
+}
+
+#id_quiz {
+  font-family: "Coiny", cursive;
+  font-size: 1em;
+  font-weight: 500;
+  background: hsl(187 75% 64%);
+  border-style: ridge;
+  border-width: 3px;
+  border-color: #333;
+  position: relative;
+  right: 380px;
+  bottom: 50%;
+  margin-bottom: 50px;
+}
+
+
+label[for="id_quiz"], label[for="id_text"] {
+  display: none;
+}
+
+.answer-card-item {
+  border: 3px dotted #333;
+  box-sizing: border-box;
+  font-size: 1em;
+  font-weight: 500;
+  margin: 20px;
+  width: 350px;
+  padding: 5px;
+}
+
+#id_text {
+  position: relative;
+  top: 70%;
+  left: 5%;
+  width: 400px;
+}
+
+.card-num {
+  /* border-bottom: 3px dotted #333;
+  border-right: 3px dotted #333; */
+  padding: 2px;
+}
+
+.answer-card {
+  margin: 20px;
+  max-width: 400px;
+  margin-right: 50px;
+}
+
+.correct-box {
+  position: relative;
+  bottom: 28px;
+  right: 75px;
+  width: 30px;
+  height: 30px;
+}
+
+.sub-btn {
+	display: flex;
+	color: black;
+	padding: 0.5rem 1rem;
+	text-decoration: none;
+	background: hsl(187 75% 64%);
+	border-radius: 0.6rem;
+	font-weight: 700;
+	border: 0.35rem solid;
+  height: 50px;
+  width: 120px;
+  position: relative;
+  /* top: 200px; */
+  left: 25px;
+  transition: background-color 0.3s ease;
+}
+
+.sub-btn:hover {
+  background-color: hsl(211, 94%, 31%); /* Change the background color for the hover effect */
+}
+
+#check-svg {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  bottom: 2px;
+}
+
+.existing-questions-items {
+  font-size: 0.8em;
+}

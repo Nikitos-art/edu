@@ -1,0 +1,54 @@
+{% load static %} 
+
+{% block site_content %}
+<div id="chat-menu-block">
+  <div class="block-top">
+    <img
+      src="{% static 'img/chat-menu-svg.svg' %}"
+      alt="chat-menu-svg"
+      id="chat-menu-svg"
+    />
+    <div class="chat-title">Chat Menu</div>
+  </div>
+  {% if user.user_roles == "student" %}
+    <div class="chat-container">
+      {% for tutor in tutors %}
+        <div class="chat-item">
+          <div class="chat-card-info-blocks">
+            {% if tutor.avatar %}
+              <div class="thumb"><img class="thumb-img" src="{{ tutor.avatar.url }}" alt="Tutor Avatar"></div>
+            {% else %}
+            <div class="thumb"><img class="thumb-img" src="{% static 'img/grey.png' %}" alt="Default Avatar"></div>
+            {% endif %}
+            <div class="chat-features">
+              <h3 class="chat-item-h3">{{ tutor.full_name }}</h3>
+              <a href="{% url 'message:create_dialog' user_id=tutor.pk %}" role="button" class="chat-init-btn">Send a Message</a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="chat-container">
+      {% for student in students %}
+        <div class="chat-item">
+          <div class="chat-card-info-blocks">
+            
+            {% if student.avatar %}
+              <div class="thumb"><img class="thumb-img" src="{{ student.avatar.url }}" alt="Student Avatar"></div>
+            {% else %}
+            <div class="thumb"><img class="thumb-img" src="{% static 'img/grey.png' %}" alt="Default Avatar"></div>
+            {% endif %}
+
+            <div class="chat-features">
+              <h3 class="chat-item-h3">{{ student.full_name }}</h3>
+              <a href="{% url 'message:create_dialog' user_id=student.pk %}" role="button" class="chat-init-btn">Send a Message</a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+</div>
+{% endblock %}
+

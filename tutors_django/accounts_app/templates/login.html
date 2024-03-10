@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/auth.css' %}">
+{% endblock %}
+
+
+{% block site_content %}
+
+
+{% for message in messages %}
+    <div class="message text-center alert alert-danger {{ message.tags }}" role="alert">{{ message }}</div>    
+{% endfor %}
+
+<div class="auth-container">
+    <form class="log-form" method="post" style='background: url("{% static 'img/log-img2.png' %}")'>
+        {% csrf_token %}
+        <h3 class="log-h3">Login Here</h3>
+    
+        <label class="log-label" for="username">{{ form.username.label }}</label>
+        <input 
+            class="log-input" 
+            type="text" 
+            placeholder="Email or Phone" 
+            id="username"
+            name="{{ form.username.name }}"
+            >
+    
+        <label class="log-label" for="password">{{ form.password.label }}</label>
+        <input 
+            class="log-input" 
+            type="password" 
+            placeholder="Password" 
+            id="password"
+            name="{{ form.password.name }}"
+        >
+    
+        <button class="sub-btn" type="submit"
+                    id="auth-btn-login"><img
+                        src="{% static 'img/login.svg' %}"
+                        alt="auth-svg"
+                        id="auth-svg"
+                  />Login</button>
+    </form>
+</div>
+{% endblock %}

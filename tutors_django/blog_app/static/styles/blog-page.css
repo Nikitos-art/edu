@@ -1,0 +1,11 @@
+
+.blog-page-container {
+    width: 800px;
+    font-family: 'Coiny', cursive;
+    margin-left: 275px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    box-shadow: 0 0 15em -1em #0C356A;
+    border-radius: 10px;
+    padding:30px;
+}

@@ -1,0 +1,196 @@
+@media screen and (max-width: 600px) {
+  
+  .hero-section {
+    height: 25vw;
+  }
+
+  .cloud-text {
+    font-size: 1.5em;
+  }
+
+  .why-us-block {
+    height: 30vh;
+  }
+
+  .why-us-text {
+    font-size: 7px;
+  }
+  /********************** WHAT WE OFFER ***************************************/
+
+  .what-we-offer-block {
+    grid-template-rows: 100px 35px 300px 300px 300px;
+    gap: 1rem;
+  }
+
+  #what-we-offer-proverb {
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 0.6rem;
+  }
+
+  #h2-title-2 {
+    position: relative;
+    font-size: 30px;
+  }
+
+  .product-block-kids {
+    position: relative;
+    left: -2em;
+  }
+
+  .product-block-grown-ups {
+    position: relative;
+    left: 0em;
+    top: -10%;
+  }
+
+  .product-block-chinese {
+    position: relative;
+    top: -18%;
+  }
+
+  .product-info-grown-ups {
+    padding-left: 1em;
+    padding-right: 1.5em;
+    width: 13em;
+  }
+
+  .product-info-chinese, .product-info-kids {
+    width: 13em;
+  }
+
+  .product-description {
+    font-size: 0.65em;
+  }
+
+  .grown-ups {
+    right: 12%;
+  }
+
+  .product-title {
+    font-size: 1rem;
+    margin-top: 10px;
+  }
+
+  #product-img-kids, #product-img-grown-ups, #product-img-chinese {
+    width: 9rem;
+    height: 9rem;
+    top: 10%;
+  }
+
+  #product-img-grown-ups {
+    right: -3%;
+  }
+
+  #product-img-chinese {
+    right: 10%;
+    top: 10%;
+  }
+
+  .chinese {
+    width: 15em;
+  }
+  /************************ BUTTONS ****************************/
+
+  .button-why, .card-button, .sub-btn {
+    border: 0.15rem solid;
+    position: relative;
+    margin-top: 10px;
+    font-size: 0.5rem;
+    text-align: center;
+  }
+
+  .button-why {
+    height: 30px;
+    width: 90px;
+  }
+
+  .card-button {
+    padding: 8px 16px 10px 10px;
+    height: 20px;
+    width: 62px;
+    line-height: 2px;
+    line-height: 2px;
+    writing-mode: horizontal-tb;
+    text-orientation: sideways;
+    white-space: nowrap;
+  }
+
+  .card-text {
+    margin-bottom: 10px;
+  } 
+
+  .sub-btn {
+    width: 120px;
+    height: 33px;
+  }
+
+  /*            TIMELINE                      */
+  .h2-title-4 {
+    font-size: 1.5rem;
+  }
+  /*             PLACEMENTS                   */
+  .h2-title-5 {
+    font-size: 1rem;
+  }
+  .card {
+    max-width: 210px;
+    margin: 5px;
+    margin-top: 60px;
+    margin-bottom: 50px;
+  }
+
+  .card-image {
+    width: 100px;
+    height: 125px;
+    object-fit: cover;
+  }
+
+  .card-content {
+    padding: 2px;
+  }
+
+  .card-title {
+    font-size: 0.7em;
+    margin-bottom: 10px;
+  }
+
+  .card-text {
+    line-height: 1;
+    margin-bottom: 5px;
+    font-size: 0.6em;
+  }
+
+  /*             INQUIRY              */
+  .inquiry-h1 {
+    font-size: 2.25em;
+  }
+
+  .inquiry-h4 {
+    font-size: 1.1em;
+    top: 10%;
+  }
+
+  .input-container {
+    max-width: 60vh;
+    min-width: 36vh;
+    width: 40%;
+    margin-top: 14vh;
+  }
+  .inquiry-input,
+  .inquiry-textarea {
+    padding: 1.5em;
+    font-size: 0.7rem;
+    border-radius: 4px;
+  }
+  .styled-input .inquiry-label {
+    padding: 0.1rem 10px 0.8rem 10px;
+    font-size: 0.7rem;
+  }
+
+  #envelope-svg {
+    width: 20px;
+    height: 20px;
+  }
+}

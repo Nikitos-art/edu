@@ -1,0 +1,71 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/schedule.css' %}">
+    <title>Dashboard - blogs</title>
+</head>
+<body>
+
+
+<div class="main-cards">
+    {% for post in blog_posts %}
+    {% if post.status == 1 %}
+    <div class="card">
+        <div class="post-main-info">
+            <h4>{{ post.title }} </h4>
+            <p>{{ post.created_on }}</p>
+            <p style="background: #1A64E5; width: 75px; margin-bottom: 5px;">Published</p>
+        </div>
+        <div class="post-features">
+            <a href="{% url 'blog_app:update_blogpost' pk=post.pk %}"
+               class="btn btn-primary dashboard">Edit</a>
+            <a href="{% url 'blog_app:delete_blogpost' pk=post.pk %}" class="btn btn-primary dashboard">Delete</a>
+        </div>
+    </div>
+    {% else %}
+    <div class="card">
+        <div class="post-main-info">
+            <h4>{{ post.title }} </h4>
+            <p>{{ post.created_on }}</p>
+            <p style="background: #e59b1a; width: 40px; margin-bottom: 5px;">Draft</p>
+        </div>
+        <div class="post-features">
+            <a href="{% url 'blog_app:update_blogpost' pk=post.pk %}"
+               class="btn btn-primary dashboard">Edit</a>
+            <a href="{% url 'blog_app:delete_blogpost' pk=post.pk %}" class="btn btn-primary dashboard">Delete</a>
+        </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Create your shit here</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="BlogCreateForm" method="post" action="{% url 'blog_app:create_blogpost' %}">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit">Create</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+    var popoverList = popoverTriggerList.map(function(popoverTriggerEl) {
+      return new bootstrap.Popover(popoverTriggerEl)
+    })
+  });
+</script>
+</body>
+</html>

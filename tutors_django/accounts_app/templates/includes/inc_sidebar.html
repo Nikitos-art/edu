@@ -1,0 +1,67 @@
+
+
+<style>
+    #side-nav {
+        position: absolute;
+        top: 32%;
+        background-color: #FFC436;
+        left: 0.5%;
+    }
+
+    .side-ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .side-li {
+        font-size: 29px;
+        font-family: sans-serif;
+        background-color: white;
+        border: 2px solid black;
+        letter-spacing: 0.1em;
+        width: 5em;
+        height: 1.5em;
+        line-height: 1.5em;
+        position: relative;
+        overflow: hidden;
+        margin: 0.5em;
+        cursor: pointer;
+    }
+
+    .side-span {
+        color: white;
+        mix-blend-mode: difference;
+    }
+
+    .side-li::before {
+        content: '';
+        position: absolute;
+        width: 1.5em;
+        height: inherit;
+        background-color: black;
+        border-radius: 50%;
+        top: 0;
+        left: -0.75em;
+        transition: 0.5s ease-out;
+    }
+
+    .side-li:hover::before {
+        transform: scale(7);
+    }
+</style>
+
+<div id="side-nav">
+    <div class="side-ul">
+        <div class="side-li" onclick="toggleContainer('schedule-container')"><span class="side-span">Schedule</span></div>
+
+        {% if user.user_roles == "tutor" %}
+            <div class="side-li" onclick="toggleContainer('blog-container')"><span class="side-span">Blog</span></div>
+            <div class="side-li" onclick="toggleContainer('quiz-container')"><span class="side-span">Quiz</span></div>
+        {% endif %}
+        
+        <div class="side-li" onclick="toggleContainer('chat-container')"><span class="side-span">Chat</span></div>
+
+        <div class="side-li" onclick="toggleContainer('profile-container')"><span class="side-span">Profile</span></div>
+        
+    </div>
+</div>

@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'styles/profile.css' %}">
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/profile.js' %}"></script>
+{% endblock %} 
+
+
+{% block site_content %}
+
+{% for message in messages %}
+    <div class="message text-center alert alert-{{ message.tags }}">
+        {{ message }}
+    </div>
+{% endfor %}
+
+
+<div class="classroom-container">
+    <div>
+      <img
+      src="{% static 'img/classroom2.png' %}"
+      alt="classroom-img"
+      id="classroom-img"
+    />
+      <div>
+        <div class="account-greetings">Hello, {{ request.user.full_name }}</div>
+        {% if request.user.avatar %}
+            <img class="account-avatar" src="{{ request.user.avatar.url }}">
+        {% else %}
+            <img class="account-avatar" src="{% static 'img/grey.png' %}">
+        {% endif %}
+      </div>
+    </div>
+    {% include 'includes/inc_sidebar.html' %}
+    <div class="main-menu">
+        <div class="menu-box-item" id="schedule-container" style="display: none">
+            {% include 'schedule-menu.html' %}
+        </div>
+        <div class="menu-box-item" id="chat-container" style="display: none">
+            {% include 'chat-menu.html' %}
+        </div>
+        <div class="menu-box-item" id="profile-container" style="display: none">
+          {% include 'profile-menu.html' %}
+        </div>
+    </div>
+  </div>
+{{ redirect_to_login_immediately }}
+{% endblock %}
+
+

@@ -1,0 +1,258 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block head %}
+    <meta name="keywords" content="online tutoring, education, online learning,
+      translations, interpreting">
+{% endblock %}
+
+{% block title %}Lighthouse-Tutors Home{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'styles/index.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/media-queries/small.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/media-queries/medium.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/media-queries/large.css' %}">
+{% endblock %}
+
+{% block site_content %}
+<div class="hero-section">
+    <h1 class="cloud-text cloud-title">Welcome to Lighthouse-Tutors!</h1>
+</div>
+
+
+<div class="why-us-block">
+    <div class="why-us-text">
+      <h2 id="why-us-title">
+        Why choose us?
+      </h2>
+      <p id="why-us-p">
+        Our tutors have extensive on-line tutoring experience. We have worked with students from all around the world. Our students are of a wide variety of levels ranging from near native level speakers to early beginners. With over 10 years of English tutoring experience we offer you the newest methods and teaching approaches. Our students have accomlished their goals. 
+      </p>
+    </div>
+    <img src="{% static 'img/why-us.png' %}" alt="Why-us-img" id="why-us-image">
+</div>
+
+<div class="what-we-offer-block">
+  <h3 id="what-we-offer-proverb">
+    "To learn a language is to have one more window from which to look at the world."
+    -Chinese Proverb</h3>
+  <h2 id="h2-title-2">
+    What we offer:
+  </h2>
+
+  <div class="product-block-kids">
+    <div class="product-info-kids">
+      <h3 class="product-title">
+        English for kids older than 9 years old.
+      </h3>
+      <p class="product-description">
+        Discover the joy of language with our English course for kids! Packed with interactive activities, captivating stories, and playful lessons, our program nurtures essential language skills in a fun, supportive setting. Watch your child thrive as they embark on an engaging journey to become confident and creative English communicators.
+      </p>
+      <button class="button-why" onclick="redirectToKids()">Find out more</button>
+      </div>
+    <img src="{% static 'img/kids_8yo.png' %}" alt="Reading Image" id="product-img-kids">
+  </div>
+
+  <div class="product-block-grown-ups">
+    <img src="{% static 'img/business-prod.png' %}" alt="Reading Image" id="product-img-grown-ups">
+    <div class="product-info-grown-ups">
+      <h3 class="product-title">
+        English for grown-ups.
+      </h3>
+      <p class="product-description grown-ups">
+        Elevate your language proficiency with our English language course designed for grown-ups. Immerse yourself in dynamic lessons tailored to adult learners, blending interactive activities, real-world conversations, and cultural insights. Cultivate confident communication skills and navigate the global stage with ease. Join us in transforming language learning into a rewarding journey for adults..
+      </p>
+
+      <button class="button-why" onclick="redirectToGrownups()">Find out more</button>
+
+    </div>
+  </div>
+
+  <div class="product-block-chinese">
+    <div class="product-info-chinese">
+      <h3 class="product-title">
+        Chinese for kids and grown-ups.
+      </h3>
+      <p class="product-description chinese">
+        Embark on a captivating linguistic adventure with our Chinese course! Tailored for learners of all levels, our program seamlessly combines interactive lessons, cultural exploration, and practical language skills. Immerse yourself in Mandarin excellence and unlock the door to a world of communication and understanding. Join us on your journey to fluency!
+      </p>
+      <button class="button-why" onclick="redirectToChinese()">Find out more</button>   
+    </div>
+    <img src="{% static 'img/hanyu.png' %}" alt="Reading Image" id="product-img-chinese">
+  </div>
+
+</div>
+
+<div class="waves-keys">
+    {% include 'includes/waves.html' %}
+</div>
+
+<div id="timeline-block">
+    <h2 class="h2-title-4">5 Steps to become our student.</h2>
+    <ul class="timeline">
+        <li class="timeline-li">
+          <div class="direction-r">
+            <div class="flag-wrapper">
+              <span class="hexa"></span>
+              <span class="flag">Make an inquiry</span>
+              <span class="time-wrapper"><span class="time">Step 1</span></span>
+            </div>
+          </div>
+        </li>
+      
+        <li class="timeline-li">
+          <div class="direction-l">
+            <div class="flag-wrapper">
+              <span class="hexa"></span>
+              <span class="flag">Arrange a trial class.</span>
+              <span class="time-wrapper"><span class="time">Step 2</span></span>
+            </div>
+          </div>
+        </li>
+      
+        <li class="timeline-li">
+          <div class="direction-r">
+            <div class="flag-wrapper">
+              <span class="hexa"></span>
+              <span class="flag">Take the trial class.</span>
+              <span class="time-wrapper"><span class="time">Step 3</span></span>
+            </div>
+          </div>
+        </li>
+
+        <li class="timeline-li">
+            <div class="direction-l">
+              <div class="flag-wrapper">
+                <span class="hexa"></span>
+                <span class="flag">We arrange a course for you.</span>
+                <span class="time-wrapper"><span class="time">Step 4</span></span>
+              </div>
+            </div>
+          </li>
+
+        <li class="timeline-li">
+            <div class="direction-r">
+                <div class="flag-wrapper">
+                <span class="hexa"></span>
+                <span class="flag">You become a lighthouse student.</span>
+                <span class="time-wrapper"><span class="time">Step 5</span></span>
+                </div>
+            </div>
+        </li>
+      </ul>
+</div>
+
+<div id="placement-tests">
+  <h2 class="h2-title-5">See where you stand with our placement tests.</h2>
+  <div class="card">
+      <img src="{% static 'img/placeA.png' %}" alt="Card Image" class="card-image">
+      <div class="card-content">
+          <h3 class="card-title">Test A</h3>
+          <p class="card-text">This placement test is recomended for fluent speakers of English language.</p>
+          <a href="/quiz/1" type="button" class="card-button">Learn More</a>
+      </div>
+  </div>
+
+  <div class="card">
+    <img src="{% static 'img/placeB.png' %}" alt="Card Image" class="card-image">
+    <div class="card-content">
+        <h3 class="card-title">Test B</h3>
+        <p class="card-text">This placement test is recomended for students who do not speak English fluently.</p>
+        <a href="/quiz/2" type="button" class="card-button">Learn More</a>
+    </div>
+  </div>
+</div> 
+
+<div id="inquiry-block">
+    <div class="container">
+        <div class="row">
+            <h2 class="inquiry-h1">Make an Inquiry</h2>
+        </div>
+        <div class="row">
+            <h4 class="inquiry-h4" style="text-align:center">We'd love to hear from you!</h4>
+        </div>
+        <form class="row input-container" method="post" action="{% url 'inquiry_form' %}">
+            {% csrf_token %}
+            <div class="col-xs-12">
+                <div class="styled-input wide">
+                    <input class="inquiry-input" 
+                      type="text"
+                      name="name" 
+                      value="{{ form.data.name }}" 
+                      required 
+                      />
+                    <label class="inquiry-label" >Your name</label> 
+                </div>
+            </div>
+            <div class="col-xs-12">
+                <div class="styled-input wide">
+                    <input class="inquiry-input" 
+                      type="text" 
+                      value="{{ form.data.email }}"
+                      name="email" 
+                      required 
+                      />
+                    <label class="inquiry-label">Your email</label> 
+                </div>
+            </div>
+            
+            <div class="col-xs-12">
+              <div class="styled-input wide">
+                  <input class="inquiry-input" 
+                    type="text" 
+                    value="{{ form.data.time_zone }}"
+                    name="time_zone" 
+                    required 
+                    />
+                  <label class="inquiry-label">Your time zone</label> 
+              </div>
+            </div>
+            
+            <div class="col-xs-12">
+              <div class="styled-input wide">
+                  <input class="inquiry-input" 
+                    type="text" 
+                    value="{{ form.data.prefered_platform }}"
+                    name="prefered_platform" 
+                    required 
+                    />
+                  <label class="inquiry-label">Prefered platform for your lesson</label> 
+              </div>
+            </div> 
+
+            <div class="col-xs-12">
+                <div class="styled-input wide">
+                    <textarea 
+                      class="inquiry-textarea"
+                      name="message" 
+                      required>{{ form.data.message }}
+                    </textarea>
+                    <label class="inquiry-label">Message</label>
+                </div>
+            </div>
+            <div class="col-xs-12">
+              <button type="submit" class="sub-btn"><img
+                src="{% static 'img/envelope.svg' %}"
+                alt="envelope-svg"
+                id="envelope-svg"
+              />Send Message</button>
+          </div>
+        </form>
+    </div>
+</div>
+
+<script>
+  function redirectToKids() {
+      window.location.href = '/courses/#kids-english';
+  }
+  function redirectToGrownups() {
+      window.location.href = '/courses/#grownups-english';
+  }
+  function redirectToChinese() {
+      window.location.href = '/courses/#chinese';
+  }
+</script>
+
+{% endblock %}

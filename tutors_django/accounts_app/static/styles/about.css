@@ -1,0 +1,104 @@
+
+.key-point {
+  color: black;
+  padding: 20px;
+  margin-top: 30px;
+  font-size: 20px;
+  font-weight: 500;
+  position: relative;
+  width: 80%;
+  left: 9%;
+  box-shadow: 0 0 5em -1em #0C356A;
+}
+
+#about-bio {
+  border-bottom: 5px solid #0C356A; 
+  padding-bottom: 20px;
+  margin-bottom: 20px; 
+}
+
+.key-title{
+  font-family: 'Indie Flower', cursive;
+  font-size: 64px;
+}
+
+.key-content {
+  display: flex;
+  align-items: center;
+}
+
+.key-text {
+  margin-right: 20px;
+}
+
+.key-image {
+  width: 150px; 
+  margin-right: 20px; 
+}
+
+.image-caption {
+  font-style: italic;
+}
+
+.philo {
+  display: flex;
+}
+
+#philo-img {
+  position: relative;
+  width: 30%;
+  height: auto;
+  left: 35%;
+  margin-bottom: 10px;
+}
+
+#paragraph-one {
+  position: absolute;
+  top: 16%;
+  max-width: 600px;
+}
+
+#exp-img {
+  max-width: 300px;
+}
+
+#ex-p-one {
+  position: absolute;
+  top: 18%;
+  max-width: 680px;
+  left: 32%;
+}
+
+#dedi-img {
+  position: relative;
+  top: 15%;
+  max-width: 300px;
+  margin-bottom: 30px;
+}
+
+#dedi-p-one {
+  position: absolute;
+  top: 25%;
+  max-width: 700px;
+  left: 30%;
+}
+
+#skills-p-one {
+  position: absolute;
+  top: 25%;
+  max-width: 700px;
+  left: 30%;
+  margin-left: 20px;
+}
+
+#bottom-key {
+  margin-bottom: 75px;
+}
+
+#skills-img {
+  position: relative;
+  top: 15%;
+  max-width: 300px;
+  margin-bottom: 30px;
+  margin-top: 20px;
+}

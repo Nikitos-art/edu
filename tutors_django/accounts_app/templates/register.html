@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/auth.css' %}">
+{% endblock %}
+
+
+{% block site_content %}
+
+{% if messages %}
+<div class="alert alert-danger" role="alert">
+    {% for message in messages %}
+        <p>{{ message }}</p>
+    {% endfor %}
+</div>
+{% endif %}
+<div class="auth-container">
+    <form class="reg-form" method="post" style='background: url("{% static 'img/log-img4.png' %}")'>
+        {% csrf_token %}
+        <div class="reg-form-content">
+            <h3 class="reg-h3">Sign-Up</h3>
+            <div>
+                <label class="reg-label" for="floatingInput1">{{ form.full_name.label }}</label>
+                <input type="text" class="reg-input" id="floatingInput1" name="{{ form.full_name.name }}" placeholder="{{ form.full_name.label }}">
+            </div>
+            <div>
+                <label class="reg-label" for="floatingInput2">{{ form.email.label }}</label>
+                <input type="email" class="reg-input" id="floatingInput2" name="{{ form.email.name }}" placeholder="{{ form.email.label }}">
+            </div>
+            <div>
+                <label class="reg-label" for="role_select">Your role: </label>
+                {{ form.user_role }}
+            </div>
+            <div>
+                <label class="reg-label" for="floatingPassword1">{{ form.password1.label }}</label>
+                <input type="password" class="reg-input" id="floatingPassword1" name="{{ form.password1.name }}" placeholder="{{ form.password1.label }}">
+            </div>
+            <div>
+                <label id="reg-pwd2" class="reg-label" for="floatingPassword2">{{ form.password2.label }}</label>
+                <input type="password" class="reg-input" id="floatingPassword2" name="{{ form.password2.name }}" placeholder="{{ form.password2.label }}">
+            </div>
+            <div class="privacy-register">
+                <button class="sub-btn" style="display: none;" type="submit"
+                    id="auth-btn"><img
+                        src="{% static 'img/register.svg' %}"
+                        alt="auth-svg"
+                        id="auth-svg"
+                  />Register</button>
+                  
+
+                <p class="privacy-box">
+                    <label for="privacy">
+                        <input id="privacy" name="{{ form.agreed_with_policy.name }}" type="checkbox" value="privacy" onchange="toggleRegisterButton()" />
+                        <span>I agree with <a href="/privacy">Privacy Policy</a></span>
+                    </label>
+                </p>
+
+                <script>
+                    function toggleRegisterButton() {
+                        var registerButton = document.getElementById("auth-btn");
+                        var privacyCheckbox = document.getElementById("privacy");
+
+                        if (privacyCheckbox.checked) {
+                            registerButton.style.display = "block"; 
+                        } else {
+                            registerButton.style.display = "none"; 
+                        }
+                    }
+
+                    function validateForm() {
+                        var privacyCheckbox = document.getElementById("privacy");
+
+                        if (!privacyCheckbox.checked) {
+                            alert("Please agree to the Privacy Policy before registering.");
+                            return false;
+                        }
+                        return true;
+                    }
+                    document.getElementById("reg-form").onsubmit = validateForm;
+                </script>
+
+            </div>
+        </div>
+    </form>
+</div>
+
+{% endblock %}
+

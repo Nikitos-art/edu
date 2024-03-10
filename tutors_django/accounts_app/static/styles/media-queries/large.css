@@ -1,0 +1,8 @@
+@media screen and (min-width: 1368px) and (max-width: 1440px) {
+    .hero-section {
+        height: 60vh;
+    }
+    .cloud-text {
+        font-size: 6.5em;
+    }
+}

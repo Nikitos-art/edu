@@ -1,0 +1,51 @@
+{% load static %} {% block site_content %}
+
+<div id="quiz-menu-block">
+  <div class="block-top">
+    <img
+      src="{% static 'img/q.svg' %}"
+      alt="q-svg"
+      id="q-svg"
+    />
+    <div class="quiz-title">Quizzes Menu</div>
+    <a class="block-top-a" href="{% url 'quiz_app:create_quiz' %}">Create a Quiz</a>
+  </div>
+
+  <div class="quiz-menu-block">
+    {% if quizzes %}
+      {% for quiz in quizzes %}
+      <div class="quiz-card">
+        <div class="quiz-card-item">
+          <h4 class="quiz-name">{{ quiz.name|slice:":14" }}</h4>
+          <div class="quiz-card-content">
+            <div class="q-c-c-body">
+              <p class="quiz-card-content-title">{{ quiz.topic }}</p>
+              <p class="quiz-card-content-p">
+                Number of questions: 
+                {% with added_questions=quiz.question_set.count %}
+                    {{ added_questions }}
+                {% endwith %}
+                / {{ quiz.number_of_questions }}
+              </p>
+            </div>
+            <a class="quiz-features-a"
+              href="{% url 'quiz_app:questions_create' pk=quiz.pk %}"
+              >Edit Questions
+            </a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    {% else %}
+      <div class="no-work-box">
+        <img
+        src="{% static 'img/karen.svg' %}"
+        alt="karen-svg"
+        class="karen-svg"
+        />
+        <p class="no-work">You haven't made any quizzes yet.</p>
+      </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

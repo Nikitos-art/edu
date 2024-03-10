@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/blog_create.css' %}">
+{% endblock %}
+
+
+{% block header %}
+{% include 'includes/inc_header.html' %}
+{% endblock %}
+
+
+{% block site_content %}
+<main class="main">
+    <div class="main-header-edit">
+        <div class="main-header__heading">Delete Post</div>
+        <h2>Delete Post</h2>
+        <p>Are you sure you want to delete the post '{{ object.title }}'?</p>
+        <form method="post">
+            {% csrf_token %}
+            <input type="submit" value="Confirm">
+        </form>
+    </div>
+
+</main>
+
+{% endblock %}
+
+{% block footer %}
+{% include 'includes/inc_footer.html' %}
+{% endblock %}

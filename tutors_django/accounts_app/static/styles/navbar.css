@@ -1,0 +1,153 @@
+.navbar {
+  background-color: #0174be;
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  width: 100%;
+  height: 60px;
+  position: relative;
+}
+
+.navbar-brand img {
+  height: 55px;
+  position: relative;
+  bottom: 10px;
+}
+
+.navbar-nav {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  /* bottom: 10px; */
+  bottom: 20px;
+  padding-right: 10px;
+}
+
+.nav-item {
+  margin-right: 50px;
+}
+
+.nav-link {
+  text-decoration: none;
+  position: relative;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.nav-link-acc {
+  top: 20%;
+  text-decoration: none;
+  position: relative;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.nav-link:hover {
+  text-decoration: none;
+  color: #f9f9f9;
+}
+
+.nav-link::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 4px;
+  border-radius: 4px;
+  background-color: #18272F;
+  bottom: 0;
+  left: 0;
+  transform-origin: right;
+  transform: scaleX(0);
+  transition: transform .3s ease-in-out;
+}
+
+.nav-link:hover::before {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+
+.dropdown-content {
+  display: none;
+  position: fixed;
+  background-color: #0174be;
+  border-style: solid;
+  border-width: 3px;
+  border-color: black;
+  min-width: 100px;
+  max-width: 120px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  padding: 12px 16px;
+  z-index: 1;
+  right: 5px;
+  top: 8%;
+  transition: opacity 1s;
+}
+
+.dropdown:hover .dropdown-content {
+  display: flex;
+  flex-direction: column;
+  opacity: 1;
+}
+
+
+@media screen and (max-width: 600px) {
+  .navbar {
+    height: 40px;
+  }
+
+  .navbar-brand img {
+    height: 35px;
+    position: relative;
+    bottom: 12px;
+  }
+  
+  .nav-item {
+    margin-right: 20px;
+  }
+  
+  .nav-link, .nav-link-acc {
+    font-size: 12px;
+  }
+
+  .nav-link-acc {
+    top: 10%;
+  }
+
+  .dropdown-content {
+    min-width: 70px;
+    max-width: 80px;
+    top: 4%;
+    padding: 6px 6px;
+  }
+}
+
+@media screen and (min-width: 601px) and (max-width: 1000px) {
+  .dropdown-content {
+    top: 6%;
+  }
+}
+
+@media screen and (min-width: 1001px) and (max-width: 1350px) {
+  .dropdown-content {
+    top: 6%;
+  }
+}
+
+
+/* @media screen and (min-width: 1368px) and (max-width: 1440px) {
+
+  .navbar-nav {
+    left: -220px;
+  }
+
+  .dropdown-content {
+    position: relative;
+    top: -5%;
+  }
+
+} */
+

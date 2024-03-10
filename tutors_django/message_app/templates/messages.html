@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% load message_app_tags %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'styles/chat.css' %}">
+{% endblock %}
+
+{% block header %}
+{% include 'includes/inc_header.html' %}
+{% endblock %}
+
+{% block site_content %}
+<div class="container">
+    <div class="col-lg-12">
+        {% load i18n %}
+        {% if not chat %}
+            <div class="panel panel-body">
+                {% trans "Can't initiate dialogue. User not found, or you have no access to this dialogue." %}
+            </div>
+        {% else %}
+            {% load tz %}
+            <div class="card chat-app">
+                <h5 style="position: relative; left: 30px;">History</h5>
+                <div id="plist" class="people-list">
+                    <ul class="list-unstyled chat-list mt-2 mb-0">
+                        {% for user_chat in user_chats %}
+                            {% get_companion user user_chat as companion %}
+                            {% with last_message=user_chat.message_set.last %}
+                                <a class="clearfix {% if companion == last_message.author and not last_message.is_read %} unread {% endif %}"
+                                    href="{{ user_chat.get_absolute_url }}">
+                                    <li class="clearfix {% if user_chat == chat %}active{% endif %}">
+                                        <div class="about">
+                                            <div class="name">{{ companion.username }}</div>
+                                            <div class="status"><i class="fa fa-circle offline"></i> {{ last_message.message|truncatechars_html:"200"|truncatechars:10|safe|striptags }}
+                                            </div>
+                                        </div>
+                                    </li>
+                                </a>
+                            {% endwith %}
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="chat">
+                    {% if chat %}
+                        <div class="chat-header clearfix">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <a href="javascript:void(0);" data-toggle="modal" data-target="#view_info">
+                                        {% if interlocutor.avatar %}
+                                            <img src="{{ interlocutor.avatar.url }}" alt="avatar" style="width: 100px" class="ch-h-img">
+                                        {% endif %}
+                                    </a>
+                                    <div class="chat-about">
+                                        <h6 class="m-b-0">{{ interlocutor.full_name }}</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="messages">
+                            {% for message in chat.message_set.all %}
+                                {% include 'message.html' with message_item=message %}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                    <div class="chat-message clearfix">
+                        <form class="form-control-sm" method="post">
+                            {% csrf_token %}
+                            {{ form }}
+                            <button type="submit" class="form-control" style="margin-top:10px">{% trans "Send" %}</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}
+

@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+    <meta name="keywords" content="language services, English/Russian translations,
+    English/Russian interpreting, teaching, on-line tutoring">
+{% endblock %}
+
+{% block title %}About{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/about.css' %}">
+{% endblock %}
+
+
+{% block site_content %}
+<div>
+    <div class="key-point" id="about-bio">
+        <h3 class="key-title">About this project</h3>
+        <div class="key-content">
+            <div class="image-container">
+                <img src="{% static 'img/mypic.jpg' %}" alt="Project Image" class="key-image">
+                <p class="image-caption">Here's my face :-)</p>
+                <a href="/about/nikita">More about me</a>
+            </div>
+            <p class="key-text">
+                Hi! I'm Nikita, the creator of this website. Originally intended as a portfolio site, it evolved into an intriguing journey, leading me to transform it into a fully functional web platform for students and tutors. Initially, I planned for a blog and quiz website, but as development progressed, I expanded it to include a registration and login system. Recognizing the value of tutor and student profiles, I incorporated those as well.
+            </p>
+            <p class="key-text">
+                The platform now boasts a comprehensive dashboard with basic functionalities like adding, editing, and removing blogs and quizzes. Additionally, I introduced a scheduling feature, allowing teachers to add classes, along with a simple chat application for seamless communication between tutors and students. Ultimately, the platform is designed to facilitate class management, keeping tabs on the number of classes, and more. 
+            </p>
+        </div>
+    </div>
+
+    <div class="key-point">
+        <div class="philo">
+            <h3 class="key-title">Philosophy</h3>
+            <img src="{% static 'img/philo.png' %}" alt="philo-img" id="philo-img">
+        </div>
+        <p class="key-text" id="paragraph-one">
+            <strong>Student-Centered Learning:</strong> 
+            We prioritize the unique needs and learning styles of individual students. By tailoring our teaching methods to accommodate diverse learning preferences, I aim to create an environment where every student can thrive.
+        </p>
+        <p class="key-text">  
+            <strong>Practical Application:</strong> 
+            We emphasize the real-world application of concepts to make learning meaningful. Through hands-on activities, case studies, and practical exercises, we encourage students to bridge theory with practice, equipping them for success beyond the classroom.
+        </p>
+        <p class="key-text">   
+            <strong>Critical Thinking and Problem-Solving:</strong> 
+            We cultivate critical thinking skills by encouraging students to analyze, question, and evaluate information. We believe in nurturing independent thought and empowering students to approach challenges with confidence and creativity.
+        </p>
+        <p class="key-text"> 
+            <strong>Open Communication:</strong> 
+            Open and transparent communication is fundamental to a positive learning experience. We create a supportive space where students feel comfortable expressing their ideas, asking questions, and engaging in constructive dialogue.
+        </p>
+        <p class="key-text"> 
+            <strong>Learning:</strong> 
+            Education is a lifelong journey, and we strive to instill a passion for continuous learning in our students. By fostering curiosity and a growth mindset, we aim to inspire a love for learning that extends beyond the confines of the classroom.
+        </p>
+        <p class="key-text"> 
+            <strong>Respect and Inclusivity:</strong>
+            We value diversity and strive to create an inclusive environment where every student feels respected and heard. By incorporating diverse perspectives into the curriculum, we aim to enrich the learning experience and prepare students for a globalized world.
+        </p>
+    </div>
+
+    <div class="key-point">
+        <div class="exp">
+            <h3 class="key-title">Experience</h3>
+            <img src="{% static 'img/exp.png' %}" alt="philo-img" id="exp-img">
+        </div>
+        <p class="key-text" id="ex-p-one">
+            We take pride in the rich tapestry of experiences that both our teachers and students bring to the learning environment. Hailing from diverse backgrounds, our community fosters an atmosphere of inclusion and collaboration. Our commitment to facilitating productive interactions between tutors and students has been a cornerstone of our success. Every class is not like the other and can bring a range of practical experiences and knowledge that can be used in real-life practices. We don't just pass on the information but rather ensure that our students have a thorough understanding on emotional level that will last for ages and not disapear after a few weeks of summer holidays. 
+        </p>
+        <p class="key-text" style="margin-top: 10px;">
+            With a robust track record spanning over 5 years in international online tutoring, we bring a wealth of experience to the table. This extensive history underscores our dedication to delivering high-quality educational services and support. Throughout the years, we have refined our approach, adapting to the evolving landscape of online education. This wealth of experience positions us as a trusted institution where both tutors and students can thrive. 
+        </p>
+    </div>
+
+    <div class="key-point">
+        <div class="dedi">
+            <h3 class="key-title">Dedication</h3>
+            <img src="{% static 'img/anchor2.png' %}" alt="philo-img" id="dedi-img">
+        </div>
+        <p class="key-text" id="dedi-p-one">
+            At the heart of our educational philosophy lies an unwavering dedication to the success and well-being of our students. We understand that true learning extends beyond textbooks and classrooms; it involves cultivating an environment where curiosity flourishes, and students feel empowered to reach their full potential. Our commitment to dedication goes beyond mere words; it is embedded in the fabric of our classes. Our educators are not just instructors; they are mentors and guides invested in the educational journey of each student. We foster a culture where every question is valued, every challenge is an opportunity, and every success is a collective achievement.
+        </p>
+    </div>
+
+    <div class="key-point" id="bottom-key">
+        <div id="skill-box">
+            <h3 class="key-title">Skills</h3>
+            <img src="{% static 'img/skills.png' %}" alt="philo-img" id="skills-img">
+        </div>
+        <p class="key-text" id="skills-p-one">
+            In the ever-evolving landscape of education, the significance of skills cannot be overstated. We recognize the pivotal role that skills play in shaping a successful academic journey and, ultimately, a fulfilling career. Our commitment to equipping students with relevant and practical skills sets us apart as an on-line school dedicated to holistic development.
+    
+            Our program is meticulously designed to impart not only theoretical knowledge but also practical, industry-relevant skills. From critical thinking to problem-solving, communication to collaboration, we prioritize the acquisition of skills that transcend the boundaries of traditional education. Our educators, chosen for their expertise, are adept at nurturing these skills, ensuring that students graduate not just with a certificate but with a robust toolkit for real-world success.
+        </p>
+    </div>
+    
+</div>
+{% endblock %}

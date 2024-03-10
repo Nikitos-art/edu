@@ -1,0 +1,50 @@
+{% load static %} 
+{% block site_content %}
+
+<div id="blog-menu-block">
+  <div class="block-top">
+    <img
+      src="{% static 'img/ink.svg' %}"
+      alt="ink-svg"
+      id="ink-svg"
+    />
+    <div class="blog-title">Blog Menu</div>
+    <a class="block-top-a" href="{% url 'blog_app:create_blogpost' %}">Create a Post</a>
+  </div>
+
+  <ul id="note-ul">
+    {% if blog_posts %}
+      {% for post in blog_posts %}
+      <li class="note-li">
+        <div class="note-a">
+          <h4 class="note-h2" >{{ post.title|slice:":14" }}...</h4>
+          <p class="post-main-info-p">{{ post.created_on|date:"M. d, Y" }}</p>
+          {% if post.status == 1 %}
+          <p style="background: #1a64e5; width: 75px; margin-bottom: 5px">
+            Published
+          </p>
+          {% else %}
+          <p class="post-main-info-p" style="background: #e59b1a; width: 40px; margin-bottom: 5px">
+            Draft
+          </p>
+          {% endif %}
+          <div class="post-note-btn">
+            <a class="post-features-a" href="{% url 'blog_app:update_blogpost' pk=post.pk %}">Edit</a>
+            <a class="post-features-a" href="{% url 'blog_app:delete_blogpost' pk=post.pk %}">Delete</a>
+          </div>
+        </div>
+      </li>
+      {% endfor %}
+    {% else %}
+      <div class="no-work-box">
+        <img
+        src="{% static 'img/karen.svg' %}"
+        alt="karen-svg"
+        class="karen-svg"
+        />
+        <p class="no-work">You haven't written any posts yet.</p>
+      </div>
+    {% endif %}
+  </ul> 
+</div>
+{% endblock %}

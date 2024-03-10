@@ -1,0 +1,41 @@
+main {
+  background-color: rgb(219, 219, 219);
+}
+
+.blog-create-main {
+  margin: 30px;
+}
+
+.form-group {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.sub-btn {
+	display: flex;
+	color: black;
+	padding: 0.5rem 1rem;
+	text-decoration: none;
+	background: hsl(187 75% 64%);
+	border-radius: 0.6rem;
+	font-weight: 700;
+	border: 0.35rem solid;
+  height: 50px;
+  width: 120px;
+  position: relative;
+  left: 25px;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.sub-btn:hover {
+  background-color: hsl(211, 94%, 31%); 
+}
+
+#check-svg {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  bottom: 2px;
+}
+

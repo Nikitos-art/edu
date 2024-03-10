@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+    <meta name="keywords" content="online courses, online education, online learning,
+      English reading, English speaking, English writing, English listening">
+{% endblock %}
+
+{% block title %}Courses{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/courses.css' %}">
+{% endblock %}
+
+
+{% block site_content %}
+<div class="courses">
+    <div class="course">
+      <img src="{% static 'img/readingk.png' %}" alt="Reading Image" class="course-image">
+      <div class="course-block">
+        <h1 class="course-title">English for kids</h1>
+        <p class="course-description">
+          In our English courses designed for kids, we offer a diverse range of programs tailored to meet your child's unique needs. Our specialized reading programs are crafted to enhance their reading skills, incorporating both classic and contemporary literature during classes. Additionally, our programs target overall English proficiency, encompassing vocabulary expansion, grammar refinement, and, of course, speaking skills.
+        </p>
+        <p class="course-description">
+          What sets our tutoring apart is its student-centered approach. Unlike traditional teaching methods that adhere strictly to a fixed curriculum, tutoring allows for a more personalized learning experience. The pace at which the course is studied can be adjusted to accommodate each student's individual abilities, fostering a dynamic and engaging educational journey.
+        </p>
+        <p class="course-description">
+          Typically, a lesson will start with a warm-up activity to ignite creative energy, acting as an appetizer before the main course. Following that, the main part of the lesson involves reading practice combined with conversation exercises and vocabulary. When encountering new vocabulary words we like to delve into Latin and Greek roots, affixes, inflectional ending and word structure in general while not forgetting about fun. If you are not having fun in our lessons, please let us know.  
+        </p>
+      </div>
+    </div>
+    <div class="course">
+      <img src="{% static 'img/grownups.png' %}" alt="Reading Image" class="course-image">
+      <div class="course-block">
+        <h1 class="course-title">English for grown-ups</h1>
+        <p class="course-description">
+          Perhaps you've had previous experiences with English learning in school or college that didn't quite resonate with you. Whether your past attempts left you feeling uninspired or discouraged, it's never too late to rediscover your motivation and start anew. At Lighthouse-Tutors, we understand that everyone's language journey is unique.  
+        </p>
+        <p class="course-description">
+          We firmly believe that an accent is a testament to courage, and it's something to be embraced rather than hidden. Moreover, we recognize that mastering phonetics is a skill that can be acquired at any stage of your learning adventure. Whether your goal is to learn English for travel, prepare for a job interview, or enhance your professional proficiency, we are here to offer guidance and support. Our interactive speaking sessions will help you gain the confidence to converse fluently in English, whether in business, travel, or social settings. Speak confidently and make a lasting impression.
+        </p>
+        <p class="course-description">
+          A typical lesson will start with some warm-up conversation activities to make those neurons regrow and establish connections. Then slowly transition into the main part of the lesson - new material introduction and processing. We focus and make sure our students have an in-depth understanding of the topics, symantic nuances and cultural implications when conversing.  
+        </p>
+      </div>
+    </div>
+    <div class="course">
+      <img src="{% static 'img/chinese2.png' %}" alt="Reading Image" class="course-image">
+      <div class="course-block">
+        <h1 class="course-title">Chinese introductory course</h1>
+        <p class="course-description">
+          This is an elementary course designed for anyone curious about the mysterious language of Chinese Mandarin. The course begins with PinYin, focusing on romanized pronunciation practice, tones, and intonation. As we progress, we delve into the basics of Chinese writing, word composition, phrases, and proverbs.  
+        </p>
+        <p class="course-description">
+          Making your first steps into speaking Chinese is surprisingly simple. Each syllable is like a word in its own right. There are no tenses like in English, no inflectional endings. For anyone curious about linguistics in general, basic Chinese can be very useful. Whether you want to impress your friends or just have fun speaking, fundamental Chinese will be an interesting endeavor.
+        </p>
+        <p class="course-description">
+          As you progress, there will be nothing more satisfactory than seeing a character that you recognize and proudly exclaiming, 'Oh, I know that one!'. Of course, no class can substitute a language environment where you hear the target language every day, but it doesn't mean that a well-structured approach will not give you the basics. Practicing inside and outside the class is key. Joining calligraphy classes and simply remembering and recycling the information you learn in class can provide a solid foundation.
+        </p>
+      </div>
+    </div>
+</div>
+{% endblock %}

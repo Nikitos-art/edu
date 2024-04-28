@@ -1,0 +1,96 @@
+
+@media screen and (min-width: 601px) and (max-width: 1000px) {
+    .hero-section {
+        height: 20vh;
+    }
+    .cloud-text {
+        font-size: 2.5rem;
+    }
+
+    .why-us-block {
+        height: auto;
+    }
+
+    .why-us-text {
+        font-size: 10px;
+    }
+
+    .h2-title-4 {
+        font-size: 2em;
+    }
+
+    /*************** placements ********************/
+    .h2-title-5 {
+        font-size: 1.5rem;
+    }
+
+    .card {
+        max-width: 300px;
+        margin: 5px;
+        margin-top: 60px;
+        margin-bottom: 50px;
+    }
+
+    .card-image {
+        width: 150px;
+        height: 166px;
+        object-fit: cover;
+    }
+
+    /* .card {
+        width: 400px;
+        padding: 20px;
+    }  */
+    
+    /* .card-image {
+        width: 200px;
+        height: auto;
+        object-fit: cover;
+    } */
+
+    .card-content {
+        padding: 5px;
+    }
+
+    .card-title {
+        font-size: 1.5em;
+        margin-bottom: 10px;
+    }
+
+    .card-text {
+        line-height: 1;
+        margin-bottom: 20px;
+        font-size: 1em;
+    }
+    .card-button {
+        padding: 8px 16px 10px 10px;
+        height: 20px;
+        width: 75px;
+        border-width: 0.3rem;
+        font-size: 0.5em;
+        line-height: 2px;
+        writing-mode: horizontal-tb;
+        text-orientation: sideways;
+        white-space: nowrap;
+    }
+    /***** NAVBAR *************/
+    .dropdown-content {
+        top: 6%;
+    }
+    /************** INQUIRY *******************/
+    .inquiry-h1 {
+        font-size: 2.5em;
+    }
+    
+    .inquiry-h4 {
+        font-size: 1.4em;
+        top: 10%;
+    }
+    
+    .input-container {
+        max-width: 60vh;
+        min-width: 36vh;
+        width: 40%;
+        margin-top: 14vh;
+    }    
+}

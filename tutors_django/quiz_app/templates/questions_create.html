@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'styles/quiz-create.css' %}">
+{% endblock %}
+    
+
+{% block header %}
+{% include 'includes/inc_header.html' %}
+{% endblock %}
+
+{% block site_content %}
+
+{% if messages %}
+<div class="alert alert-danger" role="alert">
+  {% for message in messages %}
+  <p>{{ message }}</p>
+  {% endfor %}
+</div>
+{% endif %}
+
+<div class="questions-create-page">
+    <div class="questions-create-block">
+        <ul class="existing-questions-block">
+            Existing questions of this quiz:
+            {% for question in questions %}
+                <a href="{% url 'quiz_app:edit_question' pk=question.quiz.pk question_id=question.pk %}">
+                    <li class="existing-questions-items">
+                        {{ forloop.counter }}. {{ question.text }}
+                    </li>
+                </a>
+            {% endfor %}
+        </ul>
+        <div class="questions-main-title">Questions for quiz: </div>
+        <form method="post" class="q-a-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            {{ formset.management_form }}
+            {% for form in formset %}
+            <div class="answer-card-item">
+                <span class="card-num">Answer <span style="color: red;">{{ forloop.counter }}</span></span>
+                {{ form.as_p }}
+            </div>
+            {% endfor %}
+            <button class="sub-btn" type="submit"><img
+                src="{% static 'img/check.svg' %}"
+                alt="check-svg"
+                id="check-svg"
+              />Done</button>
+        </form>
+    </div>
+    <img 
+        src="{% static 'img/qa.svg' %}"
+        alt="question-svg"
+        id="question-svg"
+    >
+</div>
+
+{% endblock %}
+
+{% block footer %}
+{% include 'includes/inc_footer.html' %}
+{% endblock %}
+
+

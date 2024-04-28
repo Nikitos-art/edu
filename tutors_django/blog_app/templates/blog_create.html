@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+    {{ form.media }}
+{% endblock %}
+
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/blog_create.css' %}">
+{% endblock %}
+
+
+{% block header %}
+{% include 'includes/inc_header.html' %}
+{% endblock %}
+
+
+{% block site_content %}
+<div class="blog-create-main">
+    <div class="main-header-create">
+        <h2 class="main-header__heading">Create a new post</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="sub-btn" type="submit"><img
+                src="{% static 'img/check.svg' %}"
+                alt="check-svg"
+                id="check-svg"
+              />Done</button>
+        </form>
+        {% if form.errors %}
+            <div class="error-message">
+                <p>There were errors in the form. Please correct them.</p>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+
+{% endblock %}
+
+{% block footer %}
+{% include 'includes/inc_footer.html' %}
+{% endblock %}

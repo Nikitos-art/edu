@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/about.css' %}">
+{% endblock %}
+
+{% block header %}
+{% include 'includes/inc_header.html' %}
+{% endblock %}
+
+
+{% block site_content %}
+<div>
+
+    <div class="key-point">
+        <h3 class="key-title">On-line tutoring</h3>
+        <p class="key-text">
+            I have been teaching English since my family and I moved to China back in the early
+            2000's. My parents were teaching and I went along their path and became a teacher too. My parents left China a little earlier than I did because I made a decision to
+            stay there and teach English. Being a non-native speaker of English, I kind of 
+            learned by doing and have an extensive teaching experience in China. After the 2008
+            Olympics I stuck around for a few more years and finally went back to Moscow where 
+            I taught English for several years in various schools. Around that time I started teaching/tutoring on-line. I liked the convinience of working from home and have been
+            working in an on-line school from the last few years. 
+        </p>
+    </div>
+
+    <div class="key-point">
+        <h3 class="key-title">Translations</h3>
+        <p class="key-text">
+            In my school days in 1990' I thought I was going to be an English interpreter/translator. After moving to China my friends always called me to ask how to say one or another thing in Chinese because my Chinese was, and still is, great. I can surely translate and interpret professionally Russian and English since I do consider
+            myself a bilingual, maybe even a polyglot. After learning Chinese I knew I could learn any language if I decided to seriously set that as my goal. I have translated 
+            a Russian business class banquet menu to Chinese before. I also did some volunteer
+            translations for a health organization. I know how to work with subtitles and can produce quality YouTube channel subtitles. So my Russian and English translations are top notch and I can do medium difficluty level Chinese translations. 
+        </p>
+    </div>
+
+    <div class="key-point">
+        <h3 class="key-title">Web Dev</h3>
+        <p class="key-text">
+            This is my biggest project to 22.12.2023. I made it entirely on Django. This website includes login/registration system, a messeging system for registered users, a personal account control and dashboard system, quizzes and a blog. I might add a scoring system for students soon but need to think through about the practicality of this and how it will blend in with the whole project.
+            I forst started with project using React.JS and Django together but had some deployment issues on Digital Ocean Linux Cubicle. I bought the domain and a SSL certificate and installed it on my machine. Everything was working ok up until
+            SSL installation on Nginx. HTTPS traffic did not go through to the backend. I posted questions in forums, read all articles and tinkered with everything I could but nothing worked so I just remade the project using only Django without React.JS this time.    
+        </p>
+    </div>
+</div>
+{% endblock %}
+
+{% block footer %}
+{% include 'includes/inc_footer.html' %}
+{% endblock %}

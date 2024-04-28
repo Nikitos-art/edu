@@ -1,0 +1,73 @@
+
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'styles/waves.css' %}">
+{% endblock %}
+
+<div id="waves-header">
+    <h2 class="keys-adv-title">Our advantages</h2>
+    <div class="inner-header flex">
+        <div class="key-icons-block">
+
+            <div class="icon-adv">
+                <img src="{% static 'img/1.svg' %}" alt="Reading Image" class="adv-image">
+                <p class="icon-text" >Focus on conversation from the start.</p>
+            </div>
+
+            <div class="icon-adv">
+                <img src="{% static 'img/2.svg' %}" alt="Reading Image" class="adv-image">
+                <p class="icon-text" >Most contemporary methods.</p>
+            </div>
+
+            <div class="icon-adv">
+                <img src="{% static 'img/present.png' %}" alt="Reading Image" class="adv-image">
+                <p class="icon-text" >Free trial class.</p>
+            </div>
+
+            <div class="icon-adv">
+                <img src="{% static 'img/4.svg' %}" alt="Reading Image" class="adv-image">
+                <p class="icon-text" >Join our community.</p>
+            </div>
+
+            <div class="icon-adv">
+                <img src="{% static 'img/5.svg' %}" alt="Reading Image" class="adv-image">
+                <p class="icon-text" >Certificates of completition.</p>
+            </div>
+
+            <div class="icon-adv">
+                <img src="{% static 'img/star.png' %}" alt="Reading Image" class="adv-image">
+                <p class="icon-text" >English, Chinese and other language courses.</p>
+            </div>
+
+            <div class="icon-adv">
+                <img id="clock" src="{% static 'img/3.png' %}" alt="Reading Image" class="adv-image">
+                <p class="icon-text" >Flexible time schedule.</p>
+            </div>
+
+            <div class="icon-adv">
+                <img src="{% static 'img/group.png' %}" alt="Reading Image" class="adv-image">
+                <p class="icon-text">Various programs (for students, business people etc.)</p>
+            </div>
+        </div>
+    </div>
+    
+    <!--Waves Container-->
+    <div>
+    <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+    viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+    <defs>
+    <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+    </defs>
+    <g class="parallax">
+    <use xlink:href="#gentle-wave" x="48" y="0" id="wave-fill-1" fill="rgba(255,255,255,0.7" />
+    <use xlink:href="#gentle-wave" x="48" y="3" id="wave-fill-2" fill="rgba(255,255,255,0.5)" />
+    <use xlink:href="#gentle-wave" x="48" y="5" id="wave-fill-3" fill="rgba(255,255,255,0.3)" />
+    <use xlink:href="#gentle-wave" x="48" y="7" id="wave-fill-4" fill="#fff" />
+    </g>
+    </svg>
+    </div>
+   
+    
+</div>
+  

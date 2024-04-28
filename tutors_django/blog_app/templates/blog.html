@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+    <meta name="keywords" content="linguist blog, linguistics, learning, motivation">
+{% endblock %}
+
+{% block title %}Blog{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/blog.css' %}">
+{% endblock %}
+
+
+{% block site_content %}
+ <div class="blog-container">
+  <h3 class="blog-page-title">Lighthouse-tutors blog</h3>
+  <section class="cards-wrapper">
+    {% for post in posts %}
+    <div class="card-grid-space">
+      <a class="b-card" href="{% url 'blog_app:post_detail' post.slug  %}" style="--bg-img: url('{% static 'img/lighthouse2.svg' %}')">
+        <div class="date">{{ post.created_on }}</div>
+        <div class="card-info">
+          <h1 class="card-h1">{{ post.title }}</h1>
+          <p>{{ post.content|slice:":100"|safe }}...</p>
+          <div class="tags">
+            <div class="tag">{{ post.author }}</div>
+          </div>
+        </div>
+      </a>
+    </div>
+    {% endfor %}
+
+  </section>
+ </div>
+  
+
+{% endblock %}

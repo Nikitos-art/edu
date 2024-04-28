@@ -1,0 +1,23 @@
+
+<div>
+    <div class="profile-help">
+        <p>You can change your profile picture here.</p>
+        <br>
+        <p>Your students will see your picture in the Chat.</p>
+        <p>To remove the your current avatar: </p>
+        <p>First click on the checkbox, then press the "Change Profile Picture" button</p>
+        <br>
+        <p>To change your current avatar to another: </p>
+        <p>Click on the "Browse" button, choose the picture, then press the "Change Profile Picture" button</p>
+    </div>
+    <form method="post" enctype="multipart/form-data" class="profile-pic-form">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        
+        <div class="form-group">
+            {{ form.avatar }}
+        </div>
+        
+        <button type="submit" class="btn btn-primary profile-change">Change Profile Picture</button>
+    </form>
+</div>

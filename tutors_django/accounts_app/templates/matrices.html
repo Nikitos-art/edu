@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+    <meta name="keywords" content="matrices">
+{% endblock %}
+
+{% block title %}Courses{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/matrices.css' %}">
+    <script src="{% static 'js/rref.js' %}"></script>
+{% endblock %}
+
+
+{% block site_content %}
+    <h2>I've put together these Linear ALgebra excersies for everyone to enjoy.</h5>
+    <div class="excercises-container">
+        <div class="excercise">
+            <h5>Reduced Row Echelon Form</h5>
+            <div class="task">
+                <p>X1 &nbsp; + 2X2 &nbsp; + X3 &nbsp; + X4 = 7</p>
+                <p>X1 &nbsp; + 2X2 &nbsp; + 2X3 - X4 = 12</p>
+                <p>2X1 + 4X2 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; + 6X4 = 4 </p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

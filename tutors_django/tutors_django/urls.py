@@ -16,8 +16,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from accounts_app.views import index_view, CoursesView, AboutView, NikitaView, LoginUser, RegisterUser, LogoutUser, StudentAccount, \
-    TutorAccount, custom_404, privacy_view
+from accounts_app.views import index_view, MatricesView, CoursesView, AboutView, NikitaView, LoginUser, \
+    RegisterUser, LogoutUser, StudentAccount, TutorAccount, custom_404, privacy_view
 # from quiz_app.views import PlacementA, PlacementB
 from courses_app.views import add_lesson
 from django.conf.urls.static import static
@@ -34,6 +34,7 @@ urlpatterns = [
     path('favicon.ico', RedirectView.as_view(url='/static/favicon.ico', permanent=True)),
     path('', index_view, name='index'),
     path('courses/', CoursesView.as_view(), name='courses'),
+    path('matrices/', MatricesView.as_view(), name='matrics'),
     path('inquiry_sent/', inquiry_form, name='inquiry_form'),
     path('about/', AboutView.as_view(), name='about'),
     path('about/nikita', NikitaView.as_view(), name='about/nikita'),

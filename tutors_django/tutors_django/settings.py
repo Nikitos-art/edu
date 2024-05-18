@@ -24,10 +24,10 @@ load_dotenv(BASE_DIR / '.env')
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['...', 'lighthouse-tutors.com', 'www.lighthouse-tutors.com', 'localhost']
-
+#ALLOWED_HOSTS = ['...', 'lighthouse-tutors.com', 'www.lighthouse-tutors.com', 'localhost']
+ALLOWED_HOSTS = ["127.0.0.1"]
 
 # Application definition
 
@@ -144,15 +144,25 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
-
+#########################################
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
-#STATIC_ROOT = BASE_DIR / "static"
+
+#STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/')  
+
 STATICFILES_DIRS = [
-    (BASE_DIR / 'accounts_app/static'),
-    (BASE_DIR / 'quiz_app/static'),
-    (BASE_DIR / 'courses_app/static')
+    os.path.join(BASE_DIR, 'static/'), 
 ]
+
+#########################################
+#STATIC_URL = '/static/'
+#STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+#STATIC_ROOT = BASE_DIR / "static"
+# STATICFILES_DIRS = [
+#     (BASE_DIR / 'accounts_app/static'),
+#     (BASE_DIR / 'quiz_app/static'),
+#     (BASE_DIR / 'courses_app/static')
+# ]
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 # Base url to serve media files
@@ -173,10 +183,10 @@ AUTO_LOGOUT = {
     'MESSAGE': 'The session has expired. Please login again to continue.',
 }
 
-SECURE_HSTS_SECONDS = 30  # Unit is seconds; *USE A SMALL VALUE FOR TESTING!*
-SECURE_HSTS_PRELOAD = True
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-SECURE_SSL_REDIRECT = True
+# SECURE_HSTS_SECONDS = 30  
+# SECURE_HSTS_PRELOAD = True
+# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+# SECURE_SSL_REDIRECT = True
 
 
 # CSRF_COOKIE_SECURE = True;

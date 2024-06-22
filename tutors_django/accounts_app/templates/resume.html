@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/resume.css' %}">
+{% endblock %}
+
+{% block header %}
+{% include 'includes/inc_header.html' %}
+{% endblock %}
+
+
+{% block site_content %}
+<div>
+
+    <div class="key-point">
+        <h3 class="key-title">Personal Info</h3>
+        <p class="key-text">
+            Name: Nikita Kurpas
+            Address: Batumi, Georgia (country), Ivane Djavahishvilli street, building 2a, apartment 47
+            (planning to move to Thailand soon)
+            Phone: (+995) 557334917
+            Email: kurpasnikita@gmail.com
+            Website: https://www.lighthouse-tutors.com/about
+            LinkedIn: https://www.linkedin.com/in/nikita-kurpas-41b024122/
+        </p>
+    </div>
+    <div class="key-point">
+        <h3 class="key-title">Education</h3>
+        <p>
+            Secondary Education
+            ● Pavlovskaya Sloboda Middle School, Moscow district, Russia.
+            ● Pearland High School (sophomore year), Pearland, Texas, USA.
+            ● Trent Academy (home schooling) - USA High School Diploma
+            Higher Education
+            ● Telfort Business Institute, Shanghai, China.
+            ● Fujian Normal University, Fujian, China.
+            Additional Courses
+            ● Udemy - 100 Days of Python (doctor Angela Yu course)
+            ● C for everybody - cc4e.com (Dr. Chuck)
+            ● Udemy - Linux System Administration
+        </p>
+
+    </div>
+</div>
+{% endblock %}
+
+{% block footer %}
+{% include 'includes/inc_footer.html' %}
+{% endblock %}

@@ -6,16 +6,15 @@ __pycache__/
 *.swp
 
 # Django-specific ignores
-db.sqlite3
-/media/
 *.log
 
 # Environment variables
 .env
-
+media/
+/media/
 # Virtual environment
 eduenv/
-
+.gitignore 
 # VS Code
 .vscode/
 

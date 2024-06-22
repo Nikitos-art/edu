@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth import login
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.auth.views import LoginView
 from django.core.exceptions import BadRequest
 from django.shortcuts import redirect
 from django.views.generic import CreateView, TemplateView
@@ -15,6 +15,7 @@ from django_ratelimit.decorators import ratelimit
 from django.utils.decorators import method_decorator
 from django.contrib import messages
 from django.urls import reverse
+from django.contrib.auth import logout
 #
 from calendar import HTMLCalendar
 from datetime import date
@@ -43,8 +44,8 @@ class MatricesView(TemplateView):
     template_name = 'matrices.html'
 
 
-class NikitaView(TemplateView):
-    template_name = 'nikita.html'
+class ResumeView(TemplateView):
+    template_name = 'resume.html'
 
 
 def privacy_view(request):
@@ -251,8 +252,12 @@ class TutorAccount(LoginRequiredMixin, TemplateView):
         return super().dispatch(request, *args, **kwargs)
 
 
-class LogoutUser(LogoutView):
-    next_page = '/log_in'
+# class LogoutUser(LogoutView):
+#     next_page = '/log_in'
+
+def logout_user(request):
+    logout(request)
+    return redirect('log_in')
 
 
 def custom_404(request, exception):

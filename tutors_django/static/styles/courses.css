@@ -12,7 +12,6 @@
 
 .course {
     display: flex;
-    border-bottom: 3px solid #000; 
 }
 
 /* marker*/
@@ -37,11 +36,27 @@
     font-size: 2vw;
 }
 
-.matrix-link {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.our-approach-block {
+    width: auto;
+    height: auto;
+    display: grid;
+    gap: 3rem;
+    grid-template-columns: 1fr;
+    /* grid-template-rows: 0.2fr 0.2fr 3fr 3fr 3fr; */
+    justify-items: center;
+}
+  
+.our-approach-heading {
+    margin: 0.625em 0.625em 0.625em;
+    font-weight: 600;
     font-size: 1.5em;
+    --s: 10px; 
+    padding: var(--s);
+    border: calc(2*var(--s)) solid #0000;
+    outline: 3px solid #000;
+    outline-offset: calc(-1*var(--s));
+    background: conic-gradient(from 90deg at 3px 3px,#0000 25%,#000 0);
+    align-items: center;
 }
 
 /* @media screen and (max-width: 600px) {

@@ -21,7 +21,10 @@ from calendar import HTMLCalendar
 from datetime import date
 from collections import defaultdict
 import re
-
+# Resume download
+from django.http import HttpResponse
+import os
+from django.conf import settings
 
 def index_view(request):
     return render(request, 'index.html')
@@ -262,3 +265,14 @@ def logout_user(request):
 
 def custom_404(request, exception):
     return render(request, 'error.html', status=404)
+
+### DOWNLOAD RESUME VIEW ###
+def download_file(request, filename):
+    file_path = os.path.join(settings.MEDIA_ROOT, filename)
+    if os.path.exists(file_path):
+        with open(file_path, 'rb') as fh:
+            response = HttpResponse(fh.read(), content_type="application/octet-stream")
+            response['Content-Disposition'] = 'attachment; filename=' + os.path.basename(file_path)
+            return response
+    else:
+        return HttpResponse('File not found')

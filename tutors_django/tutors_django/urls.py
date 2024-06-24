@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from accounts_app.views import index_view, MatricesView, CoursesView, AboutView, ResumeView, LoginUser, \
-    RegisterUser, logout_user, StudentAccount, TutorAccount, custom_404, privacy_view
+    RegisterUser, logout_user, StudentAccount, TutorAccount, custom_404, privacy_view, download_file
 # from quiz_app.views import PlacementA, PlacementB
 from courses_app.views import add_lesson
 from django.conf.urls.static import static
@@ -27,6 +27,7 @@ from django.urls import include
 
 from message_app.views import inquiry_form
 from django.conf.urls.i18n import i18n_patterns
+
 
 urlpatterns = [
     path('batumi-sloboda/', admin.site.urls),
@@ -50,6 +51,8 @@ urlpatterns = [
     path('log_out/', logout_user, name='log_out'),
     path('privacy/', privacy_view, name='privacy'),
     path('dialogues/', include('message_app.urls', namespace='message')),
+    path('download/<str:filename>/', download_file, name='download_file'),
+
 ]
 handler404 = custom_404
 

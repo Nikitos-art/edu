@@ -12,7 +12,6 @@
 
 .account-greetings {
   position: absolute;
-  font-family: 'Coiny', cursive;
   font-size: 2.5em;
   font-weight: 600;
   color: #333;
@@ -113,7 +112,6 @@
 }
 
 .blog-title, .quiz-title, .schedule-title, .chat-title {
-  font-family: 'Coiny', cursive;
   font-size: 1.5em;
   font-weight: 600;
   color: #333;
@@ -313,7 +311,6 @@
 }
 
 .help-text {
-  font-family: 'Coiny', cursive;
   font-size: 1em;
   font-weight: 500;
 }

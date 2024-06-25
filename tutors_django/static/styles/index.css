@@ -19,12 +19,8 @@ p {
   align-items: center;
 }
 
-
-@import url('https://fonts.googleapis.com/css?family=Coiny');
-
-
 .cloud-text {
-	font-family: 'Coiny', cursive;
+	font-family: 'Pacifico';
 	-webkit-background-clip: text;
   	-webkit-text-fill-color: transparent;	
 	background-image: url(../img/clouds.jpg);
@@ -33,13 +29,13 @@ p {
 	background-position: 0%;
 	width: 80%;
   margin-left: 10%;
-	font-size: 6.2rem;
+	font-size: 7rem;
 	animation: clouds-moving infinite 220s;
 	animation-fill-mode: forwards;
 	animation-play-state: running;
 	animation-timing-function: linear;
 	text-align: center;
-  padding-bottom: 1rem;
+  padding-bottom: 2rem;
 }
 @keyframes clouds-moving {
 	0% {
@@ -615,7 +611,7 @@ p {
 }
 
 .inquiry-h1 {
-  font-family: 'Coiny', cursive;
+  font-family: 'Pacifico';
   font-weight: 600;
   font-size: 4.5rem;
   color: rgb(255, 255, 255);
@@ -626,8 +622,8 @@ p {
 }
 
 .inquiry-h4 {
-  font-family: 'Coiny', cursive;
-  font-weight: 400;
+  /* font-family: 'Coiny', cursive;
+  font-weight: 400; */
   font-size: 20px;
   color: #ffffff;
   line-height: 1.5;

@@ -9,15 +9,32 @@
 
 {% block css %}
     <link rel="stylesheet" type="text/css" href="{% static 'styles/blog.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Coiny&family=Pacifico&family=Playwrite+NG+Modern:wght@100..400&display=swap" rel="stylesheet">
 {% endblock %}
 
 
 {% block site_content %}
+<div class="hero-section">
+  <h1 class="blog-page-title">Blog Posts</h1>
+</div>
  <div class="blog-container">
-  <h3 class="blog-page-title">Lighthouse-tutors blog</h3>
   <section class="cards-wrapper">
     {% for post in posts %}
-    <div class="card-grid-space">
+    <div class="blog_post">
+      <!-- <div class="">
+        <img src="https://pbs.twimg.com/profile_images/890901007387025408/oztASP4n.jpg" alt="random image">
+      </div> -->
+      <div class="container_copy">
+        <h3>{{ post.created_on }}</h3>
+        <h1>{{ post.title }}</h1>
+        <p>{{ post.content|slice:":30"|safe }}</p>
+        <a class="button-link" href="{% url 'blog_app:post_detail' post.slug  %}" target="_blank">Read More</a>
+        <!-- <a class="button-link" href="{% url 'blog_app:post_detail' post.slug  %}" target="_blank">Read More</button> -->
+      </div>
+    </div>
+    <!-- <div class="card-grid-space">
       <a class="b-card" href="{% url 'blog_app:post_detail' post.slug  %}" style="--bg-img: url('{% static 'img/lighthouse2.svg' %}')">
         <div class="date">{{ post.created_on }}</div>
         <div class="card-info">
@@ -28,7 +45,7 @@
           </div>
         </div>
       </a>
-    </div>
+    </div> -->
     {% endfor %}
 
   </section>

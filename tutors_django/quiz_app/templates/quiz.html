@@ -2,12 +2,17 @@
 {% load static %}
 
 {% block css %}
-<link rel="stylesheet" type="text/css" href="{% static 'styles/quiz.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/quiz.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Coiny&family=Pacifico&family=Playwrite+NG+Modern:wght@100..400&display=swap" rel="stylesheet">
 {% endblock %}
 
 
 {% block site_content %}
-
+<div class="section-wrapper">
+    <h1 class="quiz-page-title">Quizzes</h1>
+  </div>
 <div class="modal fade" id="quizStartModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -24,10 +29,28 @@
     </div>
 </div>
 
-<div class="quiz-list-container">
-    <ul class="quiz-list-ul">
+<div class="quiz-container">
+    <section class="cards-wrapper">
         {% for obj in object_list %}
-        <li class="quiz-list-li">
+        <div class="quiz-item">
+            <div class="container_copy">
+              <h3>{{ obj.topic }}</h3>
+              <h1>{{ obj.name }}</h1>
+              <p>Difficulty: {{ obj.difficulty }}</p>
+              <button
+                    class="button-link modal-button"
+                    data-pk="{{ obj.pk }}"
+                    data-quiz="{{ obj.name }}"
+                    data-questions="{{ obj.number_of_questions }}"
+                    data-difficulty="{{ obj.difficulty }}"
+                    data-time="{{ obj.time }}"
+                    data-pass="{{ obj.required_score_to_pass }}"
+                    data-bs-toggle="modal"
+                    data-bs-target="#quizStartModal">Take the Quiz
+            </button>
+            </div>
+          </div>
+        <!-- <li class="quiz-list-li">
             <button
                     class="btn btn-link modal-button"
                     data-pk="{{ obj.pk }}"
@@ -39,9 +62,9 @@
                     data-bs-toggle="modal"
                     data-bs-target="#quizStartModal">{{ obj.name }}
             </button>
-        </li>
+        </li> -->
         {% endfor %}
-    </ul>
+    </section>
 </div> 
 
 <script src="{% static 'js/main_quiz.js' %}" defer></script>

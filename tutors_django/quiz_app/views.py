@@ -9,16 +9,17 @@ from .forms import QuizForm, QuestionForm, AnswerFormSet
 from django.urls import reverse_lazy
 from django.shortcuts import render, get_object_or_404
 from django.views.generic.edit import FormView
-from django.contrib.auth.decorators import login_required
+#from django.contrib.auth.decorators import login_required
 
 
-class QuizList(LoginRequiredMixin, generic.ListView):
+# class QuizList(LoginRequiredMixin, generic.ListView):
+class QuizList(generic.ListView):
     queryset = Quiz.objects.all()
     template_name = 'quiz.html'
     context_object_name = 'quizzes'
 
 
-@login_required
+#@login_required
 def quiz_view(request, pk):
     quiz = Quiz.objects.get(pk=pk)
     return render(request, 'quiz_detail.html', {'obj': quiz})

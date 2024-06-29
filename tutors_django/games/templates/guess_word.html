@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+    <meta name="keywords" content="Guessing Games">
+    {% block script %}
+    <script src="{% static 'js/your_game.js' %}" defer type="module" ></script>
+    <script src="{% static 'js/words.js' %}" defer type="module" ></script>
+    {% endblock %}
+{% endblock %}
+
+{% block title %}Games{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/games.css' %}">
+{% endblock %}
+
+<!-- {% block scripts %}
+    <script src="{% static 'js/your_game.js' %}" defer type="module" ></script>
+    <script src="{% static 'js/words.js' %}" defer type="module" ></script>
+{% endblock %} -->
+
+
+{% block site_content %}
+<div class="content-box">
+    <div class="content-wrap">
+        <div class="wrapper">
+            <h1>Guess the Word</h1>
+            <div class="content">
+                <input type="text" class="typing-input" maxlength="1">
+                <div class="inputs"></div>
+                <div class="details">
+                    <p class="hint">Hint: <span></span></p>
+                    <p class="guess-left">Remaining Guesses: <span></span></p>
+                    <p class="wrong-letter">Wrong Letters: <span></span></p>
+                </div>
+                <button class="reset-btn">Reset Game</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

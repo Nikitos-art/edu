@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from accounts_app.views import index_view, MatricesView, CoursesView, AboutView, ResumeView, LoginUser, \
+from accounts_app.views import index_view, CoursesView, AboutView, ResumeView, LoginUser, \
     RegisterUser, logout_user, StudentAccount, TutorAccount, custom_404, privacy_view, download_file
 # from quiz_app.views import PlacementA, PlacementB
 from courses_app.views import add_lesson
@@ -35,13 +35,13 @@ urlpatterns = [
     path('favicon.ico', RedirectView.as_view(url='/static/favicon.ico', permanent=True)),
     path('', index_view, name='index'),
     path('courses/', CoursesView.as_view(), name='courses'),
-    path('matrices/', MatricesView.as_view(), name='matrics'),
     path('inquiry_sent/', inquiry_form, name='inquiry_form'),
     path('about/', AboutView.as_view(), name='about'),
     path('about/resume', ResumeView.as_view(), name='about/resume'),
     # path('course/<slug:slug>/', CourseDetail.as_view(), name='course_detail'),
     path('blog/', include('blog_app.urls', namespace='blog')),
     path('quiz/', include('quiz_app.urls', namespace='quiz')),
+    path('games/', include('games.urls', namespace='games')),
     path('add_lesson/', add_lesson, name='add_lesson'),
     path('log_in/', LoginUser.as_view(), name='log_in'),
     path('sign_up/', RegisterUser.as_view(), name='sign_up'),

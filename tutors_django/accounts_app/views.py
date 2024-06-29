@@ -43,10 +43,6 @@ class CoursesView(TemplateView):
     template_name = 'courses.html'
 
 
-class MatricesView(TemplateView):
-    template_name = 'matrices.html'
-
-
 class ResumeView(TemplateView):
     template_name = 'resume.html'
 

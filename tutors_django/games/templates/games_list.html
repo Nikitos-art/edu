@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+    <meta name="keywords" content="Language Games">
+    {% block script %}
+    {% endblock %}
+{% endblock %}
+
+{% block title %}Games{% endblock %}
+
+{% block css %}
+    <!-- <link rel="stylesheet" type="text/css" href="{% static 'styles/games.css' %}"> -->
+{% endblock %}
+
+
+{% block site_content %}
+<div class="games_list">
+    <h1>More games coming soon. Only 1 game so far.</h1>
+    <a href="/games/guess_word">Guessing Game</a>
+</div>
+{% endblock %}

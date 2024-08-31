@@ -20,7 +20,7 @@
   flex-direction: row;
   position: relative;
   bottom: 20px;
-  padding-right: 10px;
+  padding-right: 5vw;
 }
 
 .nav-item {
@@ -109,9 +109,9 @@
   }
 }
 
-@media screen and (min-width: 601px) and (max-width: 1350px) {
+@media screen and (min-width: 601px) and (max-width: 1550px) {
   .nav-item {
-    margin-right: 5vw;
+    margin-right: 3vw;
   }
 
   .dropdown-content {

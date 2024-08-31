@@ -7,6 +7,8 @@ Fake users:
 3. ellakrit@gmail.com - student 
 4. loganyu@gmail.com - student
 5. tutorsuser@gmail.com - tutor
+6. nikitakurpas123@gmail.com - tutor
+pwd = HeLo^7$gyello
 ---------------------------------------------------------------------------------
 SSH CONNECTION 
 ssh username@your_server_ip

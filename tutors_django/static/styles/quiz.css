@@ -18,7 +18,7 @@
 	background-position: 0%;
 	width: 80%;
   	margin-left: 10%;
-	font-size: 7rem;
+	font-size: 10vw;
 	animation: clouds-moving infinite 220s;
 	animation-fill-mode: forwards;
 	animation-play-state: running;
@@ -57,8 +57,8 @@
 
 .quiz-item {
 	background: #ffccaf;
-	max-height: 300px;
-	max-width: 250px;
+    max-height: 22vw;
+    max-width: 18.3vw;
 	border-radius: 10px;
 	border-style: solid 3px black;
 	box-shadow: 1px 1px 2rem rgba(0, 0, 0, 0.3);
@@ -66,25 +66,25 @@
 }
 
 .container_copy {
-	padding: 2rem 1rem 2rem 1.5rem;
+	padding: 2vw 1vw 2vw 1.5vw;
 }
   
 h3 {
-	margin: 0 0 0.5rem 0;
+	margin: 0 0 0.5vw 0;
 	color: #999;
-	font-size: 1rem;
+	font-size: 1vw;
 }
   
 h1 {
-	margin: 0 0 1rem 0;
-	font-size: 1.5rem;
+    margin: 0 0 1vw 0;
+    font-size: 1.7vw;
 	letter-spacing: 0.25px;
 	color: #333;
 }
   
 p {
-	margin: 0 0 2.5rem 0;
-	font-size: 1rem;
+	margin: 0 0 1vw 0;
+	font-size: 1vw;
 	line-height: 1;
 	color: #333;
 }
@@ -92,14 +92,15 @@ p {
 .button-link {
 	display: flex;
 	color: black;
-	padding: 0.5rem 1rem;
+	padding: 0.5vw 1vw;
 	text-decoration: none;
 	background: hsl(187 75% 64%);
 	border-radius: 0.6rem;
 	font-weight: 700;
-	border: 0.35rem solid;
-	height: 50px;
-	width: 150px;
+	font-size: 1.2vw;
+	border: 0.35vw solid;
+    height: 4vw;
+    width: 11vw;
 	position: relative;
 	margin-top: 10px;
 	transition: background-color 0.3s ease;
@@ -112,11 +113,11 @@ p {
 }
   
   
-@media only screen and (max-width: 650px) {
+/*@media only screen and (max-width: 650px) {
 	body {
 	  background-color: black;
 	}
-  
+*/
 }
   
 

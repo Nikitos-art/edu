@@ -19,34 +19,27 @@
   display: flex;
   flex-direction: row;
   position: relative;
-  /* bottom: 10px; */
   bottom: 20px;
-  padding-right: 10px;
+  padding-right: 5vw;
 }
 
 .nav-item {
-  margin-right: 50px;
+  margin-right: 10vw;
 }
 
-.nav-link {
+.nav-link, .nav-link-acc {
   text-decoration: none;
   position: relative;
   color: white;
   font-weight: bold;
-  font-size: 16px;
+  font-size: 2vw;
 }
 
 .nav-link-acc {
   top: 20%;
-  text-decoration: none;
-  position: relative;
-  color: white;
-  font-weight: bold;
-  font-size: 16px;
 }
 
 .nav-link:hover {
-  text-decoration: none;
   color: #f9f9f9;
 }
 
@@ -69,17 +62,14 @@
   transform-origin: left;
 }
 
-
 .dropdown-content {
   display: none;
   position: fixed;
   background-color: #0174be;
-  border-style: solid;
-  border-width: 3px;
-  border-color: black;
+  border: 3px solid black;
   min-width: 100px;
   max-width: 120px;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
   padding: 12px 16px;
   z-index: 1;
   right: 5px;
@@ -93,7 +83,6 @@
   opacity: 1;
 }
 
-
 @media screen and (max-width: 600px) {
   .navbar {
     height: 40px;
@@ -101,16 +90,11 @@
 
   .navbar-brand img {
     height: 35px;
-    position: relative;
     bottom: 12px;
   }
-  
+
   .nav-item {
-    margin-right: 20px;
-  }
-  
-  .nav-link, .nav-link-acc {
-    font-size: 12px;
+    margin-right: 5vw;
   }
 
   .nav-link-acc {
@@ -121,33 +105,17 @@
     min-width: 70px;
     max-width: 80px;
     top: 4%;
-    padding: 6px 6px;
+    padding: 6px;
   }
 }
 
-@media screen and (min-width: 601px) and (max-width: 1000px) {
+@media screen and (min-width: 601px) and (max-width: 1550px) {
+  .nav-item {
+    margin-right: 3vw;
+  }
+
   .dropdown-content {
     top: 6%;
   }
 }
-
-@media screen and (min-width: 1001px) and (max-width: 1350px) {
-  .dropdown-content {
-    top: 6%;
-  }
-}
-
-
-/* @media screen and (min-width: 1368px) and (max-width: 1440px) {
-
-  .navbar-nav {
-    left: -220px;
-  }
-
-  .dropdown-content {
-    position: relative;
-    top: -5%;
-  }
-
-} */
 

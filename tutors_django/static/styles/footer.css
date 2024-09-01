@@ -1,17 +1,97 @@
-/* * {
-  box-sizing: content-box;
-} */
 
 footer {
   width: 100%;
-  height: auto;
-  position: relative;
+  box-sizing: border-box;
   display: flex;
-  flex-direction: row;
+  justify-content: space-around; /* Distribute space evenly */
   align-items: center;
-  justify-content: center;
+  padding: 2em; /* Add padding for spacing */
   background-color: #0C356A;
+  flex-wrap: wrap; /* Wrap elements on small screens */
 }
+
+footer p, .contact-us-h, .copyright, .footer-link {
+  color: #FFF0CE;
+  font-weight: 600;
+  text-align: center; /* Center text in all elements */
+  margin: 0;
+}
+
+footer p {
+    font-size: 0.75em;
+}
+
+.footer-list {
+  list-style: none;
+}
+
+.footer-logo {
+  max-width: 150px;
+}
+
+.footer-contacts, .footer-center, .footer-links {
+  flex: 1; /* Allow equal space for each section */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1em 0;
+}
+
+.footer-contacts {
+  font-size: 1em;
+}
+
+.footer-links {
+  font-size: 1em;
+}
+
+.footer-link {
+  margin-top: 0.5em;
+  text-decoration: none;
+}
+
+.footer-link:hover {
+  color: coral;
+}
+
+@media screen and (max-width: 600px) {
+  footer {
+    flex-direction: column; /* Stack elements vertically on small screens */
+    align-items: center;
+    padding: 1em;
+  }
+
+  /*footer p {
+      font-size: 0.75em;
+  }*/
+
+  .footer-logo {
+    max-width: 100px;
+  }
+
+  .footer-contacts, .footer-links {
+    font-size: 0.9em;
+  }
+
+  .copyright {
+    font-size: 0.8em;
+  }
+}
+
+
+/*
+footer {
+  width: 100%;
+  min-height: 50px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1em 2em;
+  background-color: #0C356A;
+  flex-wrap: wrap;
+}
+
 
 footer p {
   color: #FFF0CE;
@@ -70,6 +150,45 @@ footer p {
   left: -15%;
 }
 
+.footer-logo, .footer-contacts, .footer-links, .copyright {
+  flex: 1;
+  text-align: center;
+  padding: 0.5em;
+}
+
+.footer-logo {
+  max-width: 150px;
+}
+
+.footer-contacts, .footer-links {
+  font-size: 1em;
+}
+
+.footer-links {
+  align-items: center;
+}
+
+@media screen and (max-width: 600px) {
+  footer {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer-contacts, .footer-links {
+    font-size: 0.8em;
+  }
+
+  .footer-logo {
+    max-width: 100px;
+  }
+
+  .copyright {
+    font-size: 0.7em;
+  }
+}
+*/
+
+/*
 @media screen and (min-width: 350px) and (max-width: 600px) {
 
   .footer-contacts {
@@ -90,3 +209,4 @@ footer p {
     font-size: 0.7em;
   }
 }
+*/

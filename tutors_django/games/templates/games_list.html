@@ -10,14 +10,28 @@
 {% block title %}Games{% endblock %}
 
 {% block css %}
-    <!-- <link rel="stylesheet" type="text/css" href="{% static 'styles/games.css' %}"> -->
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/games_main_page.css' %}">
 {% endblock %}
 
 
 {% block site_content %}
+<h1>Let the fun begin! <br> It's time to play some games!</h1>
 <div class="games_list">
-    <h1>More games coming soon.</h1>
-    <a href="/games/guess_word">Guessing Game</a>
-    <a href="/games/crossword">Crossword</a>
+    <div>
+        <img src="{% static 'img/guess.png' %}"
+             alt="guess-game-img"
+             id="guessing-game-image"
+             class="game-img"
+        >
+        <a href="/games/guess_word">Guessing Game</a>
+    </div>
+    <div>
+        <img src="{% static 'img/crossword.png' %}"
+             alt="crossword-img"
+             id="crossword-image"
+             class="game-img"
+        >
+        <a href="/games/crossword">Crossword</a>
+    </div>
 </div>
 {% endblock %}

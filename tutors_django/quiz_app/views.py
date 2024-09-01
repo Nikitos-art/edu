@@ -49,7 +49,7 @@ def save_quiz_view(request, pk):
             question = Question.objects.get(text=k)
             questions.append(question)
 
-        user = request.user
+        #user = request.user
         quiz = Quiz.objects.get(pk=pk)
 
         score = 0
@@ -74,7 +74,8 @@ def save_quiz_view(request, pk):
                 results.append({str(q): 'not answered'})
 
         score_ = score * multiplier
-        Result.objects.create(quiz=quiz, user=user, score=score_)
+        #Result.objects.create(quiz=quiz, user=user, score=score_)
+        Result.objects.create(quiz=quiz, score=score_)
 
         if score_ >= quiz.required_score_to_pass:
             return JsonResponse({'passed': True, 'score': score_, 'results': results})

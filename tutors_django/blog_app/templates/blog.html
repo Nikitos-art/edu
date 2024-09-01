@@ -19,7 +19,7 @@
 <div class="hero-section">
   <h1 class="blog-page-title">Blog Posts</h1>
 </div>
- <div class="blog-container">
+<div class="blog-container">
   <section class="cards-wrapper">
     {% for post in posts %}
     <div class="blog_post">
@@ -31,21 +31,8 @@
         <h1>{{ post.title }}</h1>
         <p>{{ post.content|slice:":30"|safe }}</p>
         <a class="button-link" href="{% url 'blog_app:post_detail' post.slug  %}" target="_blank">Read More</a>
-        <!-- <a class="button-link" href="{% url 'blog_app:post_detail' post.slug  %}" target="_blank">Read More</button> -->
       </div>
     </div>
-    <!-- <div class="card-grid-space">
-      <a class="b-card" href="{% url 'blog_app:post_detail' post.slug  %}" style="--bg-img: url('{% static 'img/lighthouse2.svg' %}')">
-        <div class="date">{{ post.created_on }}</div>
-        <div class="card-info">
-          <h1 class="card-h1">{{ post.title }}</h1>
-          <p>{{ post.content|slice:":100"|safe }}...</p>
-          <div class="tags">
-            <div class="tag">{{ post.author }}</div>
-          </div>
-        </div>
-      </a>
-    </div> -->
     {% endfor %}
 
   </section>

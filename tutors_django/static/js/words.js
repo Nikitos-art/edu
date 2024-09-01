@@ -1,7 +1,7 @@
 export const wordList = [
     {
         word: "python",
-        hint: "programming language"
+        hint: "a programming language"
     },
     {
         word: "guitar",
@@ -13,7 +13,7 @@ export const wordList = [
     },
     {
         word: "venus",
-        hint: "planet of our solar system"
+        hint: "a planet in the solar system"
     },
     {
         word: "gold",
@@ -21,23 +21,23 @@ export const wordList = [
     },
     {
         word: "ebay",
-        hint: "online shopping site"
+        hint: "an online shopping site"
     },
     {
         word: "golang",
-        hint: "programming language"
+        hint: "a programming language"
     },
     {
         word: "coding",
-        hint: "related to programming"
+        hint: "another word for programming"
     },
     {
         word: "matrix",
-        hint: "science fiction movie"
+        hint: "a science fiction movie"
     },
     {
         word: "bugs",
-        hint: "related to programming"
+        hint: "errors in software"
     },
     {
         word: "avatar",

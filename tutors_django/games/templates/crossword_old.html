@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+    <meta name="keywords" content="Crossword Games">
+    {% block script %}
+        <script src="{% static 'js/words.js' %}" defer type="module" ></script>
+        <script src="{% static 'js/crossword_old.js' %}" defer type="module" ></script>
+    {% endblock %}
+{% endblock %}
+
+{% block title %}Games{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/crossword.css' %}">
+{% endblock %}
+
+
+
+{% block site_content %}
+<div class="clues">
+    <h3>Hint:</h3>
+    <div id="clue-list">
+        <ul id="across">
+            <h5>Across:</h5>
+            <li></li>
+        </ul>
+        <ul id="down">
+            <h5>Down:</h5>
+            <li></li>
+        </ul>
+    </div>
+</div>
+<div class="crossword-container">
+    <div class="grid" id="crossword-grid">
+    </div>
+</div>
+{% endblock %}

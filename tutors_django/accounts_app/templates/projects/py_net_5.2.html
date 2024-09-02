@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+    <meta name="keywords" content="Python Java Script Linux CSS HTML coding programming">
+    {% block script %}
+
+    {% endblock %}
+{% endblock %}
+
+{% block title %}Projects{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/projects.css' %}">
+{% endblock %}
+
+
+{% block site_content %}
+<div class="projects-list-box">
+    <div class="project_item">
+        <img src="{% static 'img/ip_to_bin.png' %}" alt="Ip-to-bin-Image" class="ip-to-bin-image">
+        <h5>This is my code for the book's chapter 5 exercise 2 </h5>
+        <pre><code>
+        def ip_to_bin(ip_address):
+            ip = ip_address.split("/")[0].split(".")
+            result = ""
+
+            for byte in ip:
+                byte_elem = bin(int(byte))[2:]
+                padding_length = (8 - len(byte_elem) % 8) % 8
+                binary_representation = f"{'0' * padding_length + byte_elem} "
+                result += binary_representation
+
+            return result
+        </code></pre>
+        <h5 class="code-explanation">Explanation: <br> &nbsp;&nbsp;First I break up the input string by using Python's split method so that
+            I end up with 4 octets of the IP address. <br>Then I loop over each octet and turn in into
+            binary format using Python's build-in bin() function. I also remove "0b" <br> prefix that goes
+            along with that. Finally, I needed to add zeros as "padding" (if necessary) to improve
+            readability of <br> reading binary numbers.
+        </h5>
+    </div>
+</div>
+{% endblock %}

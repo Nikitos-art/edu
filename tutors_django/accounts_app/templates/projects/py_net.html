@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+    <meta name="keywords" content="Python Java Script Linux CSS HTML coding programming">
+    {% block script %}
+
+    {% endblock %}
+{% endblock %}
+
+{% block title %}Projects{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/projects.css' %}">
+{% endblock %}
+
+
+{% block site_content %}
+<div class="projects-list-box">
+    <div class="project_item">
+        <h5>Python for Network Engineers</h5>
+        <p>I used Natasha Samoylenko's book "Python for Network Engineers"
+            (link <a href="https://pyneng.readthedocs.io/en/latest/index.html">here</a>)
+        </p>
+        <h5>IP address to binary converter<a href="{% url 'py_net_5_2' %}">here</a>.</h5>
+        <br>
+        <h5>Network/Host address verifier <a href="{% url 'py_net_5_2a' %}">here</a>
+        </h5>
+    </div>
+</div>
+{% endblock %}

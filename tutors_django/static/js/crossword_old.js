@@ -46,30 +46,89 @@ function createGrid(rows, cols) {
     }
 }
 
-function placeWordsOnGrid(randomWords) {
-    randomWords.forEach((wordObj, index) => {
+function placeWordsOnGrid(words) {
+    words.forEach((wordObj, index) => {
         const { word, position, direction } = wordObj;
         let row = position.row;
         let col = position.col;
+        let canPlaceWord = true;
 
+        // First, check if the word can be placed
         for (let i = 0; i < word.length; i++) {
             const cell = document.getElementById(`cell-${row}-${col}`);
             if (cell) {
-                if (i === 0) {
-                    //cell.innerHTML = `<div class="background-number">${index + 1}</div>${word[i]}`;
-                    cell.style.backgroundColor = 'lightblue';
-                }
-                cell.textContent = word[i];
+                const existingLetter = cell.textContent;
 
+                // Check if the cell is already occupied by a different letter
+                if (existingLetter && existingLetter !== word[i]) {
+                    canPlaceWord = false;
+                    break;
+                }
+
+                // Move to the next cell based on direction
                 if (direction === 'across') {
                     col++;
                 } else if (direction === 'down') {
                     row++;
                 }
+            } else {
+                canPlaceWord = false;
+                break;
             }
+        }
+
+        if (canPlaceWord) {
+            // Reset row and col to the original position
+            row = position.row;
+            col = position.col;
+
+            // Now actually place the word on the grid
+            for (let i = 0; i < word.length; i++) {
+                const cell = document.getElementById(`cell-${row}-${col}`);
+                if (cell) {
+                    if (i === 0) {
+                        cell.style.backgroundColor = 'lightblue';
+                    }
+                    cell.textContent = word[i];
+
+                    if (direction === 'across') {
+                        col++;
+                    } else if (direction === 'down') {
+                        row++;
+                    }
+                }
+            }
+        } else {
+            console.log(`Cannot place word: ${word}`);
         }
     });
 }
+
+
+// function placeWordsOnGrid(randomWords) {
+//     randomWords.forEach((wordObj, index) => {
+//         const { word, position, direction } = wordObj;
+//         let row = position.row;
+//         let col = position.col;
+
+//         for (let i = 0; i < word.length; i++) {
+//             const cell = document.getElementById(`cell-${row}-${col}`);
+//             if (cell) {
+//                 if (i === 0) {
+//                     //cell.innerHTML = `<div class="background-number">${index + 1}</div>${word[i]}`;
+//                     cell.style.backgroundColor = 'lightblue';
+//                 }
+//                 cell.textContent = word[i];
+
+//                 if (direction === 'across') {
+//                     col++;
+//                 } else if (direction === 'down') {
+//                     row++;
+//                 }
+//             }
+//         }
+//     });
+// }
 
 
 createGrid(10, 10);

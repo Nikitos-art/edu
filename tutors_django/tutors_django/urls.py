@@ -16,8 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from accounts_app.views import index_view, CoursesView, AboutView, ResumeView, LoginUser, \
-    RegisterUser, logout_user, StudentAccount, TutorAccount, custom_404, privacy_view, download_file
+from accounts_app.views import index_view, CoursesView, AboutView, ResumeView, LoginUser, ProjectsView, \
+    RegisterUser, logout_user, StudentAccount, TutorAccount, custom_404, privacy_view, download_file, \
+    ProjectsPyNet52View, ProjectsPyNetView, ProjectsPyNet52aView
 # from quiz_app.views import PlacementA, PlacementB
 from courses_app.views import add_lesson
 from django.conf.urls.static import static
@@ -37,7 +38,11 @@ urlpatterns = [
     path('courses/', CoursesView.as_view(), name='courses'),
     path('inquiry_sent/', inquiry_form, name='inquiry_form'),
     path('about/', AboutView.as_view(), name='about'),
-    path('about/resume', ResumeView.as_view(), name='about/resume'),
+    path('about/resume', ResumeView.as_view(), name='resume'),
+    path('about/projects', ProjectsView.as_view(), name='about/projects'),
+    path('projects/py_net', ProjectsPyNetView.as_view(), name='py_net'),
+    path('projects/py_net/py_net_5_2', ProjectsPyNet52View.as_view(), name='py_net_5_2'),
+    path('projects/py_net/py_net_5_2a', ProjectsPyNet52aView.as_view(), name='py_net_5_2a'),
     # path('course/<slug:slug>/', CourseDetail.as_view(), name='course_detail'),
     path('blog/', include('blog_app.urls', namespace='blog')),
     path('quiz/', include('quiz_app.urls', namespace='quiz')),

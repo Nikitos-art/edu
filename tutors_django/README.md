@@ -17,7 +17,22 @@ ssh username@your_server_ip
 # Cubelet CI/CD
 1. git pull
 2. git pull origin main
----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+systemctl daemon-reload
+----------------------------------------------------------------------------------
+/etc/systemd/system/gunicorn.service
+----------------------------------------------------------------------------------
+The reload command works only if the service file defines how to reload the service. 
+If it's not defined, you can either add an ExecReload directive to the service file or simply use the restart command instead.
+----------------------------------------------------------------------------------------------
+*******************************To gracefully reload gunicorn**********************************
+ps aux | grep gunicorn
+kill -HUP <pid>
+There maybe several gunicorn processes running for 2 users: root and django or www-data.
+--------------------------------------------------------------------------------------------
+journalctl -u gunicorn -n 20
+
+
 # Nginx 
 ---------------------------------------------------------------------------------
 Steps to changing SSL from Namecheap to Let's Encrypt
@@ -32,10 +47,23 @@ sudo certbot --nginx -d lighthouse-tutors.com -d www.lighthouse-tutors.com
 
 Error occured:
 Saving debug log to /var/log/letsencrypt/letsencrypt.log
-Error while running nginx -c /etc/nginx/nginx.conf -t.
+---------------------------------------------------------------------------------
+VIM commands to coment and uncomment the whole page
+gg
+Ctrl + V
+G
+I
+#
+Esc
+:wq
+-------------------
+gg
+Ctrl + V
+G
+0
+l
+x
+:wq
 
-nginx: [warn] could not build optimal proxy_headers_hash, you should increase either proxy_headers_hash_max_size: 512 or proxy_headers_hash_bucket_size: 64; ignoring proxy_headers_hash_bucket_size
-nginx: [emerg] no "ssl_certificate" is defined for the "listen ... ssl" directive in /etc/nginx/sites-enabled/tutors_django:41
-nginx: configuration file /etc/nginx/nginx.conf test failed
 
 

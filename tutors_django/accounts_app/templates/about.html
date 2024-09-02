@@ -19,12 +19,15 @@
 {% block site_content %}
 <div class="key-point-block">
     <div class="key-point">
-        <h3 class="key-title">About this project</h3>
+        <div class="key-projects">
+            <h3 class="key-title">About this project</h3>
+            <h3>My other projects are <a href="/about/projects">here</a></h3>
+        </div>
         <div class="key-content">
             <div class="image-container">
                 <img src="{% static 'img/mypic.jpg' %}" alt="Project Image" class="key-image">
                 <p class="image-caption">Here's my face :-)</p>
-                <a href="/about/resume">My resume</a>
+                <a href="{% url 'resume' %}">My resume</a>
             </div>
             <p class="key-text">
                 Hi! I'm Nikita, the creator of this website. Originally intended as a portfolio site, 

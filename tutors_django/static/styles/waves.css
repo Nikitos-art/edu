@@ -107,6 +107,11 @@
     transform: translate3d(85px,0,0);
   }
 }
+
+.credit-waves {
+    font-size: 0.75em;
+    position:
+}
 /*Shrinking for mobile*/
 
 @media screen and (min-width: 350px) and (max-width: 900px) {
@@ -157,3 +162,4 @@
     font-size: 0.55rem;
   }
 }
+

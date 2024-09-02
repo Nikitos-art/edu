@@ -25,9 +25,14 @@
   margin-bottom: 20px; 
 } */
 
-.key-title {
+.key-title, .key-projects {
   font-family: 'Indie Flower', cursive;
   font-size: 3rem;
+}
+
+.key-projects {
+    display: flex;
+    justify-content: space-between;
 }
 
 .key-content {

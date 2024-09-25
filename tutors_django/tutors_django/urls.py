@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path
 from accounts_app.views import index_view, CoursesView, AboutView, ResumeView, LoginUser, ProjectsView, \
     RegisterUser, logout_user, StudentAccount, TutorAccount, custom_404, privacy_view, download_file, \
-    ProjectsPyNet52View, ProjectsPyNetView, ProjectsPyNet52aView
+    ProjectsPyNet52View, ProjectsPyNetView, ProjectsPyNet52aView, ProjectsAlgosView, ProjectsAlgo1View
 # from quiz_app.views import PlacementA, PlacementB
 from courses_app.views import add_lesson
 from django.conf.urls.static import static
@@ -40,9 +40,14 @@ urlpatterns = [
     path('about/', AboutView.as_view(), name='about'),
     path('about/resume', ResumeView.as_view(), name='resume'),
     path('about/projects', ProjectsView.as_view(), name='about/projects'),
+    #----------------------------------- PROJECTS------------------------------------#
     path('projects/py_net', ProjectsPyNetView.as_view(), name='py_net'),
     path('projects/py_net/py_net_5_2', ProjectsPyNet52View.as_view(), name='py_net_5_2'),
     path('projects/py_net/py_net_5_2a', ProjectsPyNet52aView.as_view(), name='py_net_5_2a'),
+    path('projects/algo', ProjectsAlgosView.as_view(), name='algo'),
+    path('projects/algo/algo_1', ProjectsAlgo1View.as_view(), name='algo_1'),
+
+    #-------------------------------------------------------------------------------#
     # path('course/<slug:slug>/', CourseDetail.as_view(), name='course_detail'),
     path('blog/', include('blog_app.urls', namespace='blog')),
     path('quiz/', include('quiz_app.urls', namespace='quiz')),

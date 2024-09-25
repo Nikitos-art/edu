@@ -50,13 +50,20 @@ class ProjectsView(TemplateView):
     template_name = './projects/projects.html'
 
 class ProjectsPyNetView(TemplateView):
-    template_name = './projects/py_net.html'
+    template_name = './projects/py_net/py_net.html'
 
 class ProjectsPyNet52View(TemplateView):
-    template_name = './projects/py_net_5.2.html'
+    template_name = './projects/py_net/py_net_5.2.html'
 
 class ProjectsPyNet52aView(TemplateView):
-    template_name = './projects/py_net_5.2a.html'
+    template_name = './projects/py_net/py_net_5.2a.html'
+
+class ProjectsAlgosView(TemplateView):
+    template_name = './projects/algo/algo.html'
+
+class ProjectsAlgo1View(TemplateView):
+    template_name = './projects/algo/algo.1.html'
+
 
 def privacy_view(request):
     return render(request, 'privacy.html')
@@ -118,7 +125,7 @@ class RegisterUser(CreateView):
 
 
 class StudentAccount(LoginRequiredMixin, TemplateView):
-    template_name = 'student_page.html'
+    template_name = './auth/student_page.html'
 
     def get(self, request, *args, **kwargs):
         user = request.user
@@ -189,7 +196,7 @@ class StudentAccount(LoginRequiredMixin, TemplateView):
 
 
 class TutorAccount(LoginRequiredMixin, TemplateView):
-    template_name = 'tutor_page.html'
+    template_name = './auth/tutor_page.html'
 
     def get(self, request, *args, **kwargs):
         user = request.user

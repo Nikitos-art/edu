@@ -5,7 +5,7 @@
     <meta name="keywords" content="Guessing Games">
     {% block script %}
     <script src="{% static 'js/guess_game.js' %}" defer type="module" ></script>
-    <script src="{% static 'js/words.js' %}" defer type="module" ></script>
+    <script src="{% static 'js/words_list.js' %}" defer type="module" ></script>
     {% endblock %}
 {% endblock %}
 
@@ -20,7 +20,7 @@
 <div class="content-box">
     <div class="content-wrap">
         <div class="wrapper">
-            <h1>Guess the Word</h1>
+            <h1>Guess the Word (press keys)</h1>
             <div class="content">
                 <input type="text" class="typing-input" maxlength="1">
                 <div class="inputs"></div>

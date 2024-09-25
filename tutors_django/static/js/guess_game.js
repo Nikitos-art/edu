@@ -1,4 +1,4 @@
-import { wordList } from './words.js';
+import { wordList } from './words_list.js';
 
 const inputs = document.querySelector(".inputs");
 const resetBtn = document.querySelector(".reset-btn");

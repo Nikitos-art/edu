@@ -483,20 +483,6 @@ function main(wordList, numOfWords) {
     }
   }
 
-  //console.log(`Before failedWords check: ${wordObjList.length}`);
-  // console.log(failedWords);
-  // for (let failedWord of failedWords) {
-  //   let isHorizontal = Math.random() < 0.5 ? 0 : 1; // Randomly try a direction
-  //   let wordPlaced = attemptWordPlacement(failedWord.word, wordObjList, gridResult, failedWord.hint, isHorizontal);
-  //   if (!wordPlaced) {
-  //     isHorizontal = isHorizontal === 0 ? 1 : 0;
-  //     attemptWordPlacement(failedWord.word, wordObjList, gridResult, failedWord.hint, isHorizontal);
-  //   } else {
-  //     console.log(`word "${failedWord.word}" was placed after second attempt.`)
-  //   }
-  // }
-  //console.log(`Before failedWords check: ${wordObjList.length}`);
-  //console.log(failedWords.length);
   createGridLayoutWithWordsOnIt(gridResult, wordObjList);
 }
 // Helper to place a word and store its metadata

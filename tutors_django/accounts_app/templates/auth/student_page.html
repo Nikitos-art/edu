@@ -37,13 +37,13 @@
     </div>
     {% include 'includes/inc_sidebar.html' %}
       <div class="menu-box-item" id="schedule-container" style="display: none">
-          {% include 'schedule-menu.html' %}
+          {% include 'auth/schedule-menu.html' %}
       </div>
       <div class="menu-box-item" id="chat-container" style="display: none">
           {% include 'chat-menu.html' %}
       </div>
       <div class="menu-box-item" id="profile-container" style="display: none">
-        {% include 'profile-menu.html' %}
+        {% include 'auth/profile-menu.html' %}
       </div>
   </div>
 {{ redirect_to_login_immediately }}

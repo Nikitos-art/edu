@@ -149,12 +149,13 @@
 
 <div id="placement-tests">
   <h2 class="h2-title-5">See where you stand with our placement tests.</h2>
+
   <div class="card">
       <img src="{% static 'img/placeA.png' %}" alt="Card Image" class="card-image">
       <div class="card-content">
           <h3 class="card-title">Test A</h3>
           <p class="card-text">This placement test is recomended for intermediate to advanced-level speakers of English language.</p>
-          <a href="/quiz/1" type="button" class="card-button">Learn More</a>
+          <a href="{% url 'quiz_app:quiz_detail' 2 %}" type="button" class="card-button">Learn More</a>
       </div>
   </div>
 
@@ -163,9 +164,10 @@
     <div class="card-content">
         <h3 class="card-title">Test B</h3>
         <p class="card-text">This placement test is recomended for beginner to intermediate-level English speakers. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-        <a href="/quiz/2" type="button" class="card-button">Learn More</a>
+        <a href="{% url 'quiz_app:quiz_detail' 4 %}" type="button" class="card-button">Learn More</a>
     </div>
   </div>
+
 </div> 
 
 <div id="inquiry-block">

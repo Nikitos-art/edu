@@ -27,7 +27,8 @@ import os
 from django.conf import settings
 
 def index_view(request):
-    return render(request, 'index.html')
+    quizzes = Quiz.objects.filter(id__in=[2, 4])
+    return render(request, 'index.html', {'quizzes': quizzes})
 
 
 class AboutView(TemplateView):

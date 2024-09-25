@@ -1,7 +1,8 @@
 # django_edu
+_____________________________________________________
 
-Fake users:
-
+Fake users locally:
+_________________________________________________________________________
 1. michelle19@gmail.com - tutor 
 2. braianmichels@yahoo.com - tutor 
 3. ellakrit@gmail.com - student 

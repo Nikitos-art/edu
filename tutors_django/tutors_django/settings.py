@@ -73,7 +73,8 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             'account_app/templates',
-            'blog_app/templates'
+            'blog_app/templates',
+            'games/templates'
         ],
         'APP_DIRS': True,
         'OPTIONS': {

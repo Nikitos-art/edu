@@ -57,49 +57,6 @@ function haveCommonLetters(word1, word2) {
   return commonLetters.length > 0 ? commonLetters : false;
 }
 
-
-//////////////////////////// word placement check ///////////////////////// 
-// function isCellValid(row, col, char, gridResult, emptyCell = '_') {
-//     const isRowInBounds = row >= 0 && row < gridResult.length;
-//     const isColInBounds = col >= 0 && col < gridResult[0].length;
-
-//     if (!isRowInBounds || !isColInBounds) {
-//         return false;
-//     }
-
-
-    // if (j === 0) {
-    //   if (isHorizontal) {
-    //       // Check above the first letter
-    //       if (row > 0 && gridResult[row - 1][col] !== emptyCell) {
-    //           return false;
-    //       } else {
-    //           // Check to the left of the first letter
-    //           if (col > 0 && gridResult[row][col - 1] !== emptyCell) {
-    //               return false;
-    //           }
-    //       }
-    //   }
-    // }
-    // if (j === wordLength - 1) {
-    //     if (isHorizontal) {
-    //         // Check below the last letter
-    //         if (row < gridResult.length - 1 && gridResult[row + 1][col] !== emptyCell) {
-    //             return false;
-    //         } else {
-    //             // Check to the right of the last letter
-    //             if (col < gridResult[0].length - 1 && gridResult[row][col + 1] !== emptyCell) {
-    //                 return false;
-    //             }
-    //         }
-    //     }
-    // }
-
-//     const cellValue = gridResult[row][col];
-//     return cellValue === emptyCell || cellValue === char;
-// }
-
-
 function isPaddingValid(row, col, char, letterIndex, isHorizontal, wordLength, gridResult, word, firstLetterPrevWord, emptyCell = '_') {
 
     const isRowInBounds = row >= 0 && row < gridResult.length;
@@ -232,7 +189,6 @@ function placeTheWord(word, startRow, startCol, gridResult, isHorizontal) {
     }
   }
 }
-//////////////////////////// word placement check ///////////////////////// 
 
 function createGridLayoutWithWordsOnIt(gridResult, wordObjList) {
 
@@ -252,8 +208,8 @@ function createGridLayoutWithWordsOnIt(gridResult, wordObjList) {
               cell.style.border = '1px solid #ddd'; 
               cell.style.boxSizing = 'border-box';
               cell.dataset.letter = gridResult[row][col].toUpperCase();
-              //cell.textContent = ''; //hide the letters
-              cell.textContent = gridResult[row][col] !== '_' ? gridResult[row][col] : ''; // show the letters
+              cell.textContent = ''; //hide the letters
+              //cell.textContent = gridResult[row][col] !== '_' ? gridResult[row][col] : ''; // show the letters
 
               if (gridResult[row][col] !== '_') {
                 cell.style.backgroundColor = 'lightblue';
@@ -550,7 +506,6 @@ function placeWordAndStore(word, startRow, startCol, isHorizontal, grid, wordObj
   wordObjList.push({ word, startRow, startCol, isHorizontal, hint, wordNumbering });
   displayHints(wordNumbering, hint, isHorizontal);
 }
-
 
 function attemptWordPlacement(currentWord, wordObjList, grid, hint, isHorizontal) {
 

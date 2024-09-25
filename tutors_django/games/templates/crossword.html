@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+    <meta name="keywords" content="Crossword Games">
+{% endblock %}
+
+{% block title %}Games{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/crossword.css' %}">
+{% endblock %}
+
+{% block site_content %}
+<div class="top">
+    <h1>Crossword Generator</h1>
+    <div class="input-section">
+        <label for="wordCount">(Won't be precise) Number of Words:</label>
+        <input type="number" id="wordCount" min="1" max="30" value="14">
+        <button id="genCross" onclick="generateCrossword()">Generate Crossword</button>
+    </div>
+</div>
+<div class="puzzle-wrapper">
+    <ul id="down">
+        <h5>Down:</h5>
+        <li></li>
+    </ul>
+    <div class="crossword-container">
+        <div class="grid" id="grid">
+        </div>
+    </div>
+    <ul id="across">
+        <h5>Across:</h5>
+        <li></li>
+    </ul>
+</div>
+<div id="victoryPopup" class="hidden">
+    <button id="closePopup">X</button>
+    <img src="{% static 'img/congrats.png' %}" alt="Victory!" />
+</div>
+
+{% block script %}
+    <script src="{% static 'js/crossword_beta.js' %}" defer type="module" ></script>
+{% endblock %}
+{% endblock %}

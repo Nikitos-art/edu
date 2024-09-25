@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+    <meta name="keywords" content="Python Java Script Linux CSS HTML coding programming">
+    {% block script %}
+
+    {% endblock %}
+{% endblock %}
+
+{% block title %}Projects{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/projects.css' %}">
+{% endblock %}
+
+
+{% block site_content %}
+<div class="projects-list-box">
+    <div class="project_item">
+        <h5>Algorithms</h5>
+        <p>Back in 2022 in around September something amazingly cool happened to me while I was <br>
+            writing some Python code and googling for some suggestions. When I typed a text into <br>
+            google search bar the page suddenly ... opened up. The Google page that is. I was amazed <br>
+            and a bit confused. I was invited to a Google Foo Bar coding challenge. It was Google's <br>
+            secret hiring technique. Long story short. There were 5 algorithmic coding challenges <br>
+            and I completed 2 of them with moderate difficulty. Then I proceeded to the 3rd one and <br>
+            I almost completed it but there was not enough time. I kep of my learning journey after that <br>
+            and had some extra motivation to back it all up. So without further redo here are some of <br>
+            my humble algorithmic projects.
+        </p>
+        <h5>Bubble sort and why it's not enough <a href="{% url 'algo_1' %}">here</a>.</h5>
+
+    </div>
+</div>
+{% endblock %}

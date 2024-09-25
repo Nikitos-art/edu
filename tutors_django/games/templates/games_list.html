@@ -17,13 +17,18 @@
 {% block site_content %}
 <h1>Let the fun begin! <br> It's time to play some games!</h1>
 <div class="games_list">
-    <div>
+    <div class="game-item">
         <img src="{% static 'img/guess.png' %}"
              alt="guess-game-img"
              id="guessing-game-image"
              class="game-img"
         >
-        <a href="/games/guess_word">Guessing Game</a>
+        <div>
+            <a href="/games/guess_word">Guessing Game</a>
+            <p class="game-credit">(Credit for this guessing game goes to
+                <a href="https://www.youtube.com/@CodingNepal">CodingNepal</a>)
+            </p>
+        </div>
     </div>
     <div>
         <img src="{% static 'img/crossword.png' %}"

@@ -24,16 +24,12 @@ def inquiry_form(request):
             # Get form data
             name = form.cleaned_data['name']
             email = form.cleaned_data['email']
-            time_zone = form.cleaned_data['time_zone']
-            prefered_platform = form.cleaned_data['prefered_platform']
             message = form.cleaned_data['message']
 
             # Send an email
             subject = 'New Inquiry'
             message_body = f'Name: {name}\n' \
                            f'Email: {email}\n' \
-                           f'Time Zone: {time_zone}\n' \
-                           f'Prefered_Platform: {prefered_platform}\n' \
                            f'Message: {message}'
             from_email = settings.DEFAULT_FROM_EMAIL
             recipient_list = ['lighthouse.tutors.inquiry@gmail.com']  # Replace with your email address

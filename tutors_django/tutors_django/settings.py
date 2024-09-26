@@ -48,7 +48,6 @@ INSTALLED_APPS = [
     'courses_app',
     'message_app',
     'games',
-    'tinymce',
     'login_history',
     'admin_honeypot',
 ]

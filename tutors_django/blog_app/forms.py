@@ -1,10 +1,17 @@
 from django import forms
 from .models import Post
-from tinymce.widgets import TinyMCE
 
 
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ['title', 'content', 'status']
-        widgets = {'content': TinyMCE(attrs={'cols': 80, 'rows': 30})}
+        widgets = {
+            'content': forms.Textarea(attrs={'cols': 80, 'rows': 30}),
+        }
+
+# class PostForm(forms.ModelForm):
+#     class Meta:
+#         model = Post
+#         fields = ['title', 'content', 'status']
+#         widgets = {'content': TinyMCE(attrs={'cols': 80, 'rows': 30})}

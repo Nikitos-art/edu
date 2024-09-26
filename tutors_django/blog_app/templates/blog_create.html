@@ -3,26 +3,27 @@
 
 {% block head %}
     {{ form.media }}
+    <script src="{% static 'js/rich_text_editor.js' %}"></script>  <!-- Include your JS file -->
 {% endblock %}
-
 
 {% block css %}
     <link rel="stylesheet" type="text/css" href="{% static 'styles/blog_create.css' %}">
 {% endblock %}
 
-
-{% block header %}
-{% include 'includes/inc_header.html' %}
-{% endblock %}
-
-
 {% block site_content %}
 <div class="blog-create-main">
     <div class="main-header-create">
-        <h2 class="main-header__heading">Create a new post</h2>
+        <h2 class="main-header__heading">Create a New Post</h2>
         <form method="post">
             {% csrf_token %}
-            {{ form.as_p }}
+            {{ form.title.label }} {{ form.title }}  <!-- Title Field -->
+            {{ form.status.label }} {{ form.status }}  <!-- Status Field -->
+
+            <div id="editor" contenteditable="true" style="border: 1px solid #ccc; padding: 10px; min-height: 150px;">
+                {{ form.content.value|safe }}  <!-- Populate the editor with existing content -->
+            </div>
+            <input type="hidden" id="content" name="content">  <!-- Hidden input to store editor content -->
+
             <button class="sub-btn" type="submit"><img
                 src="{% static 'img/check.svg' %}"
                 alt="check-svg"
@@ -37,9 +38,4 @@
     </div>
 </div>
 
-
-{% endblock %}
-
-{% block footer %}
-{% include 'includes/inc_footer.html' %}
 {% endblock %}

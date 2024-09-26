@@ -19,7 +19,6 @@ from django.urls import path
 from accounts_app.views import index_view, CoursesView, AboutView, ResumeView, LoginUser, ProjectsView, \
     RegisterUser, logout_user, StudentAccount, TutorAccount, custom_404, privacy_view, download_file, \
     ProjectsPyNet52View, ProjectsPyNetView, ProjectsPyNet52aView, ProjectsAlgosView, ProjectsAlgo1View
-# from quiz_app.views import PlacementA, PlacementB
 from courses_app.views import add_lesson
 from django.conf.urls.static import static
 from django.conf import settings
@@ -55,7 +54,6 @@ urlpatterns = [
     path('add_lesson/', add_lesson, name='add_lesson'),
     path('log_in/', LoginUser.as_view(), name='log_in'),
     path('sign_up/', RegisterUser.as_view(), name='sign_up'),
-    path('tinymce/', include('tinymce.urls')),
     path('student_account/<str:full_name>/', StudentAccount.as_view(), name='student_account'),
     path('tutor_account/<str:full_name>/', TutorAccount.as_view(), name='tutor_account'),
     path('log_out/', logout_user, name='log_out'),

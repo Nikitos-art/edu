@@ -19,11 +19,7 @@
             {{ form.title.label }} {{ form.title }}  <!-- Title Field -->
             {{ form.status.label }} {{ form.status }}  <!-- Status Field -->
 
-            <div id="editor" contenteditable="true" style="border: 1px solid #ccc; padding: 10px; min-height: 150px;">
-                {{ form.content.value|safe }}  <!-- Populate the editor with existing content -->
-            </div>
-            <input type="hidden" id="content" name="content">  <!-- Hidden input to store editor content -->
-
+            {% include 'includes/rich_text_editor.html' %}
             <button class="sub-btn" type="submit"><img
                 src="{% static 'img/check.svg' %}"
                 alt="check-svg"

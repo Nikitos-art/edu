@@ -45,10 +45,10 @@ Install Certbot and the necessary plugin for Nginx.
 3. Obtain the SSL Certificate
 sudo certbot --nginx -d lighthouse-tutors.com -d www.lighthouse-tutors.com
 
-Error occured:
+Error occurred:
 Saving debug log to /var/log/letsencrypt/letsencrypt.log
 ---------------------------------------------------------------------------------
-VIM commands to coment and uncomment the whole page
+VIM commands to comment and uncomment the whole page
 gg
 Ctrl + V
 G
@@ -65,22 +65,3 @@ l
 x
 :wq
 ------------------Local Droplet changes different from repo problem----------------
-This will show if there are any modified files, untracked files, or changes that have been staged for commit.
-git status
-
- Force Sync with GitHub Repo
-If you're certain that the files in your GitHub repo are correct and you want to override any local changes on the Droplet, you can force a pull:
-
-git fetch origin
-git reset --hard origin/main
-
-git fetch origin: Fetches the latest changes from the origin remote without merging them.
-git reset --hard origin/main: Resets your local branch to exactly match the main branch from the origin remote, discarding any local changes.
-Caution: The git reset --hard command will overwrite any local changes you’ve made. Make sure you don’t have anything important that isn’t committed.
-
- Verify the Files
-After running the reset, check to ensure that the about.css file matches the version in your GitHub repo:
-
-bash
-Copy code
-git diff origin/main -- about.css

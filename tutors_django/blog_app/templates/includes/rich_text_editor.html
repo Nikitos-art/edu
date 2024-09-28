@@ -1,7 +1,18 @@
-<div id="editor" contenteditable="true" style="border: 1px solid #ccc; padding: 10px; min-height: 150px;">
-    Start typing here...
+<div id="editor" contenteditable="true" class="editor" style="border: 1px solid #ccc; padding: 10px; min-height: 150px;">
+    {{ form.content.value|safe }}
 </div>
+
 <button type="button" onclick="formatText('bold')">Bold</button>
 <button type="button" onclick="formatText('italic')">Italic</button>
 <button type="button" onclick="formatText('underline')">Underline</button>
+
+<!-- New Buttons -->
+<button type="button" onclick="toggleHighlight()">Highlight</button>
+<button type="button" onclick="changeFontColor('red')">Red</button>
+<button type="button" onclick="changeFontColor('blue')">Blue</button>
+<button type="button" onclick="resetFontColor()">Reset Color</button>
+<button type="button" onclick="adjustFontSize(true)">Increase Font Size</button>
+<button type="button" onclick="adjustFontSize(false)">Decrease Font Size</button>
+
 <input type="hidden" name="content" id="content">
+

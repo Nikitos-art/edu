@@ -23,18 +23,21 @@
   <section class="cards-wrapper">
     {% for post in posts %}
     <div class="blog_post">
-      <!-- <div class="">
-        <img src="https://pbs.twimg.com/profile_images/890901007387025408/oztASP4n.jpg" alt="random image">
-      </div> -->
+      <div>
+        <img class="blog-img" src="{{ post.image.url }}" alt="blog-image">
+      </div>
       <div class="container_copy">
-        <h3>{{ post.created_on }}</h3>
-        <h1>{{ post.title }}</h1>
-        <p>{{ post.content|slice:":30"|safe }}</p>
+        <h3 class="blog-h3">{{ post.created_on }}</h3>
+        <h1 class="blog-h1">{{ post.title }}</h1>
+        <p class="blog-p">{{ post.content|slice:":30"|safe }}</p>
         <a class="button-link" href="{% url 'blog_app:post_detail' post.slug  %}" target="_blank">Read More</a>
+        <div class="blog-likes">
+          <span> Likes {{ post.likes }}</span> 
+          <i class="fa fa-heart" ></i>
+        </div>
       </div>
     </div>
     {% endfor %}
-
   </section>
  </div>
   

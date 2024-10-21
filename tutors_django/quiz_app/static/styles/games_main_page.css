@@ -1,0 +1,10 @@
+
+.game-item {
+    display: flex;
+    align-items: center;
+}
+
+.game-img {
+    width: 15vw;
+    height: 30vh;
+}

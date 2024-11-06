@@ -9,16 +9,15 @@ function isWithInBounds(move) {
 }
 
 export function getPawnMoves(square, color) {
-    const squares = document.querySelectorAll('#chessboard .square');
+    const squares = Array.from(document.querySelectorAll('#chessboard .square'));
+    const squareMap = new Map(squares.map(sq => [sq.getAttribute('data-coordinate'), sq]));
     const validMoves = [];
     const position = square.getAttribute('data-coordinate');
     const fromRow = parseInt(position[1]);
     const fromCol = position[0];
     const forwardMove = color === 'white' ? fromRow + 1 : fromRow - 1;
 
-    const potentialMoves = [];
-
-    potentialMoves.push(`${fromCol}${forwardMove}`);
+    const potentialMoves = [`${fromCol}${forwardMove}`];
 
     const isFirstMove = (color === 'white' && fromRow === 2) || (color === 'black' && fromRow === 7);
 
@@ -27,57 +26,48 @@ export function getPawnMoves(square, color) {
         potentialMoves.push(`${fromCol}${firstMove}`);
     }
 
+    // Capture moves
     const leftCapture = String.fromCharCode(fromCol.charCodeAt(0) - 1) + forwardMove;
     const rightCapture = String.fromCharCode(fromCol.charCodeAt(0) + 1) + forwardMove;
 
-    const leftTargetSquare = Array.from(squares).find(square => square.getAttribute('data-coordinate') === leftCapture);
-
-    if (leftTargetSquare) {
-        const leftTargetPieceImg = leftTargetSquare.querySelector('.piece');
-        if (leftTargetPieceImg) {
-            const targetPieceColor = leftTargetPieceImg.src.split('/').pop().split('_')[1].split('.')[0];
-            if (targetPieceColor !== color) {
-                potentialMoves.push(leftCapture); 
-            }
-        }
-    }
-
-    const rightTargetSquare = Array.from(squares).find(square => square.getAttribute('data-coordinate') === rightCapture);
-    if (rightTargetSquare) {
-        const rightTargetPieceImg = rightTargetSquare.querySelector('.piece');
-        if (rightTargetPieceImg) {
-            const targetPieceColor = rightTargetPieceImg.src.split('/').pop().split('_')[1].split('.')[0]; 
-            if (targetPieceColor !== color) {
-                potentialMoves.push(rightCapture); 
-            }
-        }
-    }
+    checkCaptureMove(leftCapture, color, squareMap, potentialMoves);
+    checkCaptureMove(rightCapture, color, squareMap, potentialMoves);
 
     potentialMoves.forEach(move => {
-
         if (isWithInBounds(move)) {
-            const targetSquare = Array.from(squares).find(square => square.getAttribute('data-coordinate') === move);
+            const targetSquare = squareMap.get(move);
             const targetSquarePieceImg = targetSquare?.querySelector('.piece');
-
             const isDiagonalMove = Math.abs(move.charCodeAt(0) - position.charCodeAt(0)) === 1;
-            if (targetSquarePieceImg && isDiagonalMove) {
 
-                const targetPieceColor = targetSquarePieceImg.src.split('/').pop().split('.')[1];
+            if (targetSquarePieceImg && isDiagonalMove) {
+                const targetPieceColor = targetSquarePieceImg.src.split('/').pop().split('_')[1].split('.')[0];
                 if (targetPieceColor !== color) {
                     validMoves.push(move);
                     isPawnMove(position, move, color, true);
                 }
-            } 
-
-            else if (!targetSquarePieceImg && !isDiagonalMove && isPawnMove(position, move, color, false)) {
-                validMoves.push(move); 
+            } else if (!targetSquarePieceImg && !isDiagonalMove && isPawnMove(position, move, color, false)) {
+                validMoves.push(move);
             }
         }
     });
 
-
     return validMoves;
 }
+
+// Helper function to check capture moves
+function checkCaptureMove(captureMove, color, squareMap, potentialMoves) {
+    const targetSquare = squareMap.get(captureMove);
+    if (targetSquare) {
+        const targetPieceImg = targetSquare.querySelector('.piece');
+        if (targetPieceImg) {
+            const targetPieceColor = targetPieceImg.src.split('/').pop().split('_')[1].split('.')[0];
+            if (targetPieceColor !== color) {
+                potentialMoves.push(captureMove);
+            }
+        }
+    }
+}
+
 
 export function getKnightMoves(square) {
     const squares = document.querySelectorAll('#chessboard .square');
@@ -194,8 +184,7 @@ export function getRookMoves(square) {
 
     const row = parseInt(position[1]);
     const col = position[0];
-    //console.log(`Rook position: ${position}. row: ${row} col: ${col}`);
-    // Check vertical and horizontal paths
+
     const directions = [
         { rowChange: 1, colChange: 0 },  // Move up
         { rowChange: -1, colChange: 0 }, // Move down

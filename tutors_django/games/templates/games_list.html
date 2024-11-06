@@ -24,19 +24,26 @@
              class="game-img"
         >
         <div>
-            <a href="/games/guess_word">Guessing Game</a>
-            <p class="game-credit">(Credit for this guessing game goes to
-                <a href="https://www.youtube.com/@CodingNepal">CodingNepal</a>)
+            <a href="{% url 'games:guess_word' %}">Guessing Game</a>
+            <p class="game-credit">(Big thanks to <a href="https://www.youtube.com/@CodingNepal">CodingNepal</a> for providing most of the code for this game)
             </p>
         </div>
     </div>
-    <div>
+    <div class="game-item">
         <img src="{% static 'img/crossword.png' %}"
              alt="crossword-img"
              id="crossword-image"
              class="game-img"
         >
-        <a href="/games/crossword">Crossword</a>
+        <a href="{% url 'games:crossword' %}">Crossword</a>
+    </div>
+    <div class="game-item">
+        <img src="{% static 'img/chess.png' %}"
+             alt="chess-img"
+             id="chess-image"
+             class="game-img"
+        >
+        <a href="{% url 'games:chess' %}">Chess</a>
     </div>
 </div>
 {% endblock %}

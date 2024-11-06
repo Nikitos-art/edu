@@ -5,9 +5,10 @@ from .models import Post
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ['title', 'content', 'status']
+        fields = ['title', 'content', 'status', 'image']
         widgets = {
             'content': forms.Textarea(attrs={'cols': 80, 'rows': 30}),
+            'image': forms.ClearableFileInput(attrs={'class': 'form-control-file'})
         }
 
 # class PostForm(forms.ModelForm):

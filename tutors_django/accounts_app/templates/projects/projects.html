@@ -14,28 +14,15 @@
     <link rel="stylesheet" type="text/css" href="{% static 'styles/projects.css' %}">
 {% endblock %}
 
-
 {% block site_content %}
-<h5>
-    Now I have written a lot (in my opinion) of Python code so I will just go over and pick<br>
-    out the most interesting ones here. I tried my best to group and categorize my code into
-    projects. So I made a Python for Networks projects where most code goes for Cisco router. And <br>
-    maybe a few lines of hacking with Python. Then I will also add some algorithmic solutions from
-    Codewars, maybe add a Panda's project.
-</h5>
-<h2>
-    Python for Networks project. Link <a href="{% url 'py_net' %}"> here</a>
-</h2>
+<h1>
+  Crossword Generator Puzzle
+</h1>
+<p>
+
+</p>
+<a>
+    <a href="{% url 'games:crossword' %}">Crossword</a>
+</a>
 <br>
-<h2>
-    Hacking project. Link <a href="{% url 'index' %}"> here</a>
-</h2>
-<br>
-<h2>
-    Pandas project. Link <a href="{% url 'index' %}"> here</a>
-</h2>
-<br>
-<h2>
-    Algorithms project. Link <a href="{% url 'algo' %}"> here</a>
-</h2>
 {% endblock %}

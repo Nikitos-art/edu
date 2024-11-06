@@ -3,7 +3,7 @@
 
 {% block head %}
     {{ form.media }}
-    <script src="{% static 'js/rich_text_editor.js' %}"></script>  <!-- Include your JS file -->
+    <script src="{% static 'js/rich_text_editor.js' %}"></script>
 {% endblock %}
 
 {% block css %}
@@ -14,10 +14,14 @@
 <div class="blog-create-main">
     <div class="main-header-create">
         <h2 class="main-header__heading">Create a New Post</h2>
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">  <!-- Added enctype for file uploads -->
             {% csrf_token %}
             {{ form.title.label }} {{ form.title }}  <!-- Title Field -->
             {{ form.status.label }} {{ form.status }}  <!-- Status Field -->
+
+            <div class="form-group">
+                {{ form.image.label }} {{ form.image }}  <!-- Image Upload Field -->
+            </div>
 
             {% include 'includes/rich_text_editor.html' %}
             <button class="sub-btn" type="submit"><img

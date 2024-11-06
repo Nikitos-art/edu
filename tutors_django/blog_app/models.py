@@ -17,6 +17,8 @@ class Post(models.Model):
     content =  models.TextField(default="")
     created_on = models.DateTimeField(auto_now_add=True)
     status = models.IntegerField(choices=STATUS, default=0)
+    likes = models.IntegerField(default=0)
+    image = models.ImageField(upload_to='blog_images/', blank=True, null=True)
 
     def save(self, *args, **kwargs):
         if not self.slug:

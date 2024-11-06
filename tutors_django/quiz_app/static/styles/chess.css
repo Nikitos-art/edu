@@ -1,0 +1,82 @@
+.chess-wrapper {
+    display: flex;
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center; 
+    height: 100vh; 
+    padding: 0 1em; 
+    box-sizing: border-box; 
+}
+
+
+.chess-container {
+    display: flex; 
+    align-items: center; 
+    position: relative; 
+}
+
+#chessboard {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    width: 400px;
+    height: 400px;
+}
+
+.square {
+    width: 50px;
+    height: 50px;
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.2); /* Subtle inner shadow */
+}
+
+.white {
+    /*background-color: #eeeed2;*/
+    background: linear-gradient(135deg, #B1D690, #A5C378); 
+}
+
+.black {
+    /*background-color: #769656;*/
+    background: linear-gradient(135deg, #4e7837, #3e5f2a);
+}
+
+.coordinates-virt {
+    display: flex;
+    flex-direction: column; 
+    justify-content: space-between;
+    margin-top: 20px;
+    position: relative;
+    left: 10px;
+    font: 24px Arial, sans-serif;
+}
+
+.coordinates-hor {
+    display: flex;
+    flex-direction: row; 
+    justify-content: space-between;
+    margin-left: 50px;
+    position: relative;
+    bottom: -30px;
+    font: 24px Arial, sans-serif; 
+}
+
+.col-coord, .row-coord {
+    width: 50px;
+    text-align: center; 
+}
+
+.col-coord {
+    margin-bottom : 22px; 
+}
+
+.row-coord {
+    transform: translateY(-20px);
+}
+
+.piece {
+    width: 100%;   /* Fit the piece to the size of the square */
+    height: 100%;
+    object-fit: contain;  /* Maintain the aspect ratio */
+}
+
+.selected {
+    border: 3px solid yellow;  
+}

@@ -10,3 +10,6 @@ class GuessWordView(TemplateView):
 
 class CrosswordView(TemplateView):
     template_name = 'crossword.html'
+
+class ChessView(TemplateView):
+    template_name = 'chess.html'

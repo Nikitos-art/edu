@@ -2,16 +2,39 @@
 {% load static %}
 
 {% block css %}
-    <link rel="stylesheet" type="text/css" href="{% static 'styles/blog_detail.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/blog.css' %}">
 {% endblock %}
 
 {% block site_content %}
 
 
 <div class="blog-page-container">
-    <h1>{{ post.title }}</h1>
+    <h1 class="blog-detail-title">{{ post.title }}</h1>
     <p class="text-muted">{{ post.author.full_name }} | {{ post.created_on }}</p>
     <p class="card-text ">{{ post.content | safe }}</p>
+
+    <button id="like-button" data-post-id="{{ post.id }}">
+        <i class="fa fa-heart"></i> Like
+    </button>
+    <span id="like-count">{{ post.likes }}</span>
+
 </div>
+<script>
+    document.getElementById("like-button").addEventListener("click", function() {
+        fetch(window.location.href, {  // Sending the POST request to the current page's URL
+            method: "POST",
+            headers: {
+                "X-CSRFToken": "{{ csrf_token }}",  // CSRF token for security
+                "X-Requested-With": "XMLHttpRequest"  // Ensures it's an AJAX request
+            }
+        })
+        .then(response => response.json())  // Parse JSON response
+        .then(data => {
+            document.getElementById("like-count").innerText = data.likes;  // Update likes count
+        })
+        .catch(error => console.error('Error:', error));  // Log any errors
+    });
+</script>
+
 
 {% endblock %}

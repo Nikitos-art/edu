@@ -65,3 +65,11 @@ l
 x
 :wq
 ------------------Local Droplet changes different from repo problem----------------
+
+========================= CHESS game descriptions =========================
+THERE ARE 4 MODULES:
+1. chessboard.js
+2. game_logic.js
+3. ai_moves.js
+4. moves_logic.js
+

@@ -383,6 +383,78 @@ function handleAIMove(move) {
 
 /////////////////////////////END AI SMART MOVES/////////////////////////////////////////////
 
+// function handlePlayerMove(square) {
+//     const pieceImg = square.querySelector('.piece');
+//     let pieceType = null;
+//     let pieceColor = "white";
+
+//     if (pieceImg) {
+//         pieceType = pieceImg.src.split('/').pop().split('.')[0];
+//         pieceColor = pieceType ? (pieceType.includes('white') ? 'white' : 'black') : null; 
+//     }
+
+//     // Deselect the selected square
+//     if (selectedSquare === square) {
+//         selectedSquare.classList.remove('selected');
+//         selectedPiece = null;
+//         selectedSquare = null;
+//         return;
+//     }
+
+//     // if (selectedPiece && !isValidMove(selectedPiece, square)) {
+//     //     selectedSquare.classList.remove('selected');
+//     //     selectedPiece = null;
+//     //     selectedSquare = null;
+//     //     return;
+//     // }
+
+//     // Only allow the current player's pieces to be selected
+//     if (!selectedPiece) {
+//         if (pieceColor === currentPlayer) {
+//             selectedPiece = pieceImg;
+//             selectedSquare = square;
+//             square.classList.add('selected');
+//             return;
+//         } else {
+//             return;
+//         }
+//     } else {
+
+//         const opponentColor = 'black';
+//         const isCapture = pieceImg && opponentColor !== currentPlayer;
+
+//         // Only attempt to move if it's an empty square or a capture
+//         if (!pieceImg || isCapture) {
+//             if (isValidMove(selectedPiece, selectedSquare, square, isCapture, 'user')) {
+//                 //console.log(`square: ${square}`)
+//                 if (isCapture) {
+//                     square.removeChild(pieceImg);
+//                 }
+
+//                 square.appendChild(selectedPiece);
+//                 selectedSquare.classList.remove('selected');
+
+//                 const selectedPieceType = selectedPiece.src.split('/').pop().split('.')[0].split('_')[0];
+                
+//                 const fromCoordinate = selectedSquare.getAttribute('data-coordinate');
+
+//                 const toCoordinate = square.getAttribute('data-coordinate');
+//                 const toRow = parseInt(toCoordinate.charAt(1));
+
+//                 if (selectedPieceType.includes('pawn')) {
+//                     if ((currentPlayer === 'white' && toRow === 8) || (currentPlayer === 'black' && toRow === 1)) {
+//                         promotePawn(square);
+//                     }
+//                 }
+
+//                 updateLastMove(fromCoordinate, toCoordinate, selectedPieceType, "white");
+//                 updatePlayerTurn();
+//             }
+//         }
+//         selectedPiece = null;
+//         selectedSquare = null;
+//     }
+// }
 function handlePlayerMove(square) {
     const pieceImg = square.querySelector('.piece');
     let pieceType = null;
@@ -412,40 +484,39 @@ function handlePlayerMove(square) {
             return;
         }
     } else {
-
         const opponentColor = 'black';
         const isCapture = pieceImg && opponentColor !== currentPlayer;
 
         // Only attempt to move if it's an empty square or a capture
-        if (!pieceImg || isCapture) {
-            if (isValidMove(selectedPiece, selectedSquare, square, isCapture, 'user')) {
-                //console.log(`square: ${square}`)
-                if (isCapture) {
-                    square.removeChild(pieceImg);
-                }
-
-                square.appendChild(selectedPiece);
-                selectedSquare.classList.remove('selected');
-
-                const selectedPieceType = selectedPiece.src.split('/').pop().split('.')[0].split('_')[0];
-                
-                const fromCoordinate = selectedSquare.getAttribute('data-coordinate');
-
-                const toCoordinate = square.getAttribute('data-coordinate');
-                const toRow = parseInt(toCoordinate.charAt(1));
-
-                if (selectedPieceType.includes('pawn')) {
-                    if ((currentPlayer === 'white' && toRow === 8) || (currentPlayer === 'black' && toRow === 1)) {
-                        promotePawn(square);
-                    }
-                }
-
-                updateLastMove(fromCoordinate, toCoordinate, selectedPieceType, "white");
-                updatePlayerTurn();
+        if ((!pieceImg || isCapture) && isValidMove(selectedPiece, selectedSquare, square, isCapture, 'user')) {
+            if (isCapture) {
+                square.removeChild(pieceImg);
             }
+            square.appendChild(selectedPiece);
+            selectedSquare.classList.remove('selected');
+
+            const selectedPieceType = selectedPiece.src.split('/').pop().split('.')[0].split('_')[0];
+            const fromCoordinate = selectedSquare.getAttribute('data-coordinate');
+            const toCoordinate = square.getAttribute('data-coordinate');
+            const toRow = parseInt(toCoordinate.charAt(1));
+
+            if (selectedPieceType.includes('pawn')) {
+                if ((currentPlayer === 'white' && toRow === 8) || (currentPlayer === 'black' && toRow === 1)) {
+                    promotePawn(square);
+                }
+            }
+
+            updateLastMove(fromCoordinate, toCoordinate, selectedPieceType, "white");
+            updatePlayerTurn();
+            
+            selectedPiece = null;
+            selectedSquare = null;
+        } else {
+            // Reset selection only if no valid move was made
+            selectedSquare.classList.remove('selected');
+            selectedPiece = null;
+            selectedSquare = null;
         }
-        selectedPiece = null;
-        selectedSquare = null;
     }
 }
 

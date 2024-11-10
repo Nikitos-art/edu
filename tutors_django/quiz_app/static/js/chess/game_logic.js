@@ -29,7 +29,7 @@ function updateLastMove(from, to, piece, color) {
     lastMoveMade.to = to;
     lastMoveMade.piece = piece;
     lastMoveMade.color = color;
-    console.log(lastMoveMade);
+    //console.log(lastMoveMade);
 }
 
 function updatePlayerTurn() {
@@ -95,37 +95,37 @@ function isKingInCheck(simulatedBoardArray, currentColor) {
 
                 if (piece.pieceType === 'rook') {
                     if (isRookMove(attackFromSquare, toKingSquare, opponentColor, simulatedBoardArray)) {
-                        console.log(`would be in check from ROOK move from | to : ${attackFromSquare} | ${toKingSquare}`);
+                        //console.log(`would be in check from ROOK move from | to : ${attackFromSquare} | ${toKingSquare}`);
                         return true;
                     }
                 }
                 
                 if (piece.pieceType === 'knight' && isKnightMove(attackFromSquare, toKingSquare, opponentColor)) {
-                    console.log(`would be in check from KNIGHT move from | to : ${attackFromSquare} | ${toKingSquare}`);
+                    //console.log(`would be in check from KNIGHT move from | to : ${attackFromSquare} | ${toKingSquare}`);
                     return true;
                 }
                 
                 if (piece.pieceType === 'bishop') {
                     if (isBishopMove(attackFromSquare, toKingSquare, opponentColor, simulatedBoardArray)) {
-                        console.log(`would be in check from BISHOP move from | to : ${attackFromSquare} | ${toKingSquare}`);
+                        //console.log(`would be in check from BISHOP move from | to : ${attackFromSquare} | ${toKingSquare}`);
                         return true;
                     }
                 }
                 
                 if (piece.pieceType === 'queen') {
                     if (isQueenMove(attackFromSquare, toKingSquare, opponentColor, simulatedBoardArray)) {
-                        console.log(`would be in check from QUEEN move from | to : ${attackFromSquare} | ${toKingSquare}`);
+                       // console.log(`would be in check from QUEEN move from | to : ${attackFromSquare} | ${toKingSquare}`);
                         return true;
                     } 
                 }
                 
                 if (piece.pieceType === 'king' && isKingMove(attackFromSquare, toKingSquare, kingFirstMove, rookFirstMove, opponentColor)) {
-                    console.log(`would be in check from KING move from | to : ${attackFromSquare} | ${toKingSquare}`);
+                   // console.log(`would be in check from KING move from | to : ${attackFromSquare} | ${toKingSquare}`);
                     return true;
                 }
                 
                 if (piece.pieceType === 'pawn' && isPawnAttack(attackFromSquare, toKingSquare, opponentColor)) {
-                    console.log(`would be in check from PAWN move from | to : ${attackFromSquare} | ${toKingSquare}`);
+                   // console.log(`would be in check from PAWN move from | to : ${attackFromSquare} | ${toKingSquare}`);
                     return true;
                 }
                 
@@ -482,8 +482,9 @@ function isValidMove(piece, fromSquare, toSquare, isCapture, userOrAI) {
 
         if (isKingInCheck(simulatedMoveBoard, 'white')) {
             unSimulateMove({ from: fromCoordinate, to: toCoordinate }, simulatedMoveBoard);
-            alert(`White king would be in check if move: ${fromCoordinate} ${toCoordinate}!\n
-                 Board simulation: ${JSON.stringify(simulatedMoveBoard)}`);
+            alert(`White king would be in check if move: ${fromCoordinate} ${toCoordinate}!`);
+            // alert(`White king would be in check if move: ${fromCoordinate} ${toCoordinate}!\n
+            //      Board simulation: ${JSON.stringify(simulatedMoveBoard)}`);
             //after simulation: ${JSON.stringify(simulatedMoveBoard, null, 2)}\n
             return false; 
         }
@@ -506,13 +507,13 @@ function isValidMove(piece, fromSquare, toSquare, isCapture, userOrAI) {
     switch (pieceType) {
         case 'pawn_white':
             if (isPawnMove(fromCoordinate, toCoordinate, 'white', isCapture, lastMoveMade, toSquare)) {
-                console.log(`white pawn move ${fromCoordinate} ${toCoordinate}`);
+                //console.log(`white pawn move ${fromCoordinate} ${toCoordinate}`);
                 return true;
             }
             break;
         case 'pawn_black':
             if (isPawnMove(fromCoordinate, toCoordinate, 'black', isCapture, lastMoveMade, toSquare)) {
-                console.log(`black pawn move ${fromCoordinate} ${toCoordinate}`)
+               // console.log(`black pawn move ${fromCoordinate} ${toCoordinate}`)
                 return true;
             }
             break;
@@ -538,38 +539,70 @@ function isValidMove(piece, fromSquare, toSquare, isCapture, userOrAI) {
             return isBishopMove(fromCoordinate, toCoordinate);
         case 'king_white':
         case 'king_black':
+            // Ensure it's a valid king move
             if (isKingMove(fromCoordinate, toCoordinate, kingFirstMove[currentColor], rookFirstMove, currentColor)) {
-                const isKingsideCastling = toCoordinate.charCodeAt(0) > fromCoordinate.charCodeAt(0);
-                
-                if (isKingsideCastling) {
-                    
-                    const rookCurrentPosition = 'h' + fromCoordinate.charAt(1);
-                    const rookNewPosition = 'f' + toCoordinate.charAt(1);
-                    const rookElement = document.querySelector(`[data-coordinate="${rookCurrentPosition}"]`);
-                    const newRookElement = document.querySelector(`[data-coordinate="${rookNewPosition}"]`);
-                    
-                    if (rookElement && newRookElement && rookElement.firstChild) {
-                        newRookElement.appendChild(rookElement.firstChild);
-                        rookFirstMove.kingside[currentColor] = false;
+        
+                // Initializing a variable for castling check
+                let isCastling = false;
+        
+                // Handle castling only if king is at the initial position
+                if (currentColor === "white") {
+                    if (fromCoordinate === 'e1') {
+                        // Kingside or Queenside castling
+                        if (toCoordinate === 'c1' || toCoordinate === 'g1') {
+                            isCastling = true;
+                        }
                     }
-                    
-                } else {
-                    
-                    const rookCurrentPosition = 'a' + fromCoordinate.charAt(1);
-                    const rookNewPosition = 'd' + toCoordinate.charAt(1);
-                    const rookElement = document.querySelector(`[data-coordinate="${rookCurrentPosition}"]`);
-                    const newRookElement = document.querySelector(`[data-coordinate="${rookNewPosition}"]`);
-                    
-                    if (rookElement && newRookElement && rookElement.firstChild) {
-                        newRookElement.appendChild(rookElement.firstChild);
-                        rookFirstMove.queenside[currentColor] = false;
+                } else if (currentColor === "black") {
+                    if (fromCoordinate === 'e8') {
+                        // Kingside or Queenside castling
+                        if (toCoordinate === 'c8' || toCoordinate === 'g8') {
+                            isCastling = true;
+                        }
                     }
                 }
-                
+        
+                if (isCastling) {
+                    const currentBoard = createBoardArray();
+                    if (isKingInCheck(currentBoard, currentColor)) {
+                        return false;  // King is in check, so castling is not allowed
+                    }
+        
+                    const isKingsideCastling = toCoordinate.charCodeAt(0) > fromCoordinate.charCodeAt(0);
+        
+                    if (isKingsideCastling) {
+                        // Handle kingside castling
+                        const rookCurrentPosition = 'h' + fromCoordinate.charAt(1);
+                        const rookNewPosition = 'f' + fromCoordinate.charAt(1);
+                        const rookElement = document.querySelector(`[data-coordinate="${rookCurrentPosition}"]`);
+                        const newRookElement = document.querySelector(`[data-coordinate="${rookNewPosition}"]`);
+        
+                        if (rookElement && newRookElement && rookElement.firstChild) {
+                            newRookElement.appendChild(rookElement.firstChild);
+                            rookFirstMove.kingside[currentColor] = false;
+                        }
+                    } else {
+                        // Handle queenside castling
+                        const rookCurrentPosition = 'a' + fromCoordinate.charAt(1);
+                        const rookNewPosition = 'd' + fromCoordinate.charAt(1);
+                        const rookElement = document.querySelector(`[data-coordinate="${rookCurrentPosition}"]`);
+                        const newRookElement = document.querySelector(`[data-coordinate="${rookNewPosition}"]`);
+        
+                        if (rookElement && newRookElement && rookElement.firstChild) {
+                            newRookElement.appendChild(rookElement.firstChild);
+                            rookFirstMove.queenside[currentColor] = false;
+                        }
+                    }
+        
+                    kingFirstMove[currentColor] = false;
+                    return true;
+                }
+        
                 kingFirstMove[currentColor] = false;
                 return true;
             }
-            break;            
+            break;
+                
         case 'queen_white':
         case 'queen_black':
             return isQueenMove(fromCoordinate, toCoordinate);

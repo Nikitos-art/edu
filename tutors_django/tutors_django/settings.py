@@ -15,7 +15,7 @@ from dotenv import load_dotenv
 from datetime import timedelta
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-load_dotenv(BASE_DIR / '.env')
+load_dotenv(BASE_DIR.parent / '.env')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -138,7 +138,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'Asia/Tbilisi'
+TIME_ZONE = 'Asia/Bangkok'
 
 USE_I18N = True
 
@@ -153,25 +153,16 @@ STATIC_URL = '/static/'
 #STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/')  
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static/'), 
+    os.path.join(BASE_DIR / 'quiz_app/static'),
 ]
 
-#########################################
-#STATIC_URL = '/static/'
-#STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
-#STATIC_ROOT = BASE_DIR / "static"
-# STATICFILES_DIRS = [
-#     (BASE_DIR / 'accounts_app/static'),
-#     (BASE_DIR / 'quiz_app/static'),
-#     (BASE_DIR / 'courses_app/static')
-# ]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 # Base url to serve media files
 MEDIA_URL = '/media/'
 
-# Path where media is stored'
+# Path where media is stored
 MEDIA_ROOT = BASE_DIR / 'media'
 
 
@@ -186,18 +177,11 @@ AUTO_LOGOUT = {
     'MESSAGE': 'The session has expired. Please login again to continue.',
 }
 
-# SECURE_HSTS_SECONDS = 30  
-# SECURE_HSTS_PRELOAD = True
-# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-# SECURE_SSL_REDIRECT = True
 
 CSRF_TRUSTED_ORIGINS = [
     'https://www.lighthouse-tutors.com',
     'https://lighthouse-tutors.com',
 ]
 
-CSRF_COOKIE_SECURE = True;
+CSRF_COOKIE_SECURE = True
 
-# SESSION_COOKIE_SECURE = True;
-# SECURE_SSL_REDIRECT = True;
-# SECURE_HSTS_SECONDS

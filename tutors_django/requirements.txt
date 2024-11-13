@@ -15,7 +15,7 @@ ConfigArgParse==1.7
 constantly==23.10.4
 cryptography==42.0.5
 distro==1.9.0
-dj-user-login-history==1.0.5
+dj-user-login-history==1.0.6
 Django==5.0
 django-admin-honeypot-updated-2021==1.2.0
 django-admin-interface==0.28.6
@@ -53,7 +53,7 @@ pyasn1==0.6.0
 pyasn1_modules==0.4.0
 pycparser==2.22
 PyHamcrest==2.1.0
-PyICU==2.13
+#PyICU==2.13
 PyJWT==2.8.0
 pyOpenSSL==24.1.0
 pyparsing==3.1.2

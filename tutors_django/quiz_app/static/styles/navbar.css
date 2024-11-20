@@ -88,6 +88,16 @@
   opacity: 1;
 }
 
+@media screen and (min-width: 340px) and (max-width: 599px) {
+
+  .navbar-nav {
+    padding-right: 1vw;
+  }
+
+}
+
+
+
 @media screen and (max-width: 600px) {
   .navbar {
     height: 40px;

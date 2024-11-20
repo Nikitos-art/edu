@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+    <meta name="keywords" content="Chinese characters, Hanzi, Chinese language, Mandarin Chinese">
+{% endblock %}
+
+{% block title %}Hanzi{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/hanzi.css' %}">
+{% endblock %}
+
+{% block site_content %}
+<div class="hanzi-main-container">
+    <div class="hanzi-game-container">
+        <div class="hanzi-char-text"></div>
+        <div class="hanzi-menu">
+            <p>Current Level: 1</p>
+            <div>
+                <button id="fetch-hanzi-btn" class="hanzi-menu-btn">开始 (start)</button>
+            </div>
+            <div>
+                <button id="speak-btn" class="hanzi-menu-btn">说话 (speak)</button>
+            </div>
+            <div>
+                <div class="feedback"></div>
+            </div>
+            <a href="{% url 'download_file' '101_hanzi.pdf' %}" class="hanzi_download">Download 101 Hanzi</a>
+            <img src="{% static 'img/chinese-carp.svg' %}" class="menu-decor-img" alt="carp" loading="lazy">
+        </div>  
+    </div>
+</div>
+{% block script %}
+    <script src="{% static 'js/hanzi/hanzi_main.js' %}" defer type="module" ></script>
+{% endblock %}
+{% endblock %}

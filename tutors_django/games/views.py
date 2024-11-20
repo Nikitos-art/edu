@@ -2,7 +2,7 @@
 from django.views.generic import TemplateView
 
 
-class GamesListiew(TemplateView):
+class GamesListView(TemplateView):
     template_name = 'games_list.html'
 
 class GuessWordView(TemplateView):
@@ -13,3 +13,6 @@ class CrosswordView(TemplateView):
 
 class ChessView(TemplateView):
     template_name = 'chess.html'
+
+class HanziView(TemplateView):
+    template_name = 'hanzi.html'

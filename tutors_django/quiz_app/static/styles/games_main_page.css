@@ -1,5 +1,5 @@
 
-.game-item {
+/* .game-item {
     display: flex;
     align-items: center;
 }
@@ -7,4 +7,32 @@
 .game-img {
     width: 15vw;
     height: 30vh;
+}
+ */
+
+
+
+ .games_list {
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap to the next row on smaller screens */
+    justify-content: space-around; /* Distribute items evenly */
+    gap: 1rem; /* Add space between items */
+    padding: 1rem;
+}
+
+.game-item {
+    display: flex;
+    flex-direction: column; /* Stack the content vertically */
+    align-items: center; /* Center content horizontally */
+    width: 20vw; /* Default size for larger screens */
+    max-width: 300px; /* Prevent items from getting too large */
+    min-width: 150px; /* Prevent items from getting too small */
+}
+
+.game-img {
+    width: 100%; /* Make the image fill its container */
+    height: auto; /* Maintain aspect ratio */
+    max-height: 30vh; /* Prevent images from being too tall */
+    object-fit: cover; /* Ensure the image covers its container */
+    border-radius: 8px; /* Optional: Rounded corners */
 }

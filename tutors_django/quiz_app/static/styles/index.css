@@ -59,7 +59,7 @@ p {
 	background: hsl(187 75% 64%);
 	border-radius: 0.6rem;
 	font-weight: 700;
-	border: 0.35rem solid;
+    border: 0.35rem solid;
   height: 50px;
   width: 150px;
   position: relative;

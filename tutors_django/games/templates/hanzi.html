@@ -12,25 +12,60 @@
 {% endblock %}
 
 {% block site_content %}
+
 <div class="hanzi-main-container">
     <div class="hanzi-game-container">
-        <div class="hanzi-char-text"></div>
-        <div class="hanzi-menu">
-            <p>Current Level: 1</p>
-            <div>
+
+        <div class="level-selection {% if level != 0 %}hidden{% endif %}">
+            <div class="level-selection-top">
+                <img src="{% static 'img/chinese-carp.svg' %}" class="l-opt-img" alt="carp" loading="lazy">
+                <h2>Select Your Level</h2>
+            </div>
+            <div class="level-cards">
+                <a href="#" class="level-card" data-level="1">
+                    <h3>Level 一</h3>
+                    <img src="{% static 'img/paper-fan.svg' %}" class="l-card-img" alt="Level 1 Icon" loading="lazy">
+                    <p>Presuming you’ve mastered PinYin and the 101 characters.</p>
+                </a>
+                <a href="#" class="level-card" data-level="2">
+                    <h3>Level 二</h3>
+                    <img src="{% static 'img/red-envelope.svg' %}" class="l-card-img" alt="Level 2 Icon" loading="lazy">
+                    <p>Requires basic speaking and pronunciation skills for some of the words constructed with 
+                        the 101 characters.
+                    </p>
+                </a>
+                <a href="#" class="level-card" data-level="3">
+                    <h3>Level 三</h3>
+                    <img src="{% static 'img/purse.svg' %}" class="l-card-img" alt="Level 3 Icon" loading="lazy">
+                    <p>Coming soon...</p>
+                </a>
+            </div>
+        </div>
+        
+        <div class="hanzi-char-text {% if level == 0 %}hidden{% endif %}"></div>
+        <div class="hanzi-menu {% if level == 0 %}hidden{% endif %}">
+            <p>Current Level: <span id="current-level">0</span></p>
+            <!-- Elements for Level 1 -->
+            <div class="level-1-options {% if level != 1 %}hidden{% endif %}">
+                <input type="text" id="pinyin-input" placeholder="Enter Pinyin">
+                <input type="number" id="tone-input" placeholder="Enter Tone (1-4)">
+                <button id="fetch-hanzi-btn" class="hanzi-menu-btn">下个字 (fetch)</button>
+                <button id="submit-answer-btn" class="hanzi-menu-btn">Submit</button>
+                <img src="{% static 'img/paper-fan.svg' %}" class="menu-decor-img" alt="carp" loading="lazy">
+            </div>
+            <!-- Elements for Level 2 -->
+            <div class="level-2-options {% if level != 2 %}hidden{% endif %}">
                 <button id="fetch-hanzi-btn" class="hanzi-menu-btn">开始 (start)</button>
-            </div>
-            <div>
                 <button id="speak-btn" class="hanzi-menu-btn">说话 (speak)</button>
+                <img src="{% static 'img/red-envelope.svg' %}" class="menu-decor-img" alt="carp" loading="lazy">
             </div>
-            <div>
-                <div class="feedback"></div>
-            </div>
+            <div class="feedback"></div>
             <a href="{% url 'download_file' '101_hanzi.pdf' %}" class="hanzi_download">Download 101 Hanzi</a>
-            <img src="{% static 'img/chinese-carp.svg' %}" class="menu-decor-img" alt="carp" loading="lazy">
-        </div>  
+        </div>
+
     </div>
 </div>
+
 {% block script %}
     <script src="{% static 'js/hanzi/hanzi_main.js' %}" defer type="module" ></script>
 {% endblock %}

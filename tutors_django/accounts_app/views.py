@@ -283,7 +283,8 @@ def custom_404(request, exception):
 
 ### DOWNLOAD RESUME VIEW ###
 def download_file(request, filename):
-    file_path = os.path.join(settings.MEDIA_ROOT, filename)
+    ##file_path = os.path.join(settings.MEDIA_ROOT, filename)
+    file_path = os.path.join(settings.BASE_DIR, filename)  # Reference the root folder directly
     if os.path.exists(file_path):
         with open(file_path, 'rb') as fh:
             response = HttpResponse(fh.read(), content_type="application/octet-stream")

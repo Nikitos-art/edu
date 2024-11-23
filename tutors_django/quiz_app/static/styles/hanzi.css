@@ -37,33 +37,31 @@
 }
 
 
-/* Initially hide all the game-related content */
-/* Initially hide all game-related content */
 .hanzi-menu,
 .hanzi-char-text {
     display: none;
 }
 
-/* Show content after level is selected */
+
 .level-selected .hanzi-menu,
 .level-selected .hanzi-char-text {
-    display: flex; /* Ensure .hanzi-menu keeps its flex behavior */
+    display: flex; 
 }
 
-/* Level selection menu is always visible initially */
+
 .level-selection {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Center children horizontally */
-    gap: 1rem; /* Space between .level-selection-top and .level-cards */
+    align-items: center; 
+    gap: 1rem; 
 }
 
 .level-selection-top {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Center content horizontally */
-    text-align: center; /* Center-align the text */
-    gap: 0.5rem; /* Space between the image and the title */
+    align-items: center; 
+    text-align: center; 
+    gap: 0.5rem; 
 }
 
 .l-opt-img {
@@ -141,29 +139,74 @@
     justify-content: center; 
     align-items: center; 
     white-space: nowrap;
-    padding: 0.5rem 1rem; 
-    width: auto;
-    max-width: 90%; 
+
+    padding: 0.2rem 0.4rem;
+
+    min-width: 6em; 
+    max-width: 10em; 
+    min-height: 2em; 
+    max-height: 6em;
+
     color: black;
     text-decoration: none;
     background: #FB3635;
     border-radius: 0.6rem;
-    font-weight: 700;
-    font-size: 1rem;
+    font-weight: 600;
+    font-size: 0.9rem;
     border: 0.2rem solid;
     position: relative;
     transition: background-color 0.3s ease, transform 0.3s ease;
     cursor: pointer;
     box-sizing: border-box;
-    margin-top: 20px;
+    margin-bottom: 10px;
 }
 
 .hanzi-menu-btn:hover {
     background-color: #FDD821; 
 }
 
+/* tone buttons */
+.tone-buttons {
+    display: flex;
+    gap: 10px; 
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.tone-btn {
+    padding: 10px 15px;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #FDD821;
+    border: 2px solid rgba(0, 0, 0, 0.3);
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.tone-btn:hover {
+    background-color: #FB3635;
+    transform: scale(1.1);
+}
+
+.tone-btn:focus {
+    background-color: #FB3635;
+}
+
+/* tone buttons END */
+
 .hanzi_download {
     margin-top: 20px;
+}
+
+.feedback {
+    position: absolute; 
+    top: 5%;
+    left: 30%;
+    color: rgb(0, 0, 0); 
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 3rem; 
+    font-style:italic;
 }
 
 .hanzi-char-text {
@@ -185,6 +228,7 @@
     height: auto;
 }
 
+
 @media screen and (max-width: 600px) {
 
     .hanzi-menu-btn {
@@ -202,6 +246,9 @@
 }
 
 
-@media screen and (min-width: 1368px) and (max-width: 1440px) {
-    
-}
+/* @media screen and (min-width: 1368px) and (max-width: 1440px) {
+    .hanzi-menu-btn {
+        font-size: 0.875rem;
+        padding: 0.4rem 0.8rem;
+    }
+} */

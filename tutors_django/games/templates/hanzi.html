@@ -41,25 +41,52 @@
                 </a>
             </div>
         </div>
-        
+        <div class="feedback"></div>
         <div class="hanzi-char-text {% if level == 0 %}hidden{% endif %}"></div>
+        
         <div class="hanzi-menu {% if level == 0 %}hidden{% endif %}">
-            <p>Current Level: <span id="current-level">0</span></p>
+
             <!-- Elements for Level 1 -->
+            <button id="fetch-hanzi-btn" class="hanzi-menu-btn">取 (fetch)</button> 
             <div class="level-1-options {% if level != 1 %}hidden{% endif %}">
                 <input type="text" id="pinyin-input" placeholder="Enter Pinyin">
-                <input type="number" id="tone-input" placeholder="Enter Tone (1-4)">
-                <button id="fetch-hanzi-btn" class="hanzi-menu-btn">下个字 (fetch)</button>
-                <button id="submit-answer-btn" class="hanzi-menu-btn">Submit</button>
+                <div id="tone-buttons" class="tone-buttons">
+                    <button type="button" class="tone-btn" data-tone="1">1</button>
+                    <button type="button" class="tone-btn" data-tone="2">2</button>
+                    <button type="button" class="tone-btn" data-tone="3">3</button>
+                    <button type="button" class="tone-btn" data-tone="4">4</button>
+                </div>         
+
+                <button id="submit-answer-btn" class="hanzi-menu-btn">提交 (submit)</button>
+                <!-- Button trigger modal -->
+                <button type="button" class="hanzi-menu-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    帮助 (help)
+                </button>
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Instructions</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Step 1 - Click "fetch" button</p>
+                            <p>Step 2 - Enter PinYin</p>
+                            <p>Step 3 - Choose a tone</p>
+                            <p>Step 4 - Click "submit"</p>
+                            <p>Step 5 - Repeat the cycle</p>
+                        </div>                        
+                    </div>
+                    </div>
+                </div>
                 <img src="{% static 'img/paper-fan.svg' %}" class="menu-decor-img" alt="carp" loading="lazy">
             </div>
             <!-- Elements for Level 2 -->
             <div class="level-2-options {% if level != 2 %}hidden{% endif %}">
-                <button id="fetch-hanzi-btn" class="hanzi-menu-btn">开始 (start)</button>
                 <button id="speak-btn" class="hanzi-menu-btn">说话 (speak)</button>
-                <img src="{% static 'img/red-envelope.svg' %}" class="menu-decor-img" alt="carp" loading="lazy">
+                <img src="{% static 'img/red-envelope.svg' %}" class="menu-decor-img" alt="envelope" loading="lazy">
             </div>
-            <div class="feedback"></div>
             <a href="{% url 'download_file' '101_hanzi.pdf' %}" class="hanzi_download">Download 101 Hanzi</a>
         </div>
 

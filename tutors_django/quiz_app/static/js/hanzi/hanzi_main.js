@@ -7,7 +7,23 @@ class Game {
         this.hanziMenu = document.querySelector('.hanzi-menu');
         this.level1Options = document.querySelector('.level-1-options');
         this.level2Options = document.querySelector('.level-2-options');
-        this.currentLevelElement = document.getElementById('current-level');
+        this.toneInput = null;
+
+        // Speech recognition setup
+        this.recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+        this.recognition.lang = 'zh-CN';
+        this.recognition.maxAlternatives = 10;
+        this.recognition.continuous = false;
+
+        this.recognition.onresult = (event) => {
+            const userSpeech = event.results[0][0].transcript.trim();
+            console.log('User said:', userSpeech);
+            this.checkAnswer(userSpeech);
+        };
+
+        this.recognition.onend = () => {
+            console.log('Speech recognition ended.');
+        };
     }
 
     async loadLevelData() {
@@ -23,6 +39,12 @@ class Game {
     }
 
     displayRandomHanzi() {
+        const feedbackElement = document.querySelector('.feedback');
+        feedbackElement.textContent = '';
+
+        const pinyinInput = document.getElementById('pinyin-input');
+        pinyinInput.value = '';
+
         if (!this.jsonData || this.jsonData.length === 0) {
             console.error('Hanzi data not loaded yet.');
             return;
@@ -30,6 +52,7 @@ class Game {
 
         const randomIndex = Math.floor(Math.random() * this.jsonData.length);
         this.currentHanzi = this.jsonData[randomIndex].Hanzi;
+
         console.log(this.currentHanzi);
 
         const hanziCharText = document.querySelector('.hanzi-char-text');
@@ -39,7 +62,7 @@ class Game {
             hanziCharText.style.fontSize = '10rem';
             hanziCharText.style.fontWeight = 'bold';
         } else if (this.level === 2) {
-            hanziCharText.style.fontSize = '2rem';
+            hanziCharText.style.fontSize = '5rem';
             hanziCharText.style.fontWeight = 'normal';
         }
 
@@ -48,14 +71,22 @@ class Game {
             speakButton.style.display = 'none';
         } else if (this.level === 2) {
             speakButton.style.display = 'block';
+            speakButton.onclick = () => this.startRecognition(); // Start recording for Level 2
         }
     }
 
-    updateLevelUI() {
-        if (this.currentLevelElement) {
-            this.currentLevelElement.textContent = this.level;
-        }
+    speakHanzi() {
+        const utterance = new SpeechSynthesisUtterance(this.currentHanzi);
+        utterance.lang = 'zh-CN'; // Set the language to Chinese
+        window.speechSynthesis.speak(utterance);
+    }
 
+    startRecognition() {
+        console.log('Starting speech recognition...');
+        this.recognition.start();
+    }
+
+    updateLevelUI() {
         if (this.hanziMenu) {
             this.hanziMenu.classList.remove('hidden');
         }
@@ -78,63 +109,46 @@ class Game {
             this.updateLevelUI();
         });
     }
-    
-    checkAnswer() {
+
+    checkAnswer(userSpeech = '') {
         const feedbackElement = document.querySelector('.feedback');
+
         if (this.level === 1) {
-            // Level 1: Pinyin and tone input
             const pinyinInput = document.getElementById('pinyin-input').value.trim();
-            const toneInput = document.getElementById('tone-input').value.trim();
-            
-            if (!pinyinInput || !toneInput) {
+
+            if (!this.toneInput || !pinyinInput) {
                 feedbackElement.textContent = 'Please enter both Pinyin and tone.';
                 return;
             }
-    
+
             const correctPinyin = this.jsonData.find(item => item.Hanzi === this.currentHanzi).Pinyin;
             const correctTone = this.jsonData.find(item => item.Hanzi === this.currentHanzi).Tone;
-    
-            // Normalize Pinyin by removing tone marks
+
             const normalizedInput = removeToneMarks(pinyinInput);
             const normalizedCorrectPinyin = removeToneMarks(correctPinyin);
-    
-            if (normalizedInput === normalizedCorrectPinyin && toneInput === correctTone) {
-                feedbackElement.textContent = 'Correct! Well done!';
+
+            if (normalizedInput === normalizedCorrectPinyin && this.toneInput === correctTone) {
+                displayFeedback(1);
             } else {
-                feedbackElement.textContent = `Incorrect. Correct answer: ${correctPinyin} ${correctTone}`;
+                displayFeedback(0, correctPinyin, correctTone);
             }
         } else if (this.level === 2) {
-            // Level 2: Speech input
-            if (speechHandler.recognition) {
-                speechHandler.recognition.onresult = (event) => {
-                    let transcript = '';
-                    for (let i = event.resultIndex; i < event.results.length; i++) {
-                        transcript += event.results[i][0].transcript.trim().toLowerCase();
-                    }
-    
-                    const correctPinyin = this.jsonData.find(item => item.Hanzi === this.currentHanzi).Pinyin.toLowerCase();
-    
-                    // Normalize the transcript by removing tone marks
-                    const normalizedTranscript = removeToneMarks(transcript);
-                    const normalizedCorrectPinyin = removeToneMarks(correctPinyin);
-    
-                    if (normalizedTranscript === normalizedCorrectPinyin) {
-                        feedbackElement.textContent = 'Correct! Well done!';
-                    } else {
-                        feedbackElement.textContent = `Incorrect. Correct answer: ${correctPinyin}`;
-                    }
-                };
-    
-                // Start speech recognition for level 2
-                speechHandler.recognition.start();
+            if (!userSpeech) {
+                feedbackElement.textContent = 'Please speak a character.';
+                return;
+            }
+
+            if (userSpeech === this.currentHanzi) {
+                displayFeedback(1);
             } else {
-                feedbackElement.textContent = 'Speech recognition not available.';
+                const correctPinyin = this.jsonData.find(item => item.Hanzi === this.currentHanzi).Pinyin;
+                displayFeedback(0, correctPinyin);
             }
         }
     }
-    
 }
 
+// Helper functions
 function removeToneMarks(pinyin) {
     const toneMarks = {
         'ā': 'a', 'á': 'a', 'ǎ': 'a', 'à': 'a',
@@ -148,53 +162,43 @@ function removeToneMarks(pinyin) {
     return pinyin.split('').map(char => toneMarks[char] || char).join('');
 }
 
+function displayFeedback(answer, correctAnswer = null, correctTone = null) {
+    const feedbackElement = document.querySelector('.feedback');
+    feedbackElement.textContent = '';
 
-class SpeechRecognitionHandler {
-    constructor() {
-        this.recognition = null;
-        this.startRecognition = null;
+    const imgElement = document.createElement('img');
+    imgElement.src = '/static/img/god.svg';
+    imgElement.alt = 'God';
+    imgElement.style.width = '3em';
+    imgElement.style.height = 'auto';
 
-        if ('webkitSpeechRecognition' in window) {
-            this.recognition = new webkitSpeechRecognition();
-            this.recognition.continuous = true;
-            this.recognition.interimResults = true;
+    const textNode = answer 
+        ? document.createTextNode('非常好! Well done!') 
+        : (() => {
+            const span = document.createElement('span');
+            span.innerHTML = `错! Incorrect! <span style="font-size: 1rem;">(${correctAnswer} was correct)</span>`;
+            return span;
+        })();
 
-            this.recognition.onstart = () => console.log("Speech recognition started.");
-            this.recognition.onerror = (event) => console.error("Speech recognition error", event);
-            this.recognition.onresult = (event) => {
-                let transcript = '';
-                for (let i = event.resultIndex; i < event.results.length; i++) {
-                    transcript += event.results[i][0].transcript;
-                }
-                console.log("You said: " + transcript);
-            };
-            this.recognition.onend = () => console.log("Speech recognition ended.");
-
-            this.startRecognition = () => {
-                if (this.recognition) {
-                    this.recognition.start();
-                } else {
-                    console.error("Speech recognition not supported in this browser.");
-                }
-            };
-        } else {
-            console.error("Speech recognition is not supported by this browser.");
-        }
-    }
-
-    attachSpeakButton() {
-        const speakButton = document.getElementById('speak-btn');
-        if (speakButton) {
-            speakButton.addEventListener('click', this.startRecognition);
-        }
-    }
+    feedbackElement.appendChild(imgElement);
+    feedbackElement.appendChild(textNode);
 }
 
-// Initialize game and speech recognition handlers
-const game = new Game();
-const speechHandler = new SpeechRecognitionHandler();
+// Tone button click listener setup
+document.addEventListener('DOMContentLoaded', () => {
+    const toneButtons = document.getElementById('tone-buttons');
+    toneButtons.addEventListener('click', function(event) {
+        if (event.target && event.target.classList.contains('tone-btn')) {
+            const tone = event.target.getAttribute('data-tone');
+            console.log('Selected tone:', tone);
+            game.toneInput = tone; 
+            event.target.classList.add('focus');
+        }
+    });
+});
 
-// Event listeners for level selection
+// Initialize game
+const game = new Game();
 document.querySelectorAll('.level-selection a').forEach((levelLink) => {
     levelLink.addEventListener('click', (event) => {
         event.preventDefault();
@@ -202,9 +206,5 @@ document.querySelectorAll('.level-selection a').forEach((levelLink) => {
     });
 });
 
-// Event listeners for game buttons
 document.getElementById('fetch-hanzi-btn').addEventListener('click', () => game.displayRandomHanzi());
 document.getElementById('submit-answer-btn').addEventListener('click', () => game.checkAnswer());
-
-// Attach speech recognition listener for level 2
-speechHandler.attachSpeakButton();

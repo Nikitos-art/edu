@@ -55,40 +55,72 @@
                     <button type="button" class="tone-btn" data-tone="2">2</button>
                     <button type="button" class="tone-btn" data-tone="3">3</button>
                     <button type="button" class="tone-btn" data-tone="4">4</button>
-                </div>         
-
+                </div>
                 <button id="submit-answer-btn" class="hanzi-menu-btn">提交 (submit)</button>
-                <!-- Button trigger modal -->
-                <button type="button" class="hanzi-menu-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                
+                <!-- Button trigger modal for Level 1 -->
+                <button type="button" class="hanzi-menu-btn" data-bs-toggle="modal" data-bs-target="#level1HelpModal">
                     帮助 (help)
                 </button>
-                <!-- Modal -->
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Instructions</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <p>Step 1 - Click "fetch" button</p>
-                            <p>Step 2 - Enter PinYin</p>
-                            <p>Step 3 - Choose a tone</p>
-                            <p>Step 4 - Click "submit"</p>
-                            <p>Step 5 - Repeat the cycle</p>
-                        </div>                        
-                    </div>
-                    </div>
-                </div>
+        
                 <img src="{% static 'img/paper-fan.svg' %}" class="menu-decor-img" alt="carp" loading="lazy">
             </div>
+        
             <!-- Elements for Level 2 -->
             <div class="level-2-options {% if level != 2 %}hidden{% endif %}">
                 <button id="speak-btn" class="hanzi-menu-btn">说话 (speak)</button>
+                
+                <!-- Button trigger modal for Level 2 -->
+                <button type="button" class="hanzi-menu-btn" data-bs-toggle="modal" data-bs-target="#level2HelpModal">
+                    帮助 (help)
+                </button>
+        
                 <img src="{% static 'img/red-envelope.svg' %}" class="menu-decor-img" alt="envelope" loading="lazy">
             </div>
+        
+            <!-- Shared Download Link -->
             <a href="{% url 'download_file' '101_hanzi.pdf' %}" class="hanzi_download">Download 101 Hanzi</a>
         </div>
+        
+        <!-- Modals -->
+        <!-- Level 1 Modal -->
+        <div class="modal fade" id="level1HelpModal" tabindex="-1" aria-labelledby="level1HelpModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="level1HelpModalLabel">Instructions</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Step 1 - Click "fetch" button</p>
+                        <p>Step 2 - Enter PinYin</p>
+                        <p>Step 3 - Choose a tone</p>
+                        <p>Step 4 - Click "submit"</p>
+                        <p>Step 5 - Repeat the cycle</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Level 2 Modal -->
+        <div class="modal fade" id="level2HelpModal" tabindex="-1" aria-labelledby="level2HelpModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="level2HelpModalLabel">Instructions</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Step 0 - Make sure you use Google Chrome browser</p>
+                        <p>Step 1 - Click "fetch" button</p>
+                        <p>Step 2 - Click "speak" button</p>
+                        <p>Step 3 - Try to read the characters you see on the screen</p>
+                        <p>Step 4 - Repeat the cycle</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
 
     </div>
 </div>

@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/python.css' %}">
+{% endblock %}
+
+{% block header %}
+    {% include 'includes/inc_header.html' %}
+{% endblock %}
+
+{% block site_content %}
+<div class="task-container">
+    <h5>Encrypt / Decrypt (Cipher)</h5>
+    <p><u>Task:</u> Build a single function that would take a string as input and a true/false value<br>
+    to encode/decode.<br><br>
+    <u>Purpose:</u>  Practice Python's Unicode built-in functions. <br><br>
+    Unicode is an encoding standard and a true marvel of ingenuity that extended computers' aility <br>
+    to work with not only Latin alphabet but... all alphabets known to us right now, or at least the <br>
+    huge portion of them. For more on Unicode follow this <a href="https://home.unicode.org/">link</a>.
+
+    <div class="task-elem">Step 1) Define the function and it's attributes. I made use of keyword <br>
+        argument and assigned a default value to it. Default value when True will be handled as <br>
+        to encode the text, while setting it to False when calling the function will behandled as <br>
+        to decode the input.
+    </div>
+    <div class="task-elem"> Step 2) Decide on what manipulations you want to make to actually implement<br>
+        the cipher. I decided to do it in 2 steps - first, reverse the string, then shift the letter/symbol<br>
+        to the left or to the right. I used anarbitrary number 2 to do this. So to encode I shift by 2 <br>
+        and to decode I shift back by two. I used Python's built-in function ord() to get the decimal <br>
+        representation of a text symbol to perform the shift.
+    </div>
+    <div class="task-elem"> Step 3) Convert the list with decimals from the previous step back into their<br>
+        corresponding representation in text. 
+    </div>
+    <div class="task-elem"> Hint: I first buildtwo separate function for thistask and then refactored the<br>
+        code to combine them into one function. 
+    </div>
+    </p>
+</div>
+<div class="input-output">
+    <form class="py_console"> 
+        <textarea id="yourcode" cols="100" rows="15" spellcheck="false">
+    
+        </textarea><br />
+        <div class="py_btn_menu">
+            <button type="button" onclick="runit()" class="py_btn">Run</button>
+            <button type="button" onclick="populateCode()" class="py_btn" id="py_show_btn">Show the code</button> 
+        </div> 
+    
+    </form> 
+    <pre id="output"></pre> 
+</div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js" type="text/javascript"></script>
+    <script src="{% static 'js/skulpt-dist-master/skulpt.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'js/skulpt-dist-master/skulpt-stdlib.js' %}" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+        // Output functions
+        function outf(text) { 
+            var mypre = document.getElementById("output"); 
+            mypre.innerHTML = mypre.innerHTML + text; 
+        } 
+
+        function builtinRead(x) {
+            if (Sk.builtinFiles === undefined || Sk.builtinFiles["files"][x] === undefined)
+                throw "File not found: '" + x + "'";
+            return Sk.builtinFiles["files"][x];
+        }
+
+        // Run Skulpt
+        function runit() { 
+           var prog = document.getElementById("yourcode").value; 
+           var mypre = document.getElementById("output"); 
+           mypre.innerHTML = ''; 
+           Sk.pre = "output";
+           Sk.configure({output: outf, read: builtinRead}); 
+           var myPromise = Sk.misceval.asyncToPromise(function() {
+               return Sk.importMainWithBody("<stdin>", false, prog, true);
+           });
+           myPromise.then(function(mod) {
+               console.log('success');
+           },
+           function(err) {
+               console.log(err.toString());
+           });
+        } 
+    </script>
+    <script>
+        function populateCode() {
+            const textarea = document.getElementById("yourcode");
+            const exampleCode = `
+def encoder_decoder(original_string, encode=False):
+
+    if encode:
+        original_string = original_string[::-1]
+
+    ascii_arr = []
+    shift = -2
+
+    if encode:
+        shift = shift * -1
+
+    for i in original_string:
+        ascii_shift = ord(i) + shift
+        ascii_arr.append(ascii_shift)
+
+    converted_string = ""
+
+    for i in ascii_arr:
+        char = chr(i)
+        converted_string += char
+
+    if not encode:
+        converted_string = converted_string[::-1]
+
+    return converted_string
+
+
+text = "sample text"
+a = encoder_decoder(text, encode=True)
+print(a)
+b = encoder_decoder(a, encode=False)
+print(b)
+`;
+        textarea.value = exampleCode;
+        }
+    </script>
+{% endblock %}
+
+{% block footer %}
+    {% include 'includes/inc_footer.html' %}
+{% endblock %}

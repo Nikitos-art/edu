@@ -16,10 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from accounts_app.views import index_view, CoursesView, AboutView, ResumeView, LoginUser, ProjectsView, \
-    RegisterUser, logout_user, StudentAccount, TutorAccount, custom_404, privacy_view, download_file, \
-    ProjectsPyNet52View, ProjectsPyNetView, ProjectsPyNet52aView, ProjectsAlgosView, ProjectsAlgo1View
-from courses_app.views import add_lesson
+from accounts_app.views import (index_view, AboutView, ResumeView, LoginUser, RegisterUser,
+                                logout_user, StudentAccount, TutorAccount, custom_404, privacy_view, download_file)
+from courses_app.views import add_lesson, CoursesView
 from django.conf.urls.static import static
 from django.conf import settings
 from django.views.generic import RedirectView
@@ -34,14 +33,10 @@ urlpatterns = [
     path('admin/', include('admin_honeypot.urls')),
     path('favicon.ico', RedirectView.as_view(url='/static/favicon.ico', permanent=True)),
     path('', index_view, name='index'),
-    path('courses/', CoursesView.as_view(), name='courses'),
+    path('courses/', include('courses_app.urls', namespace='courses')),
     path('inquiry_sent/', inquiry_form, name='inquiry_form'),
     path('about/', AboutView.as_view(), name='about'),
     path('about/resume', ResumeView.as_view(), name='resume'),
-    # ----------------------------------- PROJECTS------------------------------------#
-    path('about/projects', ProjectsView.as_view(), name='about/projects'),
-    #-------------------------------------------------------------------------------#
-    # path('course/<slug:slug>/', CourseDetail.as_view(), name='course_detail'),
     path('blog/', include('blog_app.urls', namespace='blog')),
     path('quiz/', include('quiz_app.urls', namespace='quiz')),
     path('games/', include('games.urls', namespace='games')),

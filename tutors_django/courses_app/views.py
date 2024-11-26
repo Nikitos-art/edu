@@ -44,8 +44,14 @@ def add_lesson(request):
         return redirect(reverse('tutor_account', args=[full_name]))
 
 
+class CoursesView(generic.TemplateView):
+    template_name = 'courses.html'
 
-class CourseDetail(generic.DetailView):
-    model = Course
-    template_name = 'course_1/course_1_L1.html'
-    context_object_name = 'course'
+class PythonView(generic.TemplateView):
+    template_name = 'py/python.html'
+
+class PyOneView(generic.TemplateView):
+    template_name = 'py/py_1.html'
+
+class PyTwoView(generic.TemplateView):
+    template_name = 'py/py_2.html'

@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/python.css' %}">
+{% endblock %}
+
+{% block header %}
+{% include 'includes/inc_header.html' %}
+{% endblock %}
+
+
+{% block site_content %}
+
+<div class="py_container">
+    <div class="py_header">
+        <h3>Python Lighthouse</h3>
+        <P>Here I've come up with some Python code that can be suitable for beginners and intermediate level
+            Pythonistas.<br>
+        </P>
+    </div>
+    <div class="py_item_list">
+        <div class="py_item">
+            <h5>
+                IPv4 address Validator
+            </h5>
+            <p>
+                A function that takes string as input and validates if it's an IP address.
+            </p>
+            <a href="{% url 'courses_app:python_one' %}">Try it out</a>
+        </div>
+    </div>
+    <div class="py_item_list">
+        <div class="py_item">
+            <h5>
+                Encrypt / Decrypt (Cipher)
+            </h5>
+            <p>
+                A function that will accept perform user implemented encryption and decryption<br>
+                 operations on a text data.<br>
+            </p>
+            <a href="{% url 'courses_app:python_two' %}">Try it out</a>
+        </div>
+    </div>
+    More ... Coming soon ...
+</div>
+
+{% endblock %}
+
+{% block footer %}
+{% include 'includes/inc_footer.html' %}
+{% endblock %}

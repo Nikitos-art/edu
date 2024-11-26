@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/python.css' %}">
+{% endblock %}
+
+{% block header %}
+    {% include 'includes/inc_header.html' %}
+{% endblock %}
+
+{% block site_content %}
+<div class="task-container">
+    <h5>IPv4 addr converter</h5>
+    <p><u>Task:</u> Convert an IPv4 address from decimal numbers of each octet into binary number.<br>
+        <u>Purpose:</u> Improve your understanding of IPv4 addresses along with Python skills<br>
+        application, which includes: functions, function attributes, for loops, control flow, variables.<br><br>
+        The octet is a unit of digital information in computing and telecommunications <br>
+        that consists of eight bits.<br><br>
+        In an IPv4 address the numbers to go above 255, which is the largest decimal number<br>
+        that can be represented by all 8 bits being 1. Meaning 1111 1111 in binary notation equals 255<br>
+        in decimal.<br><br>
+        So here's one approach:<br><br>
+        <div class="task-elem">Step 1) Define the function that takes a string as an input.<br><br></div>
+        <div class="task-elem">Step 2) Check if input is a string and return false if it isn't.<br><br></div>
+        <div class="task-elem">Step 3) Break up the string into parts using Python's split() method,<br>
+        and use "." as a separator and assign the result (should be a list with 4 elements in it)<br>
+        to a variable.<br><br></div>
+        <div class="task-elem">Step 4) Use a for loop to iterate over the result of the previous step to check if each <br>
+        octet is indeed an integer and with in the range of 0 to 255.<br><br></div>
+        <div class="task-elem">Step 5) Last but not least, check the length of the ip_address list (from Step 3) and make <br>
+        sure its length equals to 4, and if it doesn't return False.<br><br><br></div>
+        I'd suggest giving it a good go for whatever time you need before seeing my solution.
+    </p>
+</div>
+<div class="input-output">
+    <form class="py_console"> 
+        <textarea id="yourcode" cols="100" rows="15" spellcheck="false">
+    
+        </textarea><br />
+        <div class="py_btn_menu">
+            <button type="button" onclick="runit()" class="py_btn">Run</button>
+            <button type="button" onclick="populateCode()" class="py_btn" id="py_show_btn">Show the code</button> 
+        </div> 
+    
+    </form> 
+    <pre id="output"></pre> 
+</div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js" type="text/javascript"></script>
+    <script src="{% static 'js/skulpt-dist-master/skulpt.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'js/skulpt-dist-master/skulpt-stdlib.js' %}" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+        // Output functions
+        function outf(text) { 
+            var mypre = document.getElementById("output"); 
+            mypre.innerHTML = mypre.innerHTML + text; 
+        } 
+
+        function builtinRead(x) {
+            if (Sk.builtinFiles === undefined || Sk.builtinFiles["files"][x] === undefined)
+                throw "File not found: '" + x + "'";
+            return Sk.builtinFiles["files"][x];
+        }
+
+        // Run Skulpt
+        function runit() { 
+           var prog = document.getElementById("yourcode").value; 
+           var mypre = document.getElementById("output"); 
+           mypre.innerHTML = ''; 
+           Sk.pre = "output";
+           Sk.configure({output: outf, read: builtinRead}); 
+
+           var myPromise = Sk.misceval.asyncToPromise(function() {
+               return Sk.importMainWithBody("<stdin>", false, prog, true);
+           });
+           myPromise.then(function(mod) {
+               console.log('success');
+           },
+           function(err) {
+               console.log(err.toString());
+           });
+        } 
+    </script>
+    <script>
+        function populateCode() {
+            const textarea = document.getElementById("yourcode");
+            const exampleCode = `
+def ipv4_validator(ip):
+    if (type(ip)) != str:
+        return f'{False}, input must be a string.'
+    ip_address = ip.split(".")
+    for octet in ip_address:
+        try:
+            isinstance(int(octet), int)
+        except ValueError as e:
+            return f'{False}, one of the octets was not an integer.'
+        else:
+            if 0 > int(octet) or int(octet) > 255:
+                return f'{False}, one of the octets was not in the range of 0 - 255.'
+    if len(ip_address) == 4:
+        return True
+    else:
+        return False
+
+print(ipv4_validator('196.163.0.2'))
+            `;
+        textarea.value = exampleCode;
+        }
+    </script>
+{% endblock %}
+
+{% block footer %}
+    {% include 'includes/inc_footer.html' %}
+{% endblock %}

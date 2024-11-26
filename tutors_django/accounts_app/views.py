@@ -39,32 +39,8 @@ class AboutView(TemplateView):
         data = super().get_context_data(**kwargs)
         return data
 
-
-class CoursesView(TemplateView):
-    template_name = 'courses.html'
-
-
 class ResumeView(TemplateView):
     template_name = 'resume.html'
-
-class ProjectsView(TemplateView):
-    template_name = './projects/projects.html'
-
-class ProjectsPyNetView(TemplateView):
-    template_name = './projects/py_net/py_net.html'
-
-class ProjectsPyNet52View(TemplateView):
-    template_name = './projects/py_net/py_net_5.2.html'
-
-class ProjectsPyNet52aView(TemplateView):
-    template_name = './projects/py_net/py_net_5.2a.html'
-
-class ProjectsAlgosView(TemplateView):
-    template_name = './projects/algo/algo.html'
-
-class ProjectsAlgo1View(TemplateView):
-    template_name = './projects/algo/algo.1.html'
-
 
 def privacy_view(request):
     return render(request, 'privacy.html')

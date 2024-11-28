@@ -14,7 +14,7 @@
 
 <div class="py_container">
     <div class="py_header">
-        <h3>Python Lighthouse</h3>
+        <h3>Lighthouse Python</h3>
         <P>Here I've come up with some Python code that can be suitable for beginners and intermediate level
             Pythonistas.<br>
         </P>
@@ -22,7 +22,7 @@
     <div class="py_item_list">
         <div class="py_item">
             <h5>
-                IPv4 address Validator
+                Networks: IPv4 address Validator
             </h5>
             <p>
                 A function that takes string as input and validates if it's an IP address.
@@ -33,7 +33,7 @@
     <div class="py_item_list">
         <div class="py_item">
             <h5>
-                Encrypt / Decrypt (Cipher)
+                Cryptography: Encrypt / Decrypt (Cipher)
             </h5>
             <p>
                 A function that will accept perform user implemented encryption and decryption<br>
@@ -42,7 +42,40 @@
             <a href="{% url 'courses_app:python_two' %}">Try it out</a>
         </div>
     </div>
-    More ... Coming soon ...
+    <div class="py_item_list">
+        <div class="py_item">
+            <h5>
+                OOP: Bank Account Class
+            </h5>
+            <p>
+                A custom bank account class designed to securely store balances, support transfers, and allow <br>
+                deposits and withdrawals.
+            </p>
+            <a href="{% url 'courses_app:python_bankacc' %}">Try it out</a>
+        </div>
+    </div>
+    <div class="py_item_list">
+        <div class="py_item">
+            <h5>
+                Data Structures / OOP: Custom List Class
+            </h5>
+            <p>
+                Do reinvent the wheel to get a look under the hood of Python's lists.<br>
+            </p>
+            <a href="{% url 'courses_app:python_data_structure_list' %}">Try it out</a>
+        </div>
+    </div>
+    <div class="py_item_list">
+        <div class="py_item">
+            <h5>
+                Data Structures / OOP: Custom Dictionary Class
+            </h5>
+            <p>
+                Same as with lists but a different builtin data type of Python - dictionary.<br>
+            </p>
+            <a href="{% url 'courses_app:python_data_structure_dict' %}">Try it out</a>
+        </div>
+    </div>
 </div>
 
 {% endblock %}

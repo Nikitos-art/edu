@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/python.css' %}">
+{% endblock %}
+
+{% block header %}
+    {% include 'includes/inc_header.html' %}
+{% endblock %}
+
+{% block site_content %}
+<div class="task-container">
+    <h5>Custom Dict Class</h5>
+    <p><u>Task:</u> Implement a custom dictionary class with basic functionality of Python's dictionaries.<br>
+        <u>Purpose:</u> To practice OOP by creating a custom class, mimicking Python's built-in dictionary.<br>
+        This exercise deepens understanding of Python classes, data structure design, and fundamental<br>
+        programming concepts.
+        <div class="task-elem">Step 1) Define the class and add an __init__ method to initialize the hash<br>
+            table and its size. The hash table will be represented as a list of empty lists (buckets), one<br>
+            for each hash index.<br><br>
+        </div>
+        <div class="task-elem">Step 2) Create a hash function, define a private method _hash to compute <br>
+            the index for a given key.<br><br>
+        </div>
+        <div class="task-elem">Step 3) Define a method set(self, key, value) to add or update key-value <br>
+            pairs. Hash the key to find its index. Search the bucket at the computed index for the key. <br>
+            If the key exists, update its value. If not, append a new key-value pair to the bucket.<br><br>
+        </div>
+        <div class="task-elem">Step 4) Add the get Method. Define a method get(self, key) to retrieve <br>
+            the value for a given key. Hash the key to locate the appropriate bucket. Search for the key<br>
+            in the bucket and return its value if found. Raise a KeyError if the key is not in the bucket.<br><br>
+        </div>
+        <div class="task-elem">Step 5) Add the delete Method. Define a method delete(self, key) to remove <br>
+            a key-value pair. Hash the key to locate the bucket. Search for the key in the bucket, remove <br>
+            the pair if found, and stop. Raise a KeyError if the key does not exist.<br><br>
+        </div>
+        <div class="task-elem">Step 6) Add a string representation.
+        </div>
+    </p>
+</div>
+<div class="input-output">
+    <form class="py_console"> 
+        <textarea id="yourcode" cols="100" rows="15" spellcheck="false">
+    
+        </textarea><br />
+        <div class="py_btn_menu">
+            <button type="button" onclick="runit()" class="py_btn">Run</button>
+            <button type="button" onclick="populateCode()" class="py_btn" id="py_show_btn">Show the code</button> 
+        </div> 
+    
+    </form> 
+    <pre id="output"></pre> 
+</div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js" type="text/javascript"></script>
+    <script src="{% static 'js/skulpt-dist-master/skulpt.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'js/skulpt-dist-master/skulpt-stdlib.js' %}" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+        // Output functions
+        function outf(text) { 
+            var mypre = document.getElementById("output"); 
+            mypre.innerHTML = mypre.innerHTML + text; 
+        } 
+
+        function builtinRead(x) {
+            if (Sk.builtinFiles === undefined || Sk.builtinFiles["files"][x] === undefined)
+                throw "File not found: '" + x + "'";
+            return Sk.builtinFiles["files"][x];
+        }
+
+        // Run Skulpt
+        function runit() { 
+           var prog = document.getElementById("yourcode").value; 
+           var mypre = document.getElementById("output"); 
+           mypre.innerHTML = ''; 
+           Sk.pre = "output";
+           Sk.configure({output: outf, read: builtinRead}); 
+
+           var myPromise = Sk.misceval.asyncToPromise(function() {
+               return Sk.importMainWithBody("<stdin>", false, prog, true);
+           });
+           myPromise.then(function(mod) {
+               console.log('success');
+           },
+           function(err) {
+               console.log(err.toString());
+           });
+        } 
+    </script>
+    <script>
+        function populateCode() {
+            const textarea = document.getElementById("yourcode");
+            const exampleCode = `
+class CustomDict:
+    def __init__(self, size=100):
+        self.size = size
+        self.table = [[] for _ in range(size)]  # Create buckets as lists for chaining
+    
+    def _hash(self, key):
+        return hash(key) % self.size
+    
+    def set(self, key, value):
+        index = self._hash(key)
+        bucket = self.table[index]
+        
+        for pair in bucket:
+            if pair[0] == key:
+                pair[1] = value  
+                return
+        
+        bucket.append([key, value])
+    
+    def get(self, key):
+        index = self._hash(key)
+        bucket = self.table[index]
+        
+        for pair in bucket:
+            if pair[0] == key:
+                return pair[1]
+        
+        raise KeyError(f"Key '{key}' not found")
+    
+    def delete(self, key):
+        index = self._hash(key)
+        bucket = self.table[index]
+        
+        for i, pair in enumerate(bucket):
+            if pair[0] == key:
+                del bucket[i]
+                return
+        
+        raise KeyError(f"Key '{key}' not found")
+    
+    def __repr__(self):
+        items = []
+        for bucket in self.table:
+            for pair in bucket:
+                items.append(f"{pair[0]}: {pair[1]}")
+        return "{" + ", ".join(items) + "}"
+`;
+        textarea.value = exampleCode;
+        }
+    </script>
+{% endblock %}
+
+{% block footer %}
+    {% include 'includes/inc_footer.html' %}
+{% endblock %}

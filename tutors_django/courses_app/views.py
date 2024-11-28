@@ -51,7 +51,16 @@ class PythonView(generic.TemplateView):
     template_name = 'py/python.html'
 
 class PyOneView(generic.TemplateView):
-    template_name = 'py/py_1.html'
+    template_name = 'py/ip_validator.html'
 
 class PyTwoView(generic.TemplateView):
-    template_name = 'py/py_2.html'
+    template_name = 'py/cipher.html'
+
+class PyBankAccView(generic.TemplateView):
+    template_name = 'py/py_bankacc.html'
+
+class PyDataStructureListView(generic.TemplateView):
+    template_name = 'py/py_data_structure_list.html'
+
+class PyDataStructureDictView(generic.TemplateView):
+    template_name = 'py/py_data_structure_dict.html'

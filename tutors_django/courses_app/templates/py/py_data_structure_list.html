@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/python.css' %}">
+{% endblock %}
+
+{% block header %}
+    {% include 'includes/inc_header.html' %}
+{% endblock %}
+
+{% block site_content %}
+<div class="task-container">
+    <h5>Custom List Class</h5>
+    <p><u>Task:</u> Build a custom list class. The class must have at least append, get, find, and <br>
+        len methods.<br>
+        <u>Purpose: </u> To practice Object-Oriented Programming (OOP) principles by designing and <br>
+        implementing a custom class. This exercise aims to provide a deeper understanding of how Python's<br>
+        classes work, how data structures are built and manipulated, and how to mimic the behavior of <br>
+        Python's built-in list to solidify programming fundamentals.<br>
+        You can get a look at the methods and attriburtes of a built-in class by <b>print(dir(list))</b><br>
+        or by <b>help(list)</b>.
+        <div class="task-elem">Step 1) First, define the class using the <b>class</b> keyword.<br><br></div>
+        <div class="task-elem">Step 2) Initialize storage: inside the__init__ method define an internal list<br>
+            to hold the elements. <br><br></div>
+        <div class="task-elem">Step 3) Implement the <b>append</b> method to add elements to the end of the list.<br><br></div>
+        <div class="task-elem">Step 4) Implement the <b>append</b> method to retrieve an element by its<br>
+            index, with basic error handling.<br><br></div>
+        <div class="task-elem">Step 5) Implement the <b>find</b> method to search for a value and return<br>
+             its index. Return -1 if not found.<br><br></div>
+        <div class="task-elem">Step 5) Implement the <b>__len__</b> to return the number of elements.<br><br></div>
+        <div class="task-elem">Step 6) Add a string representation (__repr__).<br><br></div>
+    </p>
+</div>
+<div class="input-output">
+    <form class="py_console"> 
+        <textarea id="yourcode" cols="100" rows="15" spellcheck="false">
+    
+        </textarea><br />
+
+        <div class="py_btn_menu">
+            <button type="button" onclick="runit()" class="py_btn">Run</button>
+            <button type="button" onclick="populateCode()" class="py_btn" id="py_show_btn">Show the code</button> 
+        </div> 
+    
+    </form> 
+    <pre id="output"></pre> 
+</div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js" type="text/javascript"></script>
+    <script src="{% static 'js/skulpt-dist-master/skulpt.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'js/skulpt-dist-master/skulpt-stdlib.js' %}" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+        // Output functions
+        function outf(text) { 
+            var mypre = document.getElementById("output"); 
+            mypre.innerHTML = mypre.innerHTML + text; 
+        } 
+
+        function builtinRead(x) {
+            if (Sk.builtinFiles === undefined || Sk.builtinFiles["files"][x] === undefined)
+                throw "File not found: '" + x + "'";
+            return Sk.builtinFiles["files"][x];
+        }
+
+        // Run Skulpt
+        function runit() { 
+           var prog = document.getElementById("yourcode").value; 
+           var mypre = document.getElementById("output"); 
+           mypre.innerHTML = ''; 
+           Sk.pre = "output";
+           Sk.configure({output: outf, read: builtinRead}); 
+
+           var myPromise = Sk.misceval.asyncToPromise(function() {
+               return Sk.importMainWithBody("<stdin>", false, prog, true);
+           });
+           myPromise.then(function(mod) {
+               console.log('success');
+           },
+           function(err) {
+               console.log(err.toString());
+           });
+        } 
+    </script>
+    <script>
+        function populateCode() {
+            const textarea = document.getElementById("yourcode");
+            const exampleCode = `
+class CustomList:
+    def __init__(self):
+        self.items = []  # Use a regular list to store items internally
+    
+    def append(self, item):
+        """Adds an item to the end of the list."""
+        self.items += [item]  # Concatenate a single-item list to avoid using .append
+    
+    def get(self, index):
+        """Returns the item at a specific index."""
+        if index < 0 or index >= len(self.items):
+            raise IndexError("Index out of range")
+        return self.items[index]
+    
+    def find(self, value):
+        """Searches for a value in the list and returns its index or -1 if not found."""
+        for i, item in enumerate(self.items):
+            if item == value:
+                return i
+        return -1
+    
+    def __len__(self):
+        """Returns the length of the list."""
+        return len(self.items)
+    
+    def __getitem__(self, index):
+        return self.get(index)  # Use the get method for error handling
+
+    def __repr__(self):
+        """Returns a string representation of the list."""
+        return f"CustomList({self.items})"
+`;
+        textarea.value = exampleCode;
+        }
+    </script>
+{% endblock %}
+
+{% block footer %}
+    {% include 'includes/inc_footer.html' %}
+{% endblock %}

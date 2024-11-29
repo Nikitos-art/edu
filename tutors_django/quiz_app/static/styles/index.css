@@ -556,6 +556,20 @@ p {
   align-items: center; 
   justify-content: center; 
 }
+/* #placement-tests {
+  display: flex;
+  position: relative;
+  background-color: #0f4181; 
+  width: 100%;
+  height: auto;              
+  overflow: hidden;         
+  align-items: flex-start;  
+  justify-content: center;  
+  flex-wrap: wrap;           
+  padding: 1em;              
+  gap: 1em;                 
+} */
+
 
 .h2-title-5 {
   position: absolute;
@@ -567,17 +581,16 @@ p {
 
 .card {
   display: flex;
-  flex: 1;
-  flex-direction: row;   
-  max-width: 400px;
+  width: 20em;
+  height: 30em;
   background-color: #fff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin: 100px;
+  margin: 50px;
   margin-top: 150px;
 }
 
 .card-image {
-  width: 200px;
+  width: auto;
   height: 250px;
   object-fit: cover;
 }

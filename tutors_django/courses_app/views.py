@@ -64,3 +64,6 @@ class PyDataStructureListView(generic.TemplateView):
 
 class PyDataStructureDictView(generic.TemplateView):
     template_name = 'py/py_data_structure_dict.html'
+
+class PyAlgoAxisView(generic.TemplateView):
+    template_name = 'py/py_algo_axis.html'

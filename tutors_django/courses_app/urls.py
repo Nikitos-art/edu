@@ -1,6 +1,6 @@
 from django.urls import path
 from courses_app.views import (CoursesView, PythonView, PyOneView, PyTwoView, PyBankAccView,
-                               PyDataStructureListView, PyDataStructureDictView)
+                               PyDataStructureListView, PyDataStructureDictView, PyAlgoAxisView)
 
 
 app_name = 'courses_app'
@@ -13,4 +13,5 @@ urlpatterns = [
     path('python_bankacc/', PyBankAccView.as_view(), name='python_bankacc'),
     path('python_data_structure_list/', PyDataStructureListView.as_view(), name='python_data_structure_list'),
     path('python_data_structure_dict/', PyDataStructureDictView.as_view(), name='python_data_structure_dict'),
+    path('python_algo_axis/', PyAlgoAxisView.as_view(), name='python_algo_axis'),
 ]

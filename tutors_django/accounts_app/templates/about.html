@@ -21,7 +21,6 @@
     <div class="key-point">
         <div class="key-projects">
             <h3 class="key-title">About this project</h3>
-            <!-- <h3>My other projects are <a href="/about/projects">here</a></h3> -->
         </div>
         <div class="key-content">
             <div class="image-container">
@@ -34,14 +33,15 @@
                 it evolved into an intriguing journey, leading me to transform it into a fully functional 
                 web platform for students and tutors. Initially, I planned for a blog and quiz website, 
                 but as development progressed, I expanded it to include a registration and login system,
-                a calendar app, JavaScript crossword puzzle generator, chess and more.
+                a calendar app, <a href="{% url 'games:games' %}">JavaScript</a> crossword puzzle generator, chess and more.
             </p>
             <p class="key-text">
                 The platform now has a comprehensive dashboard with basic functionalities like adding, 
                 editing, and removing blogs and quizzes. Additionally, I introduced a scheduling feature, 
-                allowing teachers to add classes, along with a simple chat application for  
-                communication between tutors and students. Ultimately, the platform is designed to facilitate
-                class management, keeping tabs on the number of classes, and more. 
+                allowing teachers to add classes, along with a simple chat application for communication
+                between tutors and students. The Python section has some 
+                <a href="{% url 'courses_app:python' %}">Python</a> tasks and an interactive Python
+                console to run the code. 
             </p>
         </div>
     </div>

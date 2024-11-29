@@ -1,0 +1,144 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/python.css' %}">
+{% endblock %}
+
+{% block header %}
+    {% include 'includes/inc_header.html' %}
+{% endblock %}
+
+{% block site_content %}
+<div class="task-container">
+    <h5>Gear Axis Alignment Varifier Function</h5>
+    <p><u>Task:</u> Implement a function that checks if gears's axis are in alignment.<br>
+        <u>Purpose:</u> To develop algorithmic and mathematical thinking.<br>
+        I first built a function to check if only two gears are in alignment and I used 'distance formula'<br>
+        to check the distance between two axis' centers. That can be considered the base case. Hooray. Done!<br>
+        Oh, also, I built a helper function using <b>turtle</b> module to help visualize the axis when adjusting<br>
+        the inputs for testing and trials.<br><br>
+        Next step was to modify the function and make it accept any number of gears' tuples with coordinates and <br>
+        radii. That was more tricky and I used some AI help for that. So...
+        <div class="task-elem">Step 1) Define the function and sort x and y coordinates, and radii into <br>
+            sepaarte lists.<br><br>
+        </div>
+        <div class="task-elem">Step 2) Make sure all coordinates are integers and all radii are positive.<br><br>
+        </div>
+        <div class="task-elem">Step 3) Use the distance formula ina for loop to check that the distance <br>
+            between two consequtive gears and their radii are equal.<br><br>
+        </div>
+    </p>
+</div>
+<div class="input-output">
+    <form class="py_console"> 
+        <textarea id="yourcode" cols="100" rows="15" spellcheck="false">
+    
+        </textarea><br />
+        <div class="py_btn_menu">
+            <button type="button" onclick="runit()" class="py_btn">Run</button>
+            <button type="button" onclick="populateCode()" class="py_btn" id="py_show_btn">Show the code</button> 
+        </div> 
+    
+    </form> 
+    <pre id="output"></pre> 
+</div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js" type="text/javascript"></script>
+    <script src="{% static 'js/skulpt-dist-master/skulpt.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'js/skulpt-dist-master/skulpt-stdlib.js' %}" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+        // Output functions
+        function outf(text) { 
+            var mypre = document.getElementById("output"); 
+            mypre.innerHTML = mypre.innerHTML + text; 
+        } 
+
+        function builtinRead(x) {
+            if (Sk.builtinFiles === undefined || Sk.builtinFiles["files"][x] === undefined)
+                throw "File not found: '" + x + "'";
+            return Sk.builtinFiles["files"][x];
+        }
+
+        // Run Skulpt
+        function runit() { 
+           var prog = document.getElementById("yourcode").value; 
+           var mypre = document.getElementById("output"); 
+           mypre.innerHTML = ''; 
+           Sk.pre = "output";
+           Sk.configure({output: outf, read: builtinRead}); 
+
+           var myPromise = Sk.misceval.asyncToPromise(function() {
+               return Sk.importMainWithBody("<stdin>", false, prog, true);
+           });
+           myPromise.then(function(mod) {
+               console.log('success');
+           },
+           function(err) {
+               console.log(err.toString());
+           });
+        } 
+    </script>
+    <script>
+        function populateCode() {
+            const textarea = document.getElementById("yourcode");
+            const exampleCode = `
+import math
+import turtle
+
+def checker(obj_list):
+    for obj in obj_list:
+        x1, y1, r1 = obj[0], obj[1], obj[2]
+        turtle.penup()
+        turtle.goto(x1, y1 - r1)
+        turtle.pendown()
+        turtle.circle(r1)
+    return
+
+def gear_alignment_checker(gears):
+
+    checker(gears)
+
+    x_coords, y_coords, radii = [], [], []
+
+    for gear in gears:
+        x, y, r = gear
+        x_coords.append(x)
+        y_coords.append(y)
+        radii.append(r)
+
+    if any(r < 1 for x, y, r in zip(x_coords, y_coords, radii)) or \
+            any(not isinstance(coord, int) for coord in x_coords + y_coords):
+        return False
+
+    for i in range(1, len(gears)):
+        distance_from_centers = math.sqrt((x_coords[i] - x_coords[i - 1]) ** 2 + (y_coords[i] - y_coords[i - 1]) ** 2)
+        radii_sum = radii[i] + radii[i - 1]
+
+        if round(distance_from_centers) != radii_sum:
+            return False
+
+    return True
+
+
+g1 = (10, 20, 30)
+g2 = (-20, -20, 20)
+g3 = (-47, -56, 25)
+g4 = (-65, -97, 20)
+g5 = (-75, -125, 10)
+g6 = (-90, -183, 50)
+
+gear_list = [g1, g2, g3, g4, g5, g6]
+
+print(gear_alignment_checker(gear_list))`;
+        textarea.value = exampleCode;
+        }
+    </script>
+{% endblock %}
+
+{% block footer %}
+    {% include 'includes/inc_footer.html' %}
+{% endblock %}

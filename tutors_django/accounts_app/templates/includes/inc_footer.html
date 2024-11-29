@@ -14,10 +14,13 @@
     <h5 class="copyright">Copyright © 2024 Nikita Kurpas</h5>
   </div>
   <div class="footer-links">
-    <a href="/" class="footer-link">Home</a>
-    <a href="/courses" class="footer-link">Courses</a>
-    <a href="/blog" class="footer-link">Blog</a>
-    <a href="/about" class="footer-link">About</a>
-    <a href="/privacy" class="footer-link">Privacy Policy</a>
+    <a href="{% url 'index' %}" class="footer-link">Home</a>
+    <a href="{% url 'courses_app:courses' %}" class="footer-link">Courses</a>
+    <a href="{% url 'courses_app:python' %}" class="footer-link">Python</a>
+    <a href="{% url 'blog_app:blog' %}" class="footer-link">Blog</a>
+    <a href="{% url 'quiz_app:quiz' %}" class="footer-link">Quiz</a>
+    <a href="{% url 'games:games' %}" class="footer-link">Games</a>
+    <a href="{% url 'about' %}" class="footer-link">About</a>
+    <a href="{% url 'privacy' %}" class="footer-link">Privacy Policy</a>
   </div>
 </footer>

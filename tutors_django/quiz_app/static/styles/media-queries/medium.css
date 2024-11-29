@@ -20,33 +20,24 @@
     }
 
     /*************** placements ********************/
+
     .h2-title-5 {
         font-size: 1.5rem;
     }
 
     .card {
-        max-width: 300px;
-        margin: 5px;
-        margin-top: 60px;
-        margin-bottom: 50px;
+        max-width: 20em;  /* Adjust card size for medium screens */
+        max-height: 20em;
+        margin: 1em;
+        margin-top: 5em;
+        overflow: hidden; /* Ensures no child element overflows */
     }
 
     .card-image {
-        width: 150px;
-        height: 166px;
-        object-fit: cover;
+        width: 100%;       /* Scale the image to the full card width */
+        height: 100%;      /* Scale the image to the full card height */
+        object-fit: cover; /* Ensures the image covers the container without distortion */
     }
-
-    /* .card {
-        width: 400px;
-        padding: 20px;
-    }  */
-    
-    /* .card-image {
-        width: 200px;
-        height: auto;
-        object-fit: cover;
-    } */
 
     .card-content {
         padding: 5px;

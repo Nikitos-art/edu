@@ -34,12 +34,12 @@
     font-size: 30px;
   }
 
-  .product-block-kids {
+  .product-block-coding {
     position: relative;
     left: -2em;
   }
 
-  .product-block-grown-ups {
+  .product-block-esl {
     position: relative;
     left: 0em;
     top: -10%;
@@ -50,13 +50,13 @@
     top: -18%;
   }
 
-  .product-info-grown-ups {
+  .product-info-esl {
     padding-left: 1em;
     padding-right: 1.5em;
     width: 13em;
   }
 
-  .product-info-chinese, .product-info-kids {
+  .product-info-chinese, .product-info-coding {
     width: 13em;
   }
 
@@ -73,13 +73,13 @@
     margin-top: 10px;
   }
 
-  #product-img-kids, #product-img-grown-ups, #product-img-chinese {
+  #product-img-coding, #product-img-esl, #product-img-chinese {
     width: 9rem;
     height: 9rem;
     top: 10%;
   }
 
-  #product-img-grown-ups {
+  #product-img-esl {
     right: -3%;
   }
 
@@ -135,16 +135,18 @@
     font-size: 1rem;
   }
   .card {
-    max-width: 210px;
-    margin: 5px;
-    margin-top: 60px;
-    margin-bottom: 50px;
+    max-width: 15em;
+    max-height: 15em;
+    margin: 0.5em;
+    margin-top: 5em;
+    margin-bottom: 4em;
+    overflow: hidden;  
   }
 
   .card-image {
-    width: 100px;
-    height: 125px;
-    object-fit: cover;
+      width: 100%; 
+      height: 100%; 
+      object-fit: cover;  
   }
 
   .card-content {

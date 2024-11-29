@@ -59,7 +59,7 @@ p {
 	background: hsl(187 75% 64%);
 	border-radius: 0.6rem;
 	font-weight: 700;
-    border: 0.35rem solid;
+  border: 0.35rem solid;
   height: 50px;
   width: 150px;
   position: relative;
@@ -170,13 +170,18 @@ p {
   color: #0C356A;
 }
 
-.product-block-kids, .product-block-grown-ups, .product-block-chinese {
+.product-block-esl, .product-block-chinese {
   position: relative;
   display: flex;
   left: 5%;
 }
 
-.product-info-kids {
+.product-block-coding {
+  position: relative;
+  display: flex;
+}
+
+.product-info-esl {
   padding-left: 3em;
 }
 
@@ -193,18 +198,25 @@ p {
   max-width: 35em;
 }
 
-#product-img-kids, #product-img-grown-ups, #product-img-chinese {
+#product-img-esl, #product-img-chinese {
   width: 21.8rem;
   height: 21.8rem;
   position: relative;
 }
 
-#product-img-grown-ups {
+#product-img-coding {
+  width: 20rem;
+  height: 20rem;
+  position: relative;
+  left: 1%;
+}
+
+#product-img-esl {
   transform: rotate(3deg);
   padding-right: 2em;
 }
 
-#product-img-chinese {
+#product-img-chinese, #product-img-coding {
   transform: rotate(-3deg);
   right: 8%;
   margin-bottom: 2em;

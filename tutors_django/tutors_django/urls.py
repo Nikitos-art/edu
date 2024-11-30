@@ -27,6 +27,17 @@ from django.urls import include
 from message_app.views import inquiry_form
 from django.conf.urls.i18n import i18n_patterns
 
+from django.contrib.sitemaps.views import sitemap
+from accounts_app.sitemaps import StaticViewSitemap, CoursesAppSitemap, GamesAppSitemap, BlogAppSitemap, QuizAppSitemap
+### Sitemaps ###
+sitemaps = {
+    'static': StaticViewSitemap(),
+    'courses_app': CoursesAppSitemap(),
+    'games_app': GamesAppSitemap(),
+    'blog_app': BlogAppSitemap(),
+    'quiz_app': QuizAppSitemap(),
+}
+
 
 urlpatterns = [
     path('batumi-sloboda/', admin.site.urls),
@@ -50,7 +61,13 @@ urlpatterns = [
     path('dialogues/', include('message_app.urls', namespace='message')),
     path('download/<str:filename>/', download_file, name='download_file'),
 ]
+
 handler404 = custom_404
+
+urlpatterns += [
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
+]
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+

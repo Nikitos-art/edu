@@ -1,8 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
 .navbar {
   background-color: #0174be;
   display: flex;
   justify-content: space-between;
-  align-items: end;
+  align-items: center; /* Vertically center the items */
   width: 100%;
   height: 60px;
   position: relative;
@@ -23,13 +25,11 @@
   list-style: none;
   display: flex;
   flex-direction: row;
-  position: relative;
-  bottom: 20px;
-  padding-right: 5vw;
+  padding-right: 20px; /* Use px for consistency */
 }
 
 .nav-item {
-  margin-right: 10vw;
+  margin-right: 20px; /* Use px instead of vw for more consistent spacing */
 }
 
 .nav-link, .nav-link-acc {
@@ -37,11 +37,12 @@
   position: relative;
   color: white;
   font-weight: bold;
-  font-size: 1rem;
+  font-size: 1.2rem;
+  font-family: 'Poppins', sans-serif;
 }
 
 .nav-link-acc {
-  top: 20%;
+  top: 10%;
 }
 
 .nav-link:hover {
@@ -69,18 +70,16 @@
 
 .dropdown-content {
   display: none;
-  position: fixed;
+  position: absolute; /* Use absolute instead of fixed */
   background-color: #0174be;
   border: 3px solid black;
   min-width: 60px;
   max-width: 120px;
-  /* min-width: 3em;
-  max-width: 5em; */
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
   padding: 12px 16px;
   z-index: 1;
-  right: 5px;
-  top: 8%;
+  right: 0; /* Align the dropdown to the right of the navbar */
+  top: 100%; /* Position it directly below the dropdown trigger */
   transition: opacity 1s;
 }
 
@@ -90,24 +89,12 @@
   opacity: 1;
 }
 
-@media screen and (min-width: 340px) and (max-width: 599px) {
-
-  .nav-link, .nav-link-acc {
-    font-size: 0.4rem;
-  }
-
-  .dropdown-content {
-    padding: 6px 10px;
-    min-width: 40px;
-    max-width: 60px;
-  }
-
-}
-
-
 @media screen and (max-width: 600px) {
   .navbar {
-    height: 40px;
+    width: 100%; /* Can keep this consistent with smaller screens */
+    height: auto;
+    background-color: #0174be;
+    align-items: center; /* Centralize navbar items */
   }
 
   .navbar-brand img {
@@ -116,28 +103,35 @@
   }
 
   .nav-item {
-    margin-right: 5vw;
+    margin-right: 2vw; 
   }
 
-  .nav-link-acc {
-    top: 10%;
+  .nav-link, .nav-link-acc {
+    font-size: 0.4rem; 
   }
 
   .dropdown-content {
-    min-width: 70px;
-    max-width: 80px;
+    padding: 6px 10px;
+    min-width: 40px;
+    max-width: 60px;
     top: 4%;
-    padding: 6px;
   }
 }
 
 @media screen and (min-width: 601px) and (max-width: 1550px) {
-  .nav-item {
-    margin-right: 3vw;
+  .navbar {
+    padding-right: 0vw; /* Adjust for medium-sized screens */
   }
 
   .dropdown-content {
     top: 6%;
   }
-}
 
+  .nav-item {
+    margin-right: 2vw;
+  }
+
+  .nav-link, .nav-link-acc {
+    font-size: 0.75rem; /* Slightly bigger font for medium screens */
+  }
+}

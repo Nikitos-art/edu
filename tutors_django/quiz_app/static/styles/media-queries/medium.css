@@ -1,10 +1,10 @@
 
-@media screen and (min-width: 601px) and (max-width: 1000px) {
+@media screen and (min-width: 601px) and (max-width: 1024px) {
     .hero-section {
-        height: 20vh;
+        height: 30vh;
     }
     .cloud-text {
-        font-size: 2.5rem;
+        font-size: 3rem;
     }
 
     .why-us-block {
@@ -18,25 +18,46 @@
     .h2-title-4 {
         font-size: 2em;
     }
+    /*************** products   ********************/
+    #product-img-coding, #product-img-esl, #product-img-chinese {
+        width: 15rem;
+        height: 15rem;
+        /* top: 10%; */
+    }
+    #product-img-coding {
+        margin-right: 2em;
+    }
 
+    .product-block-esl {
+        left: 0%;
+    }
+
+    #product-img-esl {
+        padding-right: 0em;
+        padding-left: 1em;
+    }
+
+    .product-info-esl {
+        padding-left: 1em;
+    }
     /*************** placements ********************/
 
     .h2-title-5 {
-        font-size: 1.5rem;
+        font-size: 1rem;
     }
 
     .card {
-        max-width: 20em;  /* Adjust card size for medium screens */
+        max-width: 20em;  
         max-height: 20em;
         margin: 1em;
         margin-top: 5em;
-        overflow: hidden; /* Ensures no child element overflows */
+        overflow: hidden; 
     }
 
     .card-image {
-        width: 100%;       /* Scale the image to the full card width */
-        height: 100%;      /* Scale the image to the full card height */
-        object-fit: cover; /* Ensures the image covers the container without distortion */
+        width: 100%;       
+        height: 5em;      
+        object-fit: cover; 
     }
 
     .card-content {
@@ -44,8 +65,8 @@
     }
 
     .card-title {
-        font-size: 1.5em;
-        margin-bottom: 10px;
+        font-size: 1.2em;
+        margin-bottom: 5px;
     }
 
     .card-text {
@@ -53,17 +74,13 @@
         margin-bottom: 20px;
         font-size: 1em;
     }
-    .card-button {
-        padding: 8px 16px 10px 10px;
-        height: 20px;
-        width: 75px;
-        border-width: 0.3rem;
-        font-size: 0.5em;
-        line-height: 2px;
-        writing-mode: horizontal-tb;
-        text-orientation: sideways;
-        white-space: nowrap;
+
+    .button-why {
+        height: 3em;
+        width: 10em;
+        border: 0.2rem solid;
     }
+
     /***** NAVBAR *************/
     .dropdown-content {
         top: 6%;

@@ -3,8 +3,8 @@
 
 
 {% block head %}
-    <meta name="keywords" content="online tutoring, education, online learning,
-      translations, interpreting">
+    <meta name="keywords" content="online-tutoring, introduction to programming, coding, javascript,
+    algorithms, math, maths, chinese lessons, esl tutoring">
 {% endblock %}
 
 {% block title %}Lighthouse-Tutors Home{% endblock %}
@@ -20,24 +20,26 @@
 {% endblock %}
 
 {% block site_content %}
-<div class="hero-section">
+<section class="hero-section">
     <h1 class="cloud-text cloud-title">Welcome to Lighthouse-Tutors!</h1>
-</div>
+</section>
 
 
-<div class="why-us-block">
+<section class="why-us-block">
     <div class="why-us-text">
       <h2 id="why-us-title">
         Why choose us?
       </h2>
       <p id="why-us-p">
-        Our tutors have extensive on-line tutoring experience. We have worked with students from all around the world. Our students are of a wide variety of levels ranging from near native level speakers to early beginners. With over 10 years of English tutoring experience we offer you the newest methods and teaching approaches. Our students have accomlished their goals. 
-      </p>
+        Our tutors have extensive online tutoring experience, having worked with students worldwide across various subjects. From beginners to advanced learners, we provide tailored lessons in English, Chinese, and Intro to Coding with Python. With over 10 years of experience, we use the latest methods and teaching approaches to help students achieve their goals. Whether you're learning a new language or mastering coding, our students succeed with us.
+      </p>      
     </div>
-    <img src="{% static 'img/why-us.png' %}" alt="Why-us-img" id="why-us-image" loading="lazy">
-</div>
+    <figure>
+      <img src="{% static 'img/why-us.png' %}" alt="Why-us-img" id="why-us-image" loading="lazy">
+    </figure>
+</section>
 
-<div class="what-we-offer-block">
+<section class="what-we-offer-block">
   <h3 id="what-we-offer-proverb">
     "To learn a language is to have one more window from which to look at the world."
     -Chinese Proverb</h3>
@@ -47,9 +49,9 @@
 
   <div class="product-block-coding">
     <div class="product-info-esl">
-      <h3 class="product-title">
+      <h1 class="product-title">
         Introduction to Programming with Python.
-      </h3>
+      </h1>
       <p class="product-description">
         Start your programming journey with our Introduction to Programming with Python course. Dive into 
         interactive lessons that simplify coding concepts, offering hands-on exercises and real-world examples.
@@ -65,9 +67,9 @@
   <div class="product-block-esl">
     <img src="{% static 'img/business-prod.png' %}" alt="Reading Image" id="product-img-esl" loading="lazy">
     <div class="product-info-esl">
-      <h3 class="product-title">
+      <h1 class="product-title">
         English as a Second Language.
-      </h3>
+      </h1>
       <p class="product-description esl">
         Improve your English skills with our course designed for learners ready to take their communication to the next level. Enjoy interactive lessons filled with engaging activities, practical conversations, and cultural tips. Build confidence in speaking and navigate different situations with ease. Join us to make learning English a fun and rewarding experience!
       </p>
@@ -79,9 +81,9 @@
 
   <div class="product-block-chinese">
     <div class="product-info-chinese">
-      <h3 class="product-title">
+      <h1 class="product-title">
         Newbie Chinese courses.
-      </h3>
+      </h1>
       <p class="product-description chinese">
         Embark on a captivating linguistic adventure with our Chinese course! Tailored for learners of all levels, our program seamlessly combines interactive lessons, cultural exploration, and practical language skills. Immerse yourself in Mandarin excellence and unlock the door to a world of communication and understanding. Join us on your journey to fluency!
       </p>
@@ -90,13 +92,13 @@
     <img src="{% static 'img/hanyu.png' %}" alt="Reading Image" id="product-img-chinese" loading="lazy">
   </div>
 
-</div>
+</section>
 
-<div class="waves-keys">
+<section class="waves-keys">
     {% include 'includes/waves.html' %}
-</div>
+</section>
 
-<div id="timeline-block">
+<section id="timeline-block">
     <h2 class="h2-title-4">5 Steps to become our student.</h2>
     <ul class="timeline">
         <li class="timeline-li">
@@ -149,41 +151,47 @@
             </div>
         </li>
       </ul>
-</div>
+</section>
 
-<div id="placement-tests">
-  <h2 class="h2-title-5">See where you stand with our placement tests.</h2>
+<section id="placement-tests">
+  <h3 class="h2-title-5">See where you stand with our placement tests.</h2>
   
   <div class="card">
-    <img src="{% static 'img/coding_quiz.png' %}" alt="Coding quiz image" class="card-image" loading="lazy">
+    <figure>
+      <img src="{% static 'img/coding_quiz.png' %}" alt="Coding quiz image" class="card-image" loading="lazy">
+    </figure>
     <div class="card-content">
-        <h3 class="card-title">Coding Quiz</h3>
+        <h2 class="card-title">Coding Quiz</h2>
         <p class="card-text">This placement quiz is for beginner computer science and coding learners.</p>
         <button class="button-why" onclick="redirectToQuizCoding()">Learn More</button>
     </div>
   </div>
 
   <div class="card">
+    <figure>
       <img src="{% static 'img/placeA.png' %}" alt="ESL quiz image" class="card-image" loading="lazy">
+    </figure>
       <div class="card-content">
-          <h3 class="card-title">ESL Quiz</h3>
+          <h2 class="card-title">ESL Quiz</h2>
           <p class="card-text">This placement test is recomended for intermediate speakers of English language.</p>
           <button class="button-why" onclick="redirectToQuizEsl()">Learn More</button>
       </div>
   </div>
 
   <div class="card">
-    <img src="{% static 'img/chinese_quiz.png' %}" alt="Chinese quiz image" class="card-image" loading="lazy">
+    <figure>
+      <img src="{% static 'img/chinese_quiz.png' %}" alt="Chinese quiz image" class="card-image" loading="lazy">
+    </figure>
     <div class="card-content">
-        <h3 class="card-title">Chinese Quiz</h3>
+        <h2 class="card-title">Chinese Quiz</h2>
         <p class="card-text">This placement quiz is for beginner to intermediate-level learners of Chinese.</p>
         <button class="button-why" onclick="redirectToQuizChinese()">Learn More</button>
     </div>
 </div>
 
-</div> 
+</section> 
 
-<div id="inquiry-block">
+<section id="inquiry-block">
     <img src="{% static 'img/inquiry2.png' %}" alt="Inquiry Background" loading="lazy" class="background-img">
     <div class="container">
         <div class="row">
@@ -236,7 +244,7 @@
           </div>
         </form>
     </div>
-</div>
+</section>
 
 <script>
   function redirectToKids() {

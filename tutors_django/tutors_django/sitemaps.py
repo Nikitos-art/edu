@@ -9,7 +9,7 @@ from blog_app.models import Post
 
 class StaticViewSitemap(Sitemap):
     def items(self):
-        return ['index', 'blog_app:blog', 'quiz_app:quiz', 'about', 'log_in', 'sign_up']  
+        return ['index', 'about', 'log_in', 'sign_up']   
 
     def location(self, item):
         return reverse(item)
@@ -25,7 +25,6 @@ class CoursesAppSitemap(Sitemap):
 
 class GamesAppSitemap(Sitemap):
     def items(self):
-        # Fetch all named URLs in games.urls
         return [url.name for url in games_urls.urlpatterns if url.name]
 
     def location(self, item):
@@ -34,28 +33,27 @@ class GamesAppSitemap(Sitemap):
 
 class BlogAppSitemap(Sitemap):
     def items(self):
-        return Post.objects.all()  # Include only public blog post detail pages
+        static_urls = ['blog_app:blog']
+        dynamic_posts = Post.objects.all()
+        return list(static_urls) + list(dynamic_posts)
 
     def location(self, item):
+        if isinstance(item, str):
+            return reverse(item)
         return reverse('blog_app:post_detail', kwargs={'slug': item.slug})
 
     def lastmod(self, item):
-        return item.created_at if hasattr(item, 'created_at') else None
+        return item.created_on if hasattr(item, 'created_on') else None
 
 
 class QuizAppSitemap(Sitemap):
     def items(self):
-        # Handle static URLs plus dynamic quiz-related URLs
-        static_urls = [
-            'quiz',  # Static views in quiz_app
-        ]
-        dynamic_quizzes = Quiz.objects.all()  # For dynamic quiz-related URLs
-        return static_urls + list(dynamic_quizzes)
+        static_urls = ['quiz_app:quiz']
+        dynamic_quizzes = Quiz.objects.all() 
+        return list(static_urls) + list(dynamic_quizzes)
 
     def location(self, item):
-        if isinstance(item, str):  # Static URLs
-            return reverse(f'quiz_app:{item}')
-        return reverse('quiz_app:quiz_detail', kwargs={'pk': item.pk})  # Dynamic quizzes
+        if isinstance(item, str): 
+            return reverse(item)
+        return reverse('quiz_app:quiz_detail', kwargs={'pk': item.pk})  
 
-    def lastmod(self, item):
-        return None  # Since Quiz model has no updated_at field, return None for lastmod

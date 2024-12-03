@@ -7,7 +7,7 @@ from .models import Course
 from django.shortcuts import reverse
 from django.core.exceptions import ValidationError
 from django.contrib import messages
-
+import os
 
 def add_lesson(request):
     full_name = request.user.full_name
@@ -67,3 +67,16 @@ class PyDataStructureDictView(generic.TemplateView):
 
 class PyAlgoAxisView(generic.TemplateView):
     template_name = 'py/py_algo_axis.html'
+
+class PyLogAnalyzerView(generic.TemplateView):
+    template_name = 'py/log_analyzer.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        file_path = 'courses_app/templates/py/access_log.txt'
+        try:
+            with open(file_path, 'r') as file:
+                context['file_content'] = file.read()
+        except FileNotFoundError:
+            context['file_content'] = "Error: File not found."
+        return context

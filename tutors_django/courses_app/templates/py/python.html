@@ -22,7 +22,10 @@
 
 <div class="py_container">
     <div class="py_header">
-        <h3>Lighthouse Python</h3>
+        <div class="py-heading">
+            <img src="{% static 'img/py.png' %}" alt="Py Image" class="py-img" loading="lazy">
+            <h3>Lighthouse Python</h3>
+        </div>
         <P>Here I've come up with some Python code that can be suitable for beginners and intermediate level
             Pythonistas.<br>
         </P>
@@ -93,6 +96,17 @@
                 A function that checks that given list of axis are aligned.<br>
             </p>
             <a href="{% url 'courses_app:python_algo_axis' %}">Try it out</a>
+        </div>
+    </div>
+    <div class="py_item_list">
+        <div class="py_item">
+            <h5>
+                File Processing / String Parsing: Access Log Analyzer 
+            </h5>
+            <p>
+                A function that analyzes a server access log file.<br>
+            </p>
+            <a href="{% url 'courses_app:python_log_analyzer' %}">Try it out</a>
         </div>
     </div>
 </div>

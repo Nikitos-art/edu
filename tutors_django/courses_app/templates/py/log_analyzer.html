@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/python.css' %}">
+{% endblock %}
+
+{% block header %}
+    {% include 'includes/inc_header.html' %}
+{% endblock %}
+
+{% block site_content %}
+<div class="task-container">
+    <h5>Log File Analyzer</h5>
+    <p><u>Task:</u> Implement a function that will accept a server log file and identify and will<br>
+        return a list of IP addresses that have attempted to make a GET request to obtain environment<br>
+        variable (.env) file.<br>
+        <u>Purpose:</u> To practice reading a server log file and pattern recognition. One will need to<br>
+        open the file and filter out the required data.<br><br>
+        <div class="task-elem">Step 1) Define the function and its one argument - filename.<br><br>
+        </div>
+        <div class="task-elem">Step 2) Open the log file using <b>with</b> statement and read the lines<br>
+            of the file.<br><br>
+        </div>
+        <div class="task-elem">Step 3) Create the condition that will filter the lines according with the task.<br><br>
+        </div>
+        The log file will consist of many lines. Below is an example of one line of a log file:<br><br>
+        127.0.0.6 - - [01/Dec/2024:19:27:54 +0700] "GET /quiz/7/ HTTP/2.0" 200 1857 "-" <br>
+        "Mozilla/5.0 (Linux; Android 6.0.1; Nexus 5X Build/MMB29P) AppleWebKit/537.36 (KHTML, like Gecko) <br>
+        Chrome/131.0.6778.69 Mobile Safari/537.36 (compatible; GoogleOther)" "192.168.1.2"<br><br>
+        <a href="{% url 'download_file' 'access_log.txt' %}" class="btn btn-primary">Download the log file</a>
+    </p>
+</div>
+<div class="input-output">
+    <form class="py_console"> 
+        <textarea id="yourcode" cols="100" rows="15" spellcheck="false">
+    
+        </textarea><br />
+        <div class="py_btn_menu">
+            <button type="button" onclick="runit()" class="py_btn">Run</button>
+            <button type="button" onclick="populateCode()" class="py_btn" id="py_show_btn">Show the code</button> 
+        </div> 
+    
+    </form> 
+    <pre id="output"></pre> 
+</div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js" type="text/javascript"></script>
+    <script src="{% static 'js/skulpt-dist-master/skulpt.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'js/skulpt-dist-master/skulpt-stdlib.js' %}" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+        // Output functions
+        function outf(text) { 
+            var mypre = document.getElementById("output"); 
+            mypre.innerHTML = mypre.innerHTML + text; 
+        } 
+
+        function builtinRead(x) {
+            if (Sk.builtinFiles === undefined || Sk.builtinFiles["files"][x] === undefined)
+                throw "File not found: '" + x + "'";
+            return Sk.builtinFiles["files"][x];
+        }
+
+        // Run Skulpt
+        function runit() { 
+           var prog = document.getElementById("yourcode").value; 
+           var mypre = document.getElementById("output"); 
+           mypre.innerHTML = ''; 
+           Sk.pre = "output";
+           Sk.configure({output: outf, read: builtinRead}); 
+
+           var myPromise = Sk.misceval.asyncToPromise(function() {
+               return Sk.importMainWithBody("<stdin>", false, prog, true);
+           });
+           myPromise.then(function(mod) {
+               console.log('success');
+           },
+           function(err) {
+               console.log(err.toString());
+           });
+        } 
+    </script>
+    <script>
+        function populateCode() {
+            const textarea = document.getElementById("yourcode");
+            const exampleCode = `def log_analyzer(filename):
+    malicious_ips = []
+    with open(filename, 'r')as f:
+        lines = f.readlines()
+        for line in lines:
+            if '.env' in line:
+                malicious_ip = line.split("-")[0]
+                malicious_ips.append(malicious_ip.rstrip())
+    return malicious_ips`;
+        textarea.value = exampleCode;
+        }
+    </script>
+{% endblock %}
+
+{% block footer %}
+    {% include 'includes/inc_footer.html' %}
+{% endblock %}

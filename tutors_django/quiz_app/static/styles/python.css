@@ -1,3 +1,14 @@
+.py-heading {
+    display: inline-flex; 
+    align-items: center;
+    gap: 10px;
+}
+
+.py-img {
+    max-width: 50px; 
+    height: auto;
+}
+
 .task-container {
     background: #f9f9f9;  
     padding: 20px;  

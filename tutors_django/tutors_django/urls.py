@@ -62,7 +62,7 @@ urlpatterns = [
     path('privacy/', privacy_view, name='privacy'),
     path('dialogues/', include('message_app.urls', namespace='message')),
     path('download/<str:filename>/', download_file, name='download_file'),
-    path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
+    path('sitemap.xml/', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
 ]
 
 handler404 = custom_404

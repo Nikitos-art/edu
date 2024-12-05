@@ -1,4 +1,25 @@
-.chess-wrapper {
+.game-mode-selector {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    color: white;
+    display: none; /* Initially hidden */
+}
+
+.game-mode-selector button {
+    padding: 10px 20px;
+    margin: 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+
+.chess-wrapper, #chess-wraper-pre {
     display: flex;
     flex-direction: column; 
     justify-content: center; 
@@ -80,3 +101,4 @@
 .selected {
     border: 3px solid yellow;  
 }
+

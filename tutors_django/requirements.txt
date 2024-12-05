@@ -17,7 +17,6 @@ cryptography==42.0.5
 distro==1.9.0
 dj-user-login-history==1.0.6
 Django==5.0
-django-admin-honeypot-updated-2021==1.2.0
 django-admin-interface==0.28.6
 django-auto-logout==0.5.1
 django-colorfield==0.11.0

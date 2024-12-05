@@ -73,3 +73,8 @@ THERE ARE 4 MODULES:
 3. ai_moves.js
 4. moves_logic.js
 
+###################### POETRY#########################
+poetry add $(cat requirements.txt)
+Get-Content requirements.txt | ForEach-Object { poetry add $_ }
+
+

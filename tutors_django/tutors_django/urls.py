@@ -43,7 +43,6 @@ sitemaps = {
 
 urlpatterns = [
     path('batumi-sloboda/', admin.site.urls),
-    path('admin/', include('admin_honeypot.urls')),
     path('favicon.ico', RedirectView.as_view(url='/static/favicon.ico', permanent=True)),
     path('', index_view, name='index'),
     path('courses/', include('courses_app.urls', namespace='courses')),

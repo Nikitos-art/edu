@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'message_app',
     'games',
     'login_history',
+    'channels',
 ]
 
 
@@ -185,3 +186,13 @@ CSRF_TRUSTED_ORIGINS = [
 
 CSRF_COOKIE_SECURE = True
 
+ASGI_APPLICATION = 'tutors_django.asgi.application'
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+}

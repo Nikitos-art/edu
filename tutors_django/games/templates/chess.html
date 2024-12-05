@@ -12,7 +12,15 @@
 {% endblock %}
 
 {% block site_content %}
-<div class="chess-wrapper">
+
+<div id="chess-wraper-pre">
+    <div id="gameModeSelector" class="game-mode-selector">
+        <button id="playAI">Play with AI</button>
+        <button id="playHuman">Play with Another Player</button>
+    </div>
+</div>
+
+<div class="chess-wrapper" id="chessBoardWrapper" style="display: none;">
 
     <div class="coordinates-hor">
         <div class="row-coord">a</div>

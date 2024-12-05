@@ -383,78 +383,6 @@ function handleAIMove(move) {
 
 /////////////////////////////END AI SMART MOVES/////////////////////////////////////////////
 
-// function handlePlayerMove(square) {
-//     const pieceImg = square.querySelector('.piece');
-//     let pieceType = null;
-//     let pieceColor = "white";
-
-//     if (pieceImg) {
-//         pieceType = pieceImg.src.split('/').pop().split('.')[0];
-//         pieceColor = pieceType ? (pieceType.includes('white') ? 'white' : 'black') : null; 
-//     }
-
-//     // Deselect the selected square
-//     if (selectedSquare === square) {
-//         selectedSquare.classList.remove('selected');
-//         selectedPiece = null;
-//         selectedSquare = null;
-//         return;
-//     }
-
-//     // if (selectedPiece && !isValidMove(selectedPiece, square)) {
-//     //     selectedSquare.classList.remove('selected');
-//     //     selectedPiece = null;
-//     //     selectedSquare = null;
-//     //     return;
-//     // }
-
-//     // Only allow the current player's pieces to be selected
-//     if (!selectedPiece) {
-//         if (pieceColor === currentPlayer) {
-//             selectedPiece = pieceImg;
-//             selectedSquare = square;
-//             square.classList.add('selected');
-//             return;
-//         } else {
-//             return;
-//         }
-//     } else {
-
-//         const opponentColor = 'black';
-//         const isCapture = pieceImg && opponentColor !== currentPlayer;
-
-//         // Only attempt to move if it's an empty square or a capture
-//         if (!pieceImg || isCapture) {
-//             if (isValidMove(selectedPiece, selectedSquare, square, isCapture, 'user')) {
-//                 //console.log(`square: ${square}`)
-//                 if (isCapture) {
-//                     square.removeChild(pieceImg);
-//                 }
-
-//                 square.appendChild(selectedPiece);
-//                 selectedSquare.classList.remove('selected');
-
-//                 const selectedPieceType = selectedPiece.src.split('/').pop().split('.')[0].split('_')[0];
-                
-//                 const fromCoordinate = selectedSquare.getAttribute('data-coordinate');
-
-//                 const toCoordinate = square.getAttribute('data-coordinate');
-//                 const toRow = parseInt(toCoordinate.charAt(1));
-
-//                 if (selectedPieceType.includes('pawn')) {
-//                     if ((currentPlayer === 'white' && toRow === 8) || (currentPlayer === 'black' && toRow === 1)) {
-//                         promotePawn(square);
-//                     }
-//                 }
-
-//                 updateLastMove(fromCoordinate, toCoordinate, selectedPieceType, "white");
-//                 updatePlayerTurn();
-//             }
-//         }
-//         selectedPiece = null;
-//         selectedSquare = null;
-//     }
-// }
 function handlePlayerMove(square) {
     const pieceImg = square.querySelector('.piece');
     let pieceType = null;
@@ -544,7 +472,6 @@ function isValidMove(piece, fromSquare, toSquare, isCapture, userOrAI) {
         ? toSquare 
         : toSquare.getAttribute('data-coordinate');
 
-    //console.log(`toSquare: ${toSquare} \n toCoordinate: ${toCoordinate}`)
 
     if (userOrAI === 'user') {
  
@@ -554,9 +481,7 @@ function isValidMove(piece, fromSquare, toSquare, isCapture, userOrAI) {
         if (isKingInCheck(simulatedMoveBoard, 'white')) {
             unSimulateMove({ from: fromCoordinate, to: toCoordinate }, simulatedMoveBoard);
             alert(`White king would be in check if move: ${fromCoordinate} ${toCoordinate}!`);
-            // alert(`White king would be in check if move: ${fromCoordinate} ${toCoordinate}!\n
-            //      Board simulation: ${JSON.stringify(simulatedMoveBoard)}`);
-            //after simulation: ${JSON.stringify(simulatedMoveBoard, null, 2)}\n
+
             return false; 
         }
         unSimulateMove({ from: fromCoordinate, to: toCoordinate }, currentBoard);
@@ -578,13 +503,11 @@ function isValidMove(piece, fromSquare, toSquare, isCapture, userOrAI) {
     switch (pieceType) {
         case 'pawn_white':
             if (isPawnMove(fromCoordinate, toCoordinate, 'white', isCapture, lastMoveMade, toSquare)) {
-                //console.log(`white pawn move ${fromCoordinate} ${toCoordinate}`);
                 return true;
             }
             break;
         case 'pawn_black':
             if (isPawnMove(fromCoordinate, toCoordinate, 'black', isCapture, lastMoveMade, toSquare)) {
-               // console.log(`black pawn move ${fromCoordinate} ${toCoordinate}`)
                 return true;
             }
             break;
@@ -610,13 +533,10 @@ function isValidMove(piece, fromSquare, toSquare, isCapture, userOrAI) {
             return isBishopMove(fromCoordinate, toCoordinate);
         case 'king_white':
         case 'king_black':
-            // Ensure it's a valid king move
             if (isKingMove(fromCoordinate, toCoordinate, kingFirstMove[currentColor], rookFirstMove, currentColor)) {
         
-                // Initializing a variable for castling check
                 let isCastling = false;
         
-                // Handle castling only if king is at the initial position
                 if (currentColor === "white") {
                     if (fromCoordinate === 'e1') {
                         // Kingside or Queenside castling
@@ -682,8 +602,60 @@ function isValidMove(piece, fromSquare, toSquare, isCapture, userOrAI) {
     }
 }
 
-
 function main() {
+    const gameModeSelector = document.getElementById('gameModeSelector');
+    const playAIButton = document.getElementById('playAI');
+    const playHumanButton = document.getElementById('playHuman');
+    const chessBoard = document.getElementById('chessBoardWrapper');
+    const preGameWrapper = document.getElementById('chess-wraper-pre');
+
+    gameModeSelector.style.display = 'block';
+
+    playAIButton.addEventListener('click', () => {
+        gameModeSelector.style.display = 'none'; 
+        chessBoard.style.display = 'flex';
+        preGameWrapper.style.display = 'none'; 
+        startGame('AI');
+    });
+
+    playHumanButton.addEventListener('click', () => {
+        gameModeSelector.style.display = 'none'; 
+        chessBoard.style.display = 'flex';
+        preGameWrapper.style.display = 'none'; 
+        startGame('Human');
+        const roomName = prompt("Enter room name (or share with a friend):");
+        if (roomName) {
+
+            const socket = new WebSocket(`ws://${window.location.hostname}:8001/ws/chess/${roomName}/`);
+
+            // const socket = new WebSocket(
+            //     `ws://${window.location.host}/ws/chess/${roomName}/`
+            // );
+
+            socket.onmessage = (e) => {
+                const data = JSON.parse(e.data);
+                if (data.move) {
+                    // Update chessboard based on received move
+                    updateChessBoard(data.move);
+                }
+            };
+
+            socket.onopen = () => {
+                console.log("Connected to the WebSocket room!");
+            };
+
+            socket.onclose = () => {
+                console.log("Disconnected from the WebSocket room.");
+            };
+
+            // Example of sending moves
+            // socket.send(JSON.stringify({ move: "e2-e4" }));
+        }
+    });
+}
+
+function startGame(mode) {
+    // console.log(mode);
     createChessBoard();
     let squares = document.querySelectorAll('.square');
 
@@ -691,9 +663,10 @@ function main() {
         square.addEventListener('click', () => {
             if (currentPlayer === 'white') {
                 handlePlayerMove(square);
-                if (currentPlayer === 'black') {
-                    handleAITurn(); 
+                if (mode === 'AI' && currentPlayer === 'black') {
+                    handleAITurn();
                 }
+                // If it's Human vs Human, switch turns without AI
             }
         });
     });
@@ -706,6 +679,5 @@ function handleAITurn() {
         handleAIMove(aiMove);
     }, 1500); 
 }
-
 
 main();

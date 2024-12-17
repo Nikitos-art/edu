@@ -16,21 +16,23 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from accounts_app.views import (index_view, AboutView, ResumeView, LoginUser, RegisterUser,
-                                logout_user, StudentAccount, TutorAccount, custom_404, privacy_view, download_file)
-from courses_app.views import add_lesson, CoursesView
+from accounts_app.views import (
+    index_view, AboutView, ResumeView, LoginUser, RegisterUser, logout_user, StudentAccount, TutorAccount,
+    custom_404, privacy_view, download_file
+)
+from courses_app.views import add_lesson
 from django.conf.urls.static import static
 from django.conf import settings
 from django.views.generic import RedirectView
 from django.urls import include
 
 from message_app.views import inquiry_form
-from django.conf.urls.i18n import i18n_patterns
+# from django.conf.urls.i18n import i18n_patterns
 
 from django.contrib.sitemaps.views import sitemap
 from .sitemaps import StaticViewSitemap, CoursesAppSitemap, GamesAppSitemap, BlogAppSitemap, QuizAppSitemap
 
-### Sitemaps ###
+# Sitemaps
 
 sitemaps = {
     'static': StaticViewSitemap(),
@@ -64,8 +66,7 @@ urlpatterns = [
     path('sitemap.xml/', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
 ]
 
-handler404 = custom_404
+handler404 = 'accounts_app.views.custom_404'
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-

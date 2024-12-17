@@ -86,7 +86,13 @@ zope-component = "6.0"
 zope-event = "5.0"
 zope-hookable = "6.0"
 zope-interface = "6.3"
+channels = "^4.2.0"
+daphne = "^4.1.2"
+channels-redis = "^4.2.1"
 
+
+[tool.poetry.group.dev.dependencies]
+flake8 = "^7.1.1"
 
 [build-system]
 requires = ["poetry-core"]

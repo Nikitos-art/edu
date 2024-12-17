@@ -16,11 +16,17 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='lesson',
             name='student',
-            field=models.ForeignKey(limit_choices_to={'user_roles': 'student'}, on_delete=django.db.models.deletion.CASCADE, related_name='lessons_as_student', to=settings.AUTH_USER_MODEL),
+            field=models.ForeignKey(limit_choices_to={'user_roles': 'student'},
+                                    on_delete=django.db.models.deletion.CASCADE,
+                                    related_name='lessons_as_student',
+                                    to=settings.AUTH_USER_MODEL),
         ),
         migrations.AlterField(
             model_name='lesson',
             name='tutor',
-            field=models.ForeignKey(limit_choices_to={'user_roles': 'tutor'}, on_delete=django.db.models.deletion.CASCADE, related_name='lessons_as_tutor', to=settings.AUTH_USER_MODEL),
+            field=models.ForeignKey(limit_choices_to={'user_roles': 'tutor'},
+                                    on_delete=django.db.models.deletion.CASCADE,
+                                    related_name='lessons_as_tutor',
+                                    to=settings.AUTH_USER_MODEL),
         ),
     ]

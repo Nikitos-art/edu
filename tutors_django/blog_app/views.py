@@ -9,9 +9,7 @@ from django.core.exceptions import PermissionDenied
 from django.http import JsonResponse
 
 
-
 # Create your views here.
-
 class PostList(generic.ListView):
     queryset = Post.objects.filter(status=1).order_by('-created_on')
     template_name = 'blog.html'
@@ -23,10 +21,8 @@ class PostDetail(generic.DetailView):
     template_name = 'blog_detail.html'
     context_object_name = 'post'
 
-
     def post(self, request, *args, **kwargs):
         post = get_object_or_404(Post, slug=self.kwargs.get('slug'))
-
         # Check if the user has already liked this post in the session
         liked_posts = request.session.get('liked_posts', [])
 

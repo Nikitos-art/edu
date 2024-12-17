@@ -2,14 +2,14 @@ from django.contrib.sitemaps import Sitemap
 from django.urls import reverse
 from courses_app import urls as courses_urls
 from games import urls as games_urls
-from blog_app import urls as blog_urls
+# from blog_app import urls as blog_urls
 from quiz_app.models import Quiz
 from blog_app.models import Post
 
 
 class StaticViewSitemap(Sitemap):
     def items(self):
-        return ['index', 'about', 'log_in', 'sign_up']   
+        return ['index', 'about', 'log_in', 'sign_up']
 
     def location(self, item):
         return reverse(item)
@@ -49,11 +49,10 @@ class BlogAppSitemap(Sitemap):
 class QuizAppSitemap(Sitemap):
     def items(self):
         static_urls = ['quiz_app:quiz']
-        dynamic_quizzes = Quiz.objects.all() 
+        dynamic_quizzes = Quiz.objects.all()
         return list(static_urls) + list(dynamic_quizzes)
 
     def location(self, item):
-        if isinstance(item, str): 
+        if isinstance(item, str):
             return reverse(item)
-        return reverse('quiz_app:quiz_detail', kwargs={'pk': item.pk})  
-
+        return reverse('quiz_app:quiz_detail', kwargs={'pk': item.pk})

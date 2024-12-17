@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 import os
 from pathlib import Path
 from dotenv import load_dotenv
-from datetime import timedelta
+# from datetime import timedelta
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 load_dotenv(BASE_DIR.parent / '.env')
@@ -151,7 +151,7 @@ USE_TZ = True
 #########################################
 STATIC_URL = '/static/'
 
-#STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/')  
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/')
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR / 'quiz_app/static'),
@@ -170,7 +170,7 @@ MEDIA_ROOT = BASE_DIR / 'media'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'accounts_app.UserAccount'
 # ADMIN_URL = os.environ.get('ADMIN')
-handler404 = 'accounts_app.views.custom_404'
+# handler404 = 'accounts_app.views.custom_404'
 
 AUTO_LOGOUT = {
     'IDLE_TIME': 1800,

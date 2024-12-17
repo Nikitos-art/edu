@@ -17,6 +17,7 @@ from games.consumers import ChessConsumer
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'tutors_django.settings')
 
+
 application = ProtocolTypeRouter({
     "http": get_asgi_application(),
     "websocket": AuthMiddlewareStack(

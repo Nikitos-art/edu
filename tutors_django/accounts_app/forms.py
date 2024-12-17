@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from accounts_app.models import UserAccount
+from .models import UserAccount
 
 
 class UserProfilePictureForm(forms.ModelForm):
@@ -27,7 +27,7 @@ class RegisterUserForm(UserCreationForm):
 
     def save(self, commit=True):
         user = super(RegisterUserForm, self).save(commit=False)
-        user.user_roles = self.cleaned_data['user_role']  
+        user.user_roles = self.cleaned_data['user_role']
         if commit:
             user.save()
         return user
@@ -40,6 +40,5 @@ class RegisterUserForm(UserCreationForm):
             'user_role',
             'password1',
             'password2',
-            'agreed_with_policy')
-
-
+            'agreed_with_policy'
+        )

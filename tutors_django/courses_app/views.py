@@ -3,11 +3,12 @@ from django.shortcuts import get_object_or_404
 from accounts_app.models import UserAccount
 from django.shortcuts import redirect
 from django.views import generic
-from .models import Course
+# from .models import Course
 from django.shortcuts import reverse
 from django.core.exceptions import ValidationError
 from django.contrib import messages
-import os
+# import os
+
 
 def add_lesson(request):
     full_name = request.user.full_name
@@ -40,33 +41,40 @@ def add_lesson(request):
             description=description
         )
 
-
         return redirect(reverse('tutor_account', args=[full_name]))
 
 
 class CoursesView(generic.TemplateView):
     template_name = 'courses.html'
 
+
 class PythonView(generic.TemplateView):
     template_name = 'py/python.html'
+
 
 class PyOneView(generic.TemplateView):
     template_name = 'py/ip_validator.html'
 
+
 class PyTwoView(generic.TemplateView):
     template_name = 'py/cipher.html'
+
 
 class PyBankAccView(generic.TemplateView):
     template_name = 'py/py_bankacc.html'
 
+
 class PyDataStructureListView(generic.TemplateView):
     template_name = 'py/py_data_structure_list.html'
+
 
 class PyDataStructureDictView(generic.TemplateView):
     template_name = 'py/py_data_structure_dict.html'
 
+
 class PyAlgoAxisView(generic.TemplateView):
     template_name = 'py/py_algo_axis.html'
+
 
 class PyLogAnalyzerView(generic.TemplateView):
     template_name = 'py/log_analyzer.html'

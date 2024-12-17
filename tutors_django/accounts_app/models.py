@@ -3,6 +3,7 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, Permis
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
 
+
 class UserAccountManager(BaseUserManager):
     def create_user(self, email, agreed_with_policy, password=None, **extra_fields):
         try:

@@ -11,12 +11,12 @@ from blog_app.models import Post
 from quiz_app.models import Quiz
 from courses_app.models import Lesson
 from .models import UserAccount
-from django_ratelimit.decorators import ratelimit
-from django.utils.decorators import method_decorator
+# from django_ratelimit.decorators import ratelimit
+# from django.utils.decorators import method_decorator
 from django.contrib import messages
 from django.urls import reverse
 from django.contrib.auth import logout
-#
+
 from calendar import HTMLCalendar
 from datetime import date
 from collections import defaultdict
@@ -25,6 +25,7 @@ import re
 from django.http import HttpResponse
 import os
 from django.conf import settings
+
 
 def index_view(request):
     quizzes = Quiz.objects.filter(id__in=[2, 4])
@@ -39,16 +40,18 @@ class AboutView(TemplateView):
         data = super().get_context_data(**kwargs)
         return data
 
+
 class ResumeView(TemplateView):
     template_name = 'resume.html'
+
 
 def privacy_view(request):
     return render(request, 'privacy.html')
 
 
-#@method_decorator(ratelimit(key='user_or_ip', rate='20/m'), name='dispatch')
-#@method_decorator(ratelimit(key='user_or_ip', rate='100/10m'), name='dispatch')
-#@method_decorator(ratelimit(key='user_or_ip', rate='150/d'), name='dispatch')
+# @method_decorator(ratelimit(key='user_or_ip', rate='20/m'), name='dispatch')
+# @method_decorator(ratelimit(key='user_or_ip', rate='100/10m'), name='dispatch')
+# @method_decorator(ratelimit(key='user_or_ip', rate='150/d'), name='dispatch')
 class LoginUser(LoginView):
     form_class = AuthenticationForm
     template_name = 'login.html'
@@ -67,12 +70,13 @@ class LoginUser(LoginView):
         return super().form_valid(form)
 
     def form_invalid(self, form):
-        messages.error(self.request, 'Sorry! Login unsuccessful. Try again.') 
+        messages.error(self.request, 'Sorry! Login unsuccessful. Try again.')
         return super().form_invalid(form)
 
-#@method_decorator(ratelimit(key='user_or_ip', rate='50/m'), name='dispatch')
-#@method_decorator(ratelimit(key='user_or_ip', rate='60/10m'), name='dispatch')
-#@method_decorator(ratelimit(key='user_or_ip', rate='70/d'), name='dispatch')
+
+# @method_decorator(ratelimit(key='user_or_ip', rate='50/m'), name='dispatch')
+# @method_decorator(ratelimit(key='user_or_ip', rate='60/10m'), name='dispatch')
+# @method_decorator(ratelimit(key='user_or_ip', rate='70/d'), name='dispatch')
 class RegisterUser(CreateView):
     form_class = RegisterUserForm
     template_name = 'register.html'
@@ -86,7 +90,7 @@ class RegisterUser(CreateView):
             login(self.request, user)
             messages.success(self.request, 'Congrats! Registration successful! Welcome to your profile!')
             return redirect(reverse('tutor_account', args=[user.full_name]))
-        
+
         elif form.cleaned_data['user_role'] == 'student':
             user.student = True
             user.save()
@@ -181,7 +185,7 @@ class TutorAccount(LoginRequiredMixin, TemplateView):
         current_date = date.today()
         year, month = current_date.year, current_date.month
         cal = self.generate_calendar_with_lessons(year, month, user)
-        
+
         context = {
             'cal': cal,
             'lessons': Lesson.objects.filter(tutor=user.pk),
@@ -257,9 +261,10 @@ def logout_user(request):
 def custom_404(request, exception):
     return render(request, 'error.html', status=404)
 
-### DOWNLOAD RESUME VIEW ###
+
+# DOWNLOAD RESUME VIEW
 def download_file(request, filename):
-    ##file_path = os.path.join(settings.MEDIA_ROOT, filename)
+    # file_path = os.path.join(settings.MEDIA_ROOT, filename)
     file_path = os.path.join(settings.BASE_DIR, filename)  # Reference the root folder directly
     if os.path.exists(file_path):
         with open(file_path, 'rb') as fh:

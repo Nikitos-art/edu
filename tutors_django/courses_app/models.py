@@ -2,8 +2,8 @@ from django.db import models
 from accounts_app.models import UserAccount
 from quiz_app.models import Quiz
 from django.utils.text import slugify
-from datetime import date
-from datetime import datetime
+# from datetime import date
+# from datetime import datetime
 
 
 class Lesson(models.Model):
@@ -46,4 +46,3 @@ class Course(models.Model):
 
     def __str__(self):
         return self.course_name
-

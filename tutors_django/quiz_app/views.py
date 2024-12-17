@@ -9,7 +9,7 @@ from .forms import QuizForm, QuestionForm, AnswerFormSet
 from django.urls import reverse_lazy
 from django.shortcuts import render, get_object_or_404
 from django.views.generic.edit import FormView
-#from django.contrib.auth.decorators import login_required
+# from django.contrib.auth.decorators import login_required
 
 
 # class QuizList(LoginRequiredMixin, generic.ListView):
@@ -19,7 +19,7 @@ class QuizList(generic.ListView):
     context_object_name = 'quizzes'
 
 
-#@login_required
+# @login_required
 def quiz_view(request, pk):
     quiz = Quiz.objects.get(pk=pk)
     return render(request, 'quiz_detail.html', {'obj': quiz})
@@ -49,7 +49,7 @@ def save_quiz_view(request, pk):
             question = Question.objects.get(text=k)
             questions.append(question)
 
-        #user = request.user
+        # user = request.user
         quiz = Quiz.objects.get(pk=pk)
 
         score = 0
@@ -74,7 +74,7 @@ def save_quiz_view(request, pk):
                 results.append({str(q): 'not answered'})
 
         score_ = score * multiplier
-        #Result.objects.create(quiz=quiz, user=user, score=score_)
+        # Result.objects.create(quiz=quiz, user=user, score=score_)
         Result.objects.create(quiz=quiz, score=score_)
 
         if score_ >= quiz.required_score_to_pass:
@@ -120,7 +120,6 @@ class CreateQuestionsView(FormView):
             initial['quiz'] = self.kwargs['pk']
         return initial
 
-
     def dispatch(self, request, *args, **kwargs):
         # Retrieve the quiz based on the quiz ID in the URL
         quiz_pk = self.kwargs['pk']
@@ -139,10 +138,8 @@ class CreateQuestionsView(FormView):
 
         return super().dispatch(request, *args, **kwargs)
 
-
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
-
         # Check if there's a question ID in the URL, indicating editing
         question_id = self.kwargs.get('question_id')
 
@@ -162,14 +159,11 @@ class CreateQuestionsView(FormView):
 
         return data
 
-
     def form_valid(self, form):
         context = self.get_context_data()
         formset = context['formset']
-
         # Check if there's a question ID in the URL, indicating editing
         question_id = self.kwargs.get('question_id')
-
         total_questions = Question.objects.filter(quiz=self.quiz).count()
         cur_quiz_q_num = self.quiz.number_of_questions
 
@@ -191,7 +185,6 @@ class CreateQuestionsView(FormView):
         formset.save()
 
         return super().form_valid(form)
-
 
     def get_success_url(self):
         return reverse_lazy('tutor_account', kwargs={'full_name': self.request.user.full_name})

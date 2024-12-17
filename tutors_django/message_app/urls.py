@@ -1,5 +1,4 @@
 from django.urls import path
-
 from message_app.views import DialogsView, MessagesView, CreateDialogView
 
 app_name = 'message_app'

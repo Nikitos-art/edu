@@ -1,3 +1,10 @@
+
+# Adding SSH identity for remote access
+
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/your_private_key
+ssh-add -l
+
 # django_edu
 _____________________________________________________
 daphne -b 127.0.0.1 -p 8001 tutors_django.asgi:application

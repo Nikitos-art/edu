@@ -10,13 +10,13 @@ from django.views import View
 from message_app.forms import MessageForm
 from message_app.models import Chat
 from django.http import HttpResponse
-############################## inquiry message #########################
+# inquiry message
 from django_ratelimit.decorators import ratelimit
 
 
-@ratelimit(key='user_or_ip', rate='3/m')
-@ratelimit(key='user_or_ip', rate='5/10m')
-@ratelimit(key='user_or_ip', rate='6/d')
+# @ratelimit(key='user_or_ip', rate='3/m')
+# @ratelimit(key='user_or_ip', rate='5/10m')
+# @ratelimit(key='user_or_ip', rate='6/d')
 def inquiry_form(request):
     if request.method == 'POST':
         form = InquiryForm(request.POST)
@@ -32,7 +32,7 @@ def inquiry_form(request):
                            f'Email: {email}\n' \
                            f'Message: {message}'
             from_email = settings.DEFAULT_FROM_EMAIL
-            recipient_list = ['lighthouse.tutors.inquiry@gmail.com']  # Replace with your email address
+            recipient_list = ['lighthouse.tutors.inquiry@gmail.com']
             send_mail(subject, message_body, from_email, recipient_list)
             print('Message sent')
             return render(request, 'inq_sent.html')

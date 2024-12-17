@@ -1,7 +1,8 @@
 from django.urls import path
-from courses_app.views import (CoursesView, PythonView, PyOneView, PyTwoView, PyBankAccView,
-                               PyDataStructureListView, PyDataStructureDictView, PyAlgoAxisView, 
-                               PyLogAnalyzerView)
+from courses_app.views import (
+    CoursesView, PythonView, PyOneView, PyTwoView, PyBankAccView,
+    PyDataStructureListView, PyDataStructureDictView, PyAlgoAxisView, PyLogAnalyzerView
+)
 
 
 app_name = 'courses_app'

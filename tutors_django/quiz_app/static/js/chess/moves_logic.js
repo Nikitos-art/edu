@@ -48,12 +48,12 @@ function isPathBlocked(from, to, curColor, simulatedBoardArray = null) {
                 : pieceOnSquare.src.split('/').pop().split('.')[0].split('_')[1];
 
             if (step === maxSteps && pieceColor !== curColor) {
-                return false; // Target square is occupied by an opponent's piece
+                return false; 
             }
-            return true; // Path is blocked by another piece
+            return true; 
         }
     }
-    return false; // No pieces are blocking the path
+    return false; 
 }
 
 

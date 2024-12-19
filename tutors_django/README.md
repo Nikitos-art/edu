@@ -1,3 +1,6 @@
+# Daphne onserver 
+
+sudo journalctl -u daphne -n 50
 
 # Adding SSH identity for remote access
 

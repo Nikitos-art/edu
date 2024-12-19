@@ -71,7 +71,16 @@ function main() {
         const roomName = prompt("Enter room name (or share with a friend):");
         if (roomName) {
 
-            socket = new WebSocket(`ws://${window.location.hostname}:8001/ws/chess/${roomName}/`);
+            const protocol = window.location.protocol === "https:" ? "wss" : "ws";
+            // socket = new WebSocket(`wss://${window.location.hostname}/ws/chess/${roomName}/`);
+            if (protocol === 'ws') {
+                socket = new WebSocket(`${protocol}://${window.location.hostname}:8001/ws/chess/${roomName}/`);
+            } else if (protocol === 'wss') {
+                socket = new WebSocket(`${protocol}://${window.location.hostname}/ws/chess/${roomName}/`);
+            } else {
+                return; 
+            }
+
             socket.onopen = () => {
                 console.log("Connected to the WebSocket room!");
             };
@@ -120,7 +129,7 @@ function main() {
 
 
 function updatePlayerColor(color) {
-    document.getElementById('playerColor').innerText = `You are playing ${color}`;
+    document.getElementById('playerColor').innerText = `You are playing: ${color}`;
 }
 
 function coordinateToDivConverter(coord) {
@@ -177,6 +186,8 @@ function updateLastMove(from, to, piece, color, isCapture=false) {
     lastMoveMade.piece = piece;
     lastMoveMade.color = color;
     lastMoveMade.isCapture = isCapture;
+    const lastValueHTML = document.getElementById('lastMoveValue');
+    lastValueHTML.textContent = `from:${from} to:${to}`;
     //console.log(lastMoveMade);
     if (gameMode === 'multiplayer') {
         if (socket && socket.readyState === WebSocket.OPEN) {
@@ -208,7 +219,7 @@ function updatePlayerTurn(plColor=PLAYER_ONE) {
     // console.log(currentPlayer);
     // console.log("*********");
     const playerTurnDisplay = document.getElementById('playerTurn');
-    playerTurnDisplay.textContent = `Current Player: ${plColor.charAt(0).toUpperCase() + plColor.slice(1)}`;
+    playerTurnDisplay.textContent = `Current turn: ${plColor}`;
     selectedPiece = null;
     selectedSquare = null;
 }
@@ -547,7 +558,6 @@ function handleAIMove(move) {
 
 
 function handlePlayerMove(square) {
-    console.log(`called handlePlayerMove`);
     const pieceImg = square.querySelector('.piece');
     let pieceColor = '';
     
@@ -561,8 +571,7 @@ function handlePlayerMove(square) {
     }
 
     if (!selectedPiece) {
-        let triplCheck = document.getElementById('playerColor').innerText.slice(-5);
-
+        let triplCheck = document.getElementById('playerColor').innerText.slice(-5); 
         currentPlayer = getCurPlayer();
 
         if (
@@ -589,7 +598,7 @@ function handlePlayerMove(square) {
 /** Helper Functions **/
 
 function getCurPlayer() {
-    const playerTurnDisplay = document.getElementById('playerTurn').textContent.slice(-5).toLowerCase();
+    const playerTurnDisplay = document.getElementById('playerTurn').textContent.slice(-5);
     return playerTurnDisplay;
 }
 
@@ -645,12 +654,6 @@ function makeMove(square, pieceImg = null, isCapture = false) {
     const fromCoordinate = selectedSquare.getAttribute('data-coordinate');
     const toCoordinate = square.getAttribute('data-coordinate');
     const toRow = parseInt(toCoordinate.charAt(1));
-
-    // if (castleMoveFlag) {
-    //     console.log(`making castling move`);
-    //     performCastling(fromCoordinate, toCoordinate, curPlayerPieceColor, kingFirstMove, rookFirstMove);
-    //     castleMoveFlag = false;
-    // }
 
     if (selectedPieceType.includes('pawn')) {
         checkPawnPromotion(square, toRow, curPlayerPieceColor);

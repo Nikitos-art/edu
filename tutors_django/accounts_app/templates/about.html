@@ -29,19 +29,20 @@
                 <a href="{% url 'resume' %}">My resume</a>
             </div>
             <p class="key-text">
-                Hi! I'm Nikita, the creator of this website. Originally intended as a purely portfolio site, 
-                it evolved into an intriguing journey, leading me to transform it into a fully functional 
-                web platform for students and tutors. Initially, I planned for a blog and quiz website, 
-                but as development progressed, I expanded it to include a registration and login system,
-                a calendar app, <a href="{% url 'games:games' %}">JavaScript</a> crossword puzzle generator, chess and more.
+                Hi! I'm Nikita, the creator of this website, which is my portfolio project as well as a 
+                fully functioning web platform for students and tutors. It started with some basic features of Blog, 
+                Quiz, and Registration, Login. As development progressed, I added a Scheduler, and a Chat, built
+                with Django Signals. Later I added some JavaScript games: Crossword Puzzle Generator, Chess with
+                single and multiplayer mode and a Chinese characters learning game. You can check it all out 
+                in the <a href="{% url 'games:games' %}">Games</a> section.
             </p>
             <p class="key-text">
-                The platform now has a comprehensive dashboard with basic functionalities like adding, 
-                editing, and removing blogs and quizzes. Additionally, I introduced a scheduling feature, 
-                allowing teachers to add classes, along with a simple chat application for communication
-                between tutors and students. The Python section has some 
-                <a href="{% url 'courses_app:python' %}">Python</a> tasks and an interactive Python
-                console to run the code. 
+                But the most adventerous was setting up the backend. There's a lot of things going on there. Linux
+                and Nginx with Gunicorn handle the backbone. I've also set up a a Linux firewall to keep unwanted
+                traffic from hitting my server. Daily there's over 50+ unwanted hits. And this is with Cloudflare
+                installed to handle a big chunk of the traffic for protection. And finally I decided to share some
+                Python mini-programs, which could be found in <a href="{% url 'courses_app:python' %}">Python</a> 
+                section. 
             </p>
         </div>
     </div>
@@ -54,19 +55,21 @@
         <img src="{% static 'img/blog.png' %}" alt="Blog Image" id="blog-img" class="pre-img">
         <p>Blogging. Users who are tutors can create, edit and delete their blog posts. Blog post creatiion is
             done on a rich text editor. Users can create a draft and finish it up later before final 
-            posting.
+            posting. (unfortunately you will need to register and login to create your own blog posts, but 
+            you can read mine <a href="{% url 'blog:blog' %}">here</a> ).
         </p>
     </div>
     <div class="pre-item-block">
         <img src="{% static 'img/quiz.png' %}" alt="Quiz Image" id="quiz-img" class="pre-img">
         <p>Quizzes. A tutor can create quizzes. Created quizzes can be edited by their authors, questions can
             be added, edited or deleted. Students are later assigned a quiz of quiz can go and be open for everyone.
+            Quiz was built ina similar fashion as blog. 
         </p>
     </div>
     <div class="pre-item-block">
         <img src="{% static 'img/chat.png' %}" alt="Chat Image" id="chat-img" class="pre-img">
         <p>Chat. Chat with other tutors and students. Chat was implemented using Django signals. Tutors and studdents
-            can chat and appoint their next class.
+            can chat and appoint their next class. You will need to register and log in to see this feature for yourself.
         </p>
     </div>
     <div class="pre-item-block">
@@ -75,10 +78,31 @@
             class in/from the calendar.
         </p>
     </div>
-        <div class="pre-item-block">
+    <div class="pre-item-block">
         <img src="{% static 'img/chess_demo.png' %}" alt="Chess Image" id="chess-img" class="pre-img">
         <p>
-            A chess game with a moderately intelligent AI player and a few other games.
+            A chess game with a moderately intelligent AI player and a multiplayer mode built with Django Channels,
+            so you can invite your friends to play!
+        </p>
+    </div>
+    <div class="pre-item-block">
+        <img src="{% static 'img/crossword_demo.png' %}" alt="Crossword Image" id="crossword-img" class="pre-img">
+        <p>
+            Crossword puzzle generator. This one was hard to built and its far from perfect. Current algorithm
+            only allows one "intersection" between words. 
+        </p>
+    </div>
+    <div class="pre-item-block">
+        <img src="{% static 'img/hanzi_demo.png' %}" alt="Hanzi Image" id="hanzi-img" class="pre-img">
+        <p>
+            I have learned and attempted to learn several foreign langauges. So building something that 
+            helps to learn Chinese Mandarin was a must :-) 
+        </p>
+    </div>
+    <div class="pre-item-block">
+        <img src="{% static 'img/python_demo.png' %}" alt="Python Image" id="python-img" class="pre-img">
+        <p>
+            Some Python tasks suitable for beginners and beginner-mid level Pythonistas.  
         </p>
     </div>
 </div>

@@ -22,6 +22,22 @@
 
 <div class="chess-wrapper" id="chessBoardWrapper" style="display: none;">
 
+    <div class="info-board-wrapper">
+        <div class="info-board">
+            <div id="playerColor"></div>
+            <!-- <div>-----------------------------------</div> -->
+            <div id="playerTurn">Current turn: white</div>
+        </div>
+        <div class="lastMoveWrapper">
+            <div id="lastMove">
+                Last move
+            </div>
+            <div id="lastMoveValue">
+                from __ to __
+            </div>
+        </div>
+    </div>
+
     <div class="coordinates-hor">
         <div class="row-coord">a</div>
         <div class="row-coord">b</div>
@@ -45,10 +61,9 @@
         </div>
         <div id="chessboard"></div>
     </div>
-    <div id="playerTurn">Current Player: White</div>
-    <div id="playerColor"></div>
+
 </div>
 {% block script %}
-    <script src="{% static 'js/chess/game_logic.js' %}" defer type="module" ></script>
+    <script src="{% static 'js/chess/game_logic.js' %}" defer type="module" crossorigin="anonymous"></script>
 {% endblock %}
 {% endblock %}

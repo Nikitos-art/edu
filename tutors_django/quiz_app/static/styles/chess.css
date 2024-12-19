@@ -29,6 +29,18 @@
     box-sizing: border-box; 
 }
 
+.info-board-wrapper {
+    display: flex;
+    position: relative;
+}
+
+.info-board, .lastMoveWrapper {
+    border: 1px solid black;
+}
+
+#playerColor, #playerTurn, #lastMove, #lastMoveValue {
+    padding: 5px;
+}
 
 .chess-container {
     display: flex; 

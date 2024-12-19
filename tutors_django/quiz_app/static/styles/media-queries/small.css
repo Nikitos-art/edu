@@ -82,6 +82,7 @@
 
   #product-img-esl {
     right: -3%;
+    margin-top: 3em;
   }
 
   #product-img-chinese {
@@ -104,7 +105,7 @@
 
   .button-why {
     height: 20px;
-    width: 60px;
+    width: 9em;
     padding: 0.1rem 0.4rem;
   }
 

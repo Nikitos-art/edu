@@ -9,7 +9,8 @@
     position: relative;
     background-size: var(--snowsize, auto); 
     animation: snowing var(--snowfall, 20s) linear infinite;
-    padding-bottom: 20px; 
+    padding-bottom: 20px;
+    overflow: hidden;
 }
 
 .keys-adv-title {

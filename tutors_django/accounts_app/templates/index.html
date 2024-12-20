@@ -22,14 +22,17 @@
 {% block site_content %}
 <section class="hero-section">
     <h1 class="cloud-text cloud-title">Welcome to Lighthouse-Tutors!</h1>
+    <img src="{% static 'img/penguin.svg' %}" alt="penguin-img" id="penguin-image" loading="lazy">
 </section>
 
 
 <section class="why-us-block">
     <div class="why-us-text">
-      <h2 id="why-us-title">
-        Why choose us?
-      </h2>
+      <div style="display: flex;">
+        <h2 id="why-us-title">
+          Why choose us?
+        </h2>
+      </div>
       <p id="why-us-p">
         Our tutors have extensive online tutoring experience, having worked with students worldwide across various subjects. From beginners to advanced learners, we provide tailored lessons in English, Chinese, and Intro to Coding with Python. With over 10 years of experience, we use the latest methods and teaching approaches to help students achieve their goals. Whether you're learning a new language or mastering coding, our students succeed with us.
       </p>      
@@ -41,8 +44,7 @@
 
 <section class="what-we-offer-block">
   <h3 id="what-we-offer-proverb">
-    "To learn a language is to have one more window from which to look at the world."
-    -Chinese Proverb</h3>
+    "To learn a language is to have one more window from which to look at the world."</h3>
   <h2 id="h2-title-2">
     What we offer:
   </h2>

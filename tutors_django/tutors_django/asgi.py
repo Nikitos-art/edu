@@ -14,9 +14,14 @@ from channels.routing import ProtocolTypeRouter, URLRouter
 from channels.auth import AuthMiddlewareStack
 from games.consumers import ChessConsumer
 
+from pathlib import Path
+from dotenv import load_dotenv
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'tutors_django.settings')
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
+load_dotenv(BASE_DIR / '.env')
 
+
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', os.environ['DJANGO_SETTINGS_MODULE'])
 
 application = ProtocolTypeRouter({
     "http": get_asgi_application(),

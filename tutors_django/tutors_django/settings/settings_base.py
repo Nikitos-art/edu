@@ -5,10 +5,10 @@ from dotenv import load_dotenv
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 load_dotenv(BASE_DIR.parent / '.env')
 
-# SECURITY WARNING: keep the secret key used in production secret!
+ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', '').split(',')
+
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
-# Application definition
 INSTALLED_APPS = [
     "admin_interface",
     "colorfield",
@@ -77,7 +77,16 @@ EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_APP_PASSWORD')
 DEFAULT_FROM_EMAIL = os.environ.get('EMAIL')
 
 # Database configuration (to be overridden in specific environments)
-DATABASES = {}
+DATABASES = {
+     'default': {
+         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+         'NAME': os.environ.get('PSQL_DB_NAME'),
+         'USER': os.environ.get('PSQL_USER'),
+         'PASSWORD': os.environ.get('PSQL_PSWD'),
+         'HOST': 'localhost',
+         'PORT': '',
+     }
+}
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [

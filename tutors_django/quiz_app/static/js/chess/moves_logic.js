@@ -23,8 +23,6 @@ function isPathBlocked(from, to, curColor, simulatedBoardArray = null) {
         const currentRow = fromIndices.row + rowStep * step;
         const currentCol = fromIndices.col + colStep * step;
 
-        //console.log(`currentRowcurrentCol: ${currentRow} | ${currentCol}`);
-
         // Ensure currentRow and currentCol stay within 0-7 range
         if (currentRow < 0 || currentRow > 7 || currentCol < 0 || currentCol > 7) {
             return true; // Path is blocked if out of range
@@ -56,57 +54,63 @@ function isPathBlocked(from, to, curColor, simulatedBoardArray = null) {
     return false; 
 }
 
-
-export function isPawnMove(from, to, color, isCapture = false, lastMove = null, toSquare) {
-
+export function isPawnMove(from, to, color, isCapture = false, movesHistory) {
     const fromRow = parseInt(from.charAt(1));
     const toRow = parseInt(to.charAt(1));
     const fromCol = from.charAt(0);
     const toCol = to.charAt(0);
-    const direction = color === 'white' ? 1 : -1; 
+    const direction = color === 'white' ? 1 : -1;
     const isFirstMove = (color === 'white' && fromRow === 2) || (color === 'black' && fromRow === 7);
 
-    if (lastMove && lastMove.piece === 'pawn' && lastMove.color !== color) {
-        const lastMoveFromRow = parseInt(lastMove.from.charAt(1));
-        const lastMoveToRow = parseInt(lastMove.to.charAt(1));
-        const isTwoSquareAdvance = Math.abs(lastMoveToRow - lastMoveFromRow) === 2;
-        const rowDif = toRow - fromRow;
+    // Check for en passant
+    const enPassantPossible = movesHistory.some((move) => {
+        const prevFromRow = parseInt(move.from.charAt(1));
+        const prevToRow = parseInt(move.to.charAt(1));
+        const isTwoSquareAdvance = move.piece === 'pawn' && Math.abs(prevToRow - prevFromRow) === 2;
 
-        if (isTwoSquareAdvance && lastMove.to === `${toCol}${fromRow}` && rowDif === direction) {
-            console.log(`En passant implemented successfully!`);
-            
-            // Determine the row and column of the captured pawn's square
-            const enPassantRow = fromRow; // Row of the captured pawn (same as `fromRow`)
-            const enPassantCol = String.fromCharCode(toCol.charCodeAt(0)); // Column of the captured pawn
-        
-            const enPassantSquare = document.querySelector(`[data-coordinate="${enPassantCol}${enPassantRow}"]`);
-            console.log(`enPassantSquare: ${enPassantCol}${enPassantRow}`);
-            
-            if (enPassantSquare) {
-                const pieceImg = enPassantSquare.querySelector('.piece');
-                if (pieceImg) {
-                    enPassantSquare.removeChild(pieceImg); // Remove the captured pawn
-                    console.log(`Captured pawn removed from: ${enPassantCol}${enPassantRow}`);
-                }
+        return (
+            move.to === `${toCol}${fromRow}` &&
+            move.color !== color &&
+            isTwoSquareAdvance
+        );
+    });
+
+    if (enPassantPossible) {
+        const enPassantRow = fromRow;
+        const enPassantCol = String.fromCharCode(toCol.charCodeAt(0));
+
+        const enPassantSquare = document.querySelector(`[data-coordinate="${enPassantCol}${enPassantRow}"]`);
+        if (enPassantSquare) {
+            const pieceImg = enPassantSquare.querySelector('.piece');
+            if (pieceImg) {
+                enPassantSquare.removeChild(pieceImg);
             }
-            return true; // En passant capture is successful
+            return [enPassantCol, enPassantRow];
         }
-        
     }
-
+    //console.log(`regular pawn move`);
+    // Regular pawn move logic
     if (!isCapture) {
         if (toCol === fromCol) {
             if (isFirstMove && toRow === fromRow + 2 * direction) {
                 return !isPathBlocked(from, to);
             }
-            return toRow === fromRow + direction;
+            if (toRow === fromRow + direction) {
+                return true;
+            }
         }
     } else {
         const isDiagonalCapture = toRow === fromRow + direction && Math.abs(toCol.charCodeAt(0) - fromCol.charCodeAt(0)) === 1;
-        return isDiagonalCapture;
+        if (isDiagonalCapture) {
+            return true;
+        }
     }
+
     return false;
 }
+
+
+
 
 
 export function isRookMove(fromSquare, toSquare, color, simulatedBoardArray=null) {
@@ -128,9 +132,6 @@ export function isRookMove(fromSquare, toSquare, color, simulatedBoardArray=null
     const isRookMoveValid = fromRow === toRow || fromCol === toCol;
 
     const pathBlocked = isPathBlocked(fromCoordinate, toCoordinate, color, simulatedBoardArray);
-    // console.log(`+++ checking rooks move : ${color} +++ \n
-    //     +++ ${fromSquare} ${toSquare} +++\n 
-    //     +++ isRookMoveValid ${isRookMoveValid} | pathBlocked ${pathBlocked} +++`)
     return isRookMoveValid && !pathBlocked;
 }
 

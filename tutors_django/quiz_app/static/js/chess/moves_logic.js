@@ -63,32 +63,35 @@ export function isPawnMove(from, to, color, isCapture = false, movesHistory) {
     const isFirstMove = (color === 'white' && fromRow === 2) || (color === 'black' && fromRow === 7);
 
     // Check for en passant
-    const enPassantPossible = movesHistory.some((move) => {
-        const prevFromRow = parseInt(move.from.charAt(1));
-        const prevToRow = parseInt(move.to.charAt(1));
-        const isTwoSquareAdvance = move.piece === 'pawn' && Math.abs(prevToRow - prevFromRow) === 2;
+    if (movesHistory) {
+        const enPassantPossible = movesHistory.some((move) => {
+            const prevFromRow = parseInt(move.from.charAt(1));
+            const prevToRow = parseInt(move.to.charAt(1));
+            const isTwoSquareAdvance = move.piece === 'pawn' && Math.abs(prevToRow - prevFromRow) === 2;
+    
+            return (
+                move.to === `${toCol}${fromRow}` &&
+                move.color !== color &&
+                isTwoSquareAdvance
+            );
+        });
 
-        return (
-            move.to === `${toCol}${fromRow}` &&
-            move.color !== color &&
-            isTwoSquareAdvance
-        );
-    });
-
-    if (enPassantPossible) {
-        const enPassantRow = fromRow;
-        const enPassantCol = String.fromCharCode(toCol.charCodeAt(0));
-
-        const enPassantSquare = document.querySelector(`[data-coordinate="${enPassantCol}${enPassantRow}"]`);
-        if (enPassantSquare) {
-            const pieceImg = enPassantSquare.querySelector('.piece');
-            if (pieceImg) {
-                enPassantSquare.removeChild(pieceImg);
+        if (enPassantPossible) {
+            const enPassantRow = fromRow;
+            const enPassantCol = String.fromCharCode(toCol.charCodeAt(0));
+    
+            const enPassantSquare = document.querySelector(`[data-coordinate="${enPassantCol}${enPassantRow}"]`);
+            if (enPassantSquare) {
+                const pieceImg = enPassantSquare.querySelector('.piece');
+                if (pieceImg) {
+                    enPassantSquare.removeChild(pieceImg);
+                }
+                return [enPassantCol, enPassantRow];
             }
-            return [enPassantCol, enPassantRow];
         }
+
     }
-    //console.log(`regular pawn move`);
+
     // Regular pawn move logic
     if (!isCapture) {
         if (toCol === fromCol) {
@@ -108,9 +111,6 @@ export function isPawnMove(from, to, color, isCapture = false, movesHistory) {
 
     return false;
 }
-
-
-
 
 
 export function isRookMove(fromSquare, toSquare, color, simulatedBoardArray=null) {

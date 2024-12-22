@@ -31,8 +31,10 @@ let lastMoveMade = {
     to: "",
     piece: "",
     color: "",
-    isCapture: false
+    isCapture: false,
 }
+
+let movesHistory = []
 
 let socket = null;
 let aiActive = false;
@@ -41,6 +43,8 @@ let castlingFlag = {
     white: false,
     black: false
 };
+
+let enPassant = false;
 //////////////////////////////////////////// 
 
 
@@ -72,7 +76,6 @@ function main() {
         if (roomName) {
 
             const protocol = window.location.protocol === "https:" ? "wss" : "ws";
-            // socket = new WebSocket(`wss://${window.location.hostname}/ws/chess/${roomName}/`);
             if (protocol === 'ws') {
                 socket = new WebSocket(`${protocol}://${window.location.hostname}:8001/ws/chess/${roomName}/`);
             } else if (protocol === 'wss') {
@@ -112,9 +115,19 @@ function main() {
                         selectPiece(selectedSquare, pieceImg);
                         makeMove(squareDivObject, null, move.isCapture);
                         if (move.castleMoveFlag) {
-                            console.log(`making castling move`);
                             performCastling(move.from, move.to, move.color, kingFirstMove, rookFirstMove);
                             castlingFlag[move.color] = true;
+                        } else if (move.enPassantMove) {
+                            console.log(`move.enPassantMove = ${move.enPassantMove}`);
+                            let enPassantRow = move.enPassantMove[0];
+                            let enPassantCol = move.enPassantMove[1];
+                            const enPassantSquare = document.querySelector(`[data-coordinate="${enPassantRow}${enPassantCol}"]`);
+                            const imgToRemove = enPassantSquare.querySelector('.piece');
+                            if (imgToRemove) {
+                                enPassantSquare.removeChild(imgToRemove);
+                            }
+                            //console.log(`should have removed: ${enPassantSquare}\n --- ${imgToRemove}`);
+                            enPassant = false;
                         }
                     }
                 }
@@ -188,7 +201,7 @@ function updateLastMove(from, to, piece, color, isCapture=false) {
     lastMoveMade.isCapture = isCapture;
     const lastValueHTML = document.getElementById('lastMoveValue');
     lastValueHTML.textContent = `from:${from} to:${to}`;
-    //console.log(lastMoveMade);
+    movesHistory.push(lastMoveMade);
     if (gameMode === 'multiplayer') {
         if (socket && socket.readyState === WebSocket.OPEN) {
             const nextPlayer = color === 'white' ? 'black' : 'white';
@@ -203,6 +216,7 @@ function updateLastMove(from, to, piece, color, isCapture=false) {
                 selectedPiecetoPass: curSelectedPiece,
                 isCapture: isCapture,
                 castleMoveFlag: castlingFlag[color],
+                enPassantMove: enPassant
             }));
             
         } else {
@@ -213,11 +227,7 @@ function updateLastMove(from, to, piece, color, isCapture=false) {
 
 
 function updatePlayerTurn(plColor=PLAYER_ONE) {
-    // console.log("*********");
-    // console.log(currentPlayer);
     currentPlayer = plColor;
-    // console.log(currentPlayer);
-    // console.log("*********");
     const playerTurnDisplay = document.getElementById('playerTurn');
     playerTurnDisplay.textContent = `Current turn: ${plColor}`;
     selectedPiece = null;
@@ -746,13 +756,15 @@ function isValidMove(piece, fromSquare, toSquare, isCapture, userOrAI, pieceColo
 
     switch (pieceType) {
         case 'pawn_white':
-            if (isPawnMove(fromCoordinate, toCoordinate, PLAYER_ONE, isCapture, lastMoveMade, toSquare)) {
-                return true;
-            }
-            break;
         case 'pawn_black':
-            if (isPawnMove(fromCoordinate, toCoordinate, PLAYER_TWO, isCapture, lastMoveMade, toSquare)) {
+            const pawnMoveResult = isPawnMove(fromCoordinate, toCoordinate, currentColor, isCapture, movesHistory)
+            if (pawnMoveResult.length > 1) {
+                enPassant = pawnMoveResult;
                 return true;
+            } else if (pawnMoveResult.length === 1 || pawnMoveResult) {
+                return true;
+            } else {
+                return false;
             }
             break;
         case 'rook_white':
@@ -813,7 +825,6 @@ function isValidMove(piece, fromSquare, toSquare, isCapture, userOrAI, pieceColo
 function performCastling(fromCoordinate, toCoordinate, currentColor, kingFirstMove, rookFirstMove) {
 
     if (castlingFlag[currentColor]) {
-        console.log(`castlingFlag[currentColor] is ${castlingFlag[currentColor]}`);
         return false
     }
 

@@ -179,16 +179,85 @@ function startGame(mode) {
 
 
 function handleAITurn() {
-
     if (aiActive) return; 
     aiActive = true;
 
-    setTimeout(() => {
-        const aiMove = calculateBestMoveAI();
-        handleAIMove(aiMove);
-        aiActive = false; 
-    }, 2000); 
+    // Generate the FEN string from the current board state
+    const fen = generateFenFromBoard();
+
+    // Call the Django backend to get the AI move
+    fetch(`/games/ai_move/?fen=${fen}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.move) {
+                handleAIMove(data.move); // Use the move provided by the AI
+            } else {
+                console.error("Error from AI backend:", data.error);
+            }
+        })
+        .catch(error => console.error("Error fetching AI move:", error))
+        .finally(() => {
+            aiActive = false; // Ensure AI status is reset
+        });
 }
+
+function generateFenFromBoard() {
+    const boardArray = createBoardArray();
+    let fen = "";
+
+    for (let row = 0; row < 8; row++) {
+        let emptySquares = 0;
+
+        for (let col = 0; col < 8; col++) {
+            const square = boardArray[row][col];
+
+            if (square) {
+                if (emptySquares > 0) {
+                    fen += emptySquares;
+                    emptySquares = 0;
+                }
+
+                // Map pieceType and pieceColor to FEN notation
+                const piece = square.pieceType[0]; // e.g., 'p' for pawn
+                fen += square.pieceColor === 'white' ? piece.toUpperCase() : piece.toLowerCase();
+            } else {
+                emptySquares++;
+            }
+        }
+
+        if (emptySquares > 0) {
+            fen += emptySquares;
+        }
+
+        if (row < 7) {
+            fen += '/';
+        }
+    }
+
+    // Add other FEN fields
+    const currentTurn = currentPlayer === PLAYER_ONE ? 'w' : 'b';
+    const castlingRights = 'KQkq'; // Placeholder, adjust to actual rights
+    const enPassantTarget = '-'; // Update if applicable
+    const halfMoveClock = '0'; // Adjust if tracking
+    const fullMoveNumber = '1'; // Update dynamically if tracking
+
+    fen += ` ${currentTurn} ${castlingRights} ${enPassantTarget} ${halfMoveClock} ${fullMoveNumber}`;
+
+    return fen;
+}
+
+
+// function handleAITurn() {
+
+//     if (aiActive) return; 
+//     aiActive = true;
+
+//     setTimeout(() => {
+//         const aiMove = calculateBestMoveAI();
+//         handleAIMove(aiMove);
+//         aiActive = false; 
+//     }, 2000); 
+// }
 
 main();
 
@@ -461,70 +530,68 @@ function unSimulateMove(move, boardArray) {
 }
 
 
-const previousMoves = [];  
+const previousAIMoves = [];  
 
-function calculateBestMoveAI() {
-    const currentBoard = createBoardArray();
-    const allMoves = generateAllValidMovesAI();
-    let bestMove = null; 
-    let bestScore = -Infinity; 
+// function calculateBestMoveAI() {
+//     const currentBoard = createBoardArray();
+//     const allMoves = generateAllValidMovesAI();
+//     let bestMove = null; 
+//     let bestScore = -Infinity; 
 
-    if (!allMoves || allMoves.length === 0) {
-        console.error("No moves generated.");
-        return null;
-    }
+//     if (!allMoves || allMoves.length === 0) {
+//         console.error("No moves generated.");
+//         return null;
+//     }
 
-    for (let i = 0; i < allMoves.length; i++) {
-        const move = allMoves[i];
-        const simulatedArray = simulateMove(move, currentBoard);
+//     for (let i = 0; i < allMoves.length; i++) {
+//         const move = allMoves[i];
+//         const simulatedArray = simulateMove(move, currentBoard);
         
-        if (isKingInCheck(simulatedArray, PLAYER_TWO)) {
-            unSimulateMove(move, simulatedArray);
-            continue;
-        } else {
-            let moveScore = evaluateBoardAI(simulatedArray); 
-            const isCapturingMove = move.capturedPiece ? true : false; 
+//         if (isKingInCheck(simulatedArray, PLAYER_TWO)) {
+//             unSimulateMove(move, simulatedArray);
+//             continue;
+//         } else {
+//             let moveScore = evaluateBoardAI(simulatedArray); 
+//             const isCapturingMove = move.capturedPiece ? true : false; 
 
-            if (isCapturingMove) {
-                moveScore += 20;
-            } else {
-                moveScore += Math.random() * 0.5;
-            }
+//             if (isCapturingMove) {
+//                 moveScore += 20;
+//             } else {
+//                 moveScore += Math.random() * 0.5;
+//             }
 
-            for (let j = 0; j < previousMoves.length; j++) {
-                const prevMove = previousMoves[j]; // Use 'const' because this isn't reassigned
-                if (prevMove.from === move.from && prevMove.to === move.to) {
-                    moveScore -= 5;
-                }
-            }
+//             for (let j = 0; j < previousAIMoves.length; j++) {
+//                 const prevMove = previousAIMoves[j]; // Use 'const' because this isn't reassigned
+//                 if (prevMove.from === move.from && prevMove.to === move.to) {
+//                     moveScore -= 5;
+//                 }
+//             }
+//             //console.log("Before undoing move", JSON.stringify(simulatedArray));
+//             unSimulateMove(move, simulatedArray);
+//             if (moveScore > bestScore) {
+//                 bestScore = moveScore;
+//                 bestMove = move;
+//             }
+//         }
+//     }
 
-            //console.log("Before undoing move", JSON.stringify(simulatedArray));
-            unSimulateMove(move, simulatedArray);
-
-            if (moveScore > bestScore) {
-                bestScore = moveScore;
-                bestMove = move;
-            }
-        }
-    }
-
-    if (bestMove) {
-        previousMoves.push(bestMove);
-        if (previousMoves.length > 5) {
-            previousMoves.shift(); 
-        }
-    } else {
-        const curBoard = createBoardArray();
-        if (isKingInCheck(curBoard, PLAYER_TWO)) {
-            alert(`Checkmate! You win!`);
-        } else {
-            alert(`Stalemate. It's a draw.`);
-        }
+//     if (bestMove) {
+//         previousAIMoves.push(bestMove);
+//         if (previousAIMoves.length > 5) {
+//             previousAIMoves.shift(); 
+//         }
+//     } else {
+//         const curBoard = createBoardArray();
+//         if (isKingInCheck(curBoard, PLAYER_TWO)) {
+//             alert(`Checkmate! You win!`);
+//         } else {
+//             alert(`Stalemate. It's a draw.`);
+//         }
         
-    }
+//     }
 
-    return bestMove;
-}
+//     return bestMove;
+// }
 
 function handleAIMove(move) {
     //console.log(`handleAIMove: ${move}`);

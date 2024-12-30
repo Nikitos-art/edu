@@ -26,6 +26,13 @@ def inquiry_form(request):
             email = form.cleaned_data['email']
             message = form.cleaned_data['message']
 
+            # List of words to check for
+            forbidden_words = ['win', 'won', 'winning', 'winnings', 'prize', 'bonus', '$', 'ø']
+
+            # Check if any forbidden word is in the message
+            if any(word in message.lower() for word in forbidden_words):
+                return HttpResponse("Bugger off.", status=404)
+
             # Send an email
             subject = 'New Inquiry'
             message_body = f'Name: {name}\n' \

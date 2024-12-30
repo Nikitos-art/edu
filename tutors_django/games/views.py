@@ -1,5 +1,11 @@
 # from django.shortcuts import render
 from django.views.generic import TemplateView
+from django.http import JsonResponse
+import chess
+import torch
+import sys
+import os
+from .chess.chess_model_code import Model
 
 
 class GamesListView(TemplateView):
@@ -23,3 +29,35 @@ class HanziView(TemplateView):
         level = self.request.GET.get('level', '0')
         context['level'] = int(level) if level.isdigit() else 0
         return context
+
+
+model = None
+
+def load_model():
+    """Load the trained chess model if not already loaded."""
+    global model
+    if model is None:
+        model = Model()
+        #model.load_state_dict(torch.load('/home/nikitos/Projects/edu/tutors_django/games/chess/chess_model.pt', map_location='cpu'))
+        model = torch.load('/home/nikitos/Projects/edu/tutors_django/games/chess/chess_model.pt', map_location='cpu')
+        model.eval()
+
+def get_ai_move(fen):
+    """Get the AI's move based on the current board state."""
+    load_model()
+    board = chess.Board(fen)
+    move = model.predict(board)
+    if move:
+        return move.uci()
+    return None
+
+def ai_move(request):
+    """Handle the request to get the AI's move."""
+    fen = request.GET.get('fen')
+    if not fen:
+        return JsonResponse({'error': 'FEN string is required.'}, status=400)
+    
+    move = get_ai_move(fen)
+    if move:
+        return JsonResponse({'move': move})
+    return JsonResponse({'error': 'No valid moves found.'}, status=400)

@@ -4,9 +4,11 @@ sudo journalctl -u daphne -n 50
 
 # Adding SSH identity for remote access
 
+cd ~/.ssh
 eval "$(ssh-agent -s)"
-ssh-add ~/.ssh/your_private_key
-ssh-add -l
+ssh-add ~/.ssh/id_ed25519_ocean
+ssh -p 31415 nikitonik@104.248.12.151
+
 
 # django_edu
 _____________________________________________________

@@ -3,7 +3,7 @@ import { createChessBoard } from "./chess_board.js";
 import { getPawnMoves, getKnightMoves, getRookMoves, getBishopMoves, getKingMoves, getQueenMoves } from "./ai_moves.js";
 
 // TO DO :
-// stalemate in Multiplayer mode   
+// numpy gym-chess  
 
 
 let selectedPiece = null;
@@ -161,7 +161,7 @@ function startGame(mode) {
             if (currentPlayer === PLAYER_TWO && !aiActive) {
                 handleAITurn();
             }
-        }, 500); 
+        }, 1500); 
     }
 
     squares.forEach(square => {

@@ -90,6 +90,10 @@ channels = "^4.2.0"
 daphne = "^4.1.2"
 channels-redis = "^4.2.1"
 django-cors-headers = "^4.6.0"
+chess = "^1.11.1"
+numpy = "^2.2.1"
+gym-chess = "^0.1.1"
+torch = "^2.5.1"
 
 
 [tool.poetry.group.dev.dependencies]

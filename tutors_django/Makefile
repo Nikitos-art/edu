@@ -12,7 +12,7 @@ runserver:
 	poetry run python manage.py runserver
 
 daphne:
-	poetry run daphne -b 127.0.0.1 -p 8001 tutors_django.asgi:application
+	poetry run daphne -b 127.0.0.1 -p 8001 config.asgi:application
 
 # Run Django migrations
 migrate:

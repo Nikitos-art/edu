@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import GamesListView, CrosswordView, ChessView, HanziView, ai_move
+from .views import GamesListView, CrosswordView, ChessView, HanziView
 
 
 app_name = 'games'

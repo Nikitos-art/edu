@@ -8,7 +8,7 @@ install:
 	poetry install
 
 # Run the Django development server
-runserver:
+run:
 	poetry run python manage.py runserver
 
 daphne:

@@ -27,7 +27,10 @@ def inquiry_form(request):
             message = form.cleaned_data['message']
 
             # List of words to check for
-            forbidden_words = ['win', 'won', 'winning', 'winnings', 'prize', 'bonus', '$', 'ø']
+            forbidden_words = 
+            ['win', 'won', 'winning', 'winnings', 'prize', 'bonus', '$', 'ø', 'Ваш',
+            'прайс', 'Salam', 'მინდოდა', 'Szia', 'Hola', 'Salut', 'a href', 
+            ]
 
             # Check if any forbidden word is in the message
             if any(word in message.lower() for word in forbidden_words):

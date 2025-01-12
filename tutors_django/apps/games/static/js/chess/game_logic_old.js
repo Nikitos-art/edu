@@ -318,13 +318,13 @@ function isKingInCheck(simulatedBoardArray, currentColor) {
 }
 ///////////// END KING IN CHECK////////////////////////////////
 
-function generateAllValidMovesAI() {
+function AllValidMovesGenerator(inputPlayer) {
     const allMoves = [];
     const squares = document.querySelectorAll('#chessboard .square');
 
     squares.forEach(square => {
         const pieceImg = square.querySelector('.piece');
-        if (pieceImg && pieceImg.src.includes(PLAYER_TWO)) {
+        if (pieceImg && pieceImg.src.includes(inputPlayer)) {
             const piece = pieceImg.src.split('/').pop().split('.')[0].split('_')[0];
             const position = square.getAttribute('data-coordinate');
             const validMoves = getValidMovesForPieceAI(piece, square);
@@ -461,14 +461,13 @@ function unSimulateMove(move, boardArray) {
 }
 
 
-const previousMoves = [];  
+const previousMoves = [];
 
-
-function calculateBestMoveAI() {
+function calculateBestMoveAI(depth = 2) {
     const currentBoard = createBoardArray();
-    const allMoves = generateAllValidMovesAI();
+    const allMoves = AllValidMovesGenerator(PLAYER_TWO);
     let bestMove = null;
-    let bestScore = -Infinity; 
+    let bestScore = -Infinity;
 
     if (!allMoves || allMoves.length === 0) {
         console.error("No moves generated.");
@@ -478,41 +477,49 @@ function calculateBestMoveAI() {
     for (let i = 0; i < allMoves.length; i++) {
         const move = allMoves[i];
         const simulatedArray = simulateMove(move, currentBoard);
-        
+
         if (isKingInCheck(simulatedArray, PLAYER_TWO)) {
             unSimulateMove(move, simulatedArray);
             continue;
+        }
+
+        let moveScore = evaluateBoardAI(simulatedArray);
+
+        if (move.capturedPiece) {
+            moveScore += 20;
         } else {
-            let moveScore = evaluateBoardAI(simulatedArray); 
-            const isCapturingMove = move.capturedPiece ? true : false; 
+            moveScore += Math.random() * 0.5;
+        }
 
-            if (isCapturingMove) {
-                moveScore += 20;
-            } else {
-                moveScore += Math.random() * 0.5;
+        for (let j = 0; j < previousMoves.length; j++) {
+            const prevMove = previousMoves[j];
+            if (prevMove.from === move.from && prevMove.to === move.to) {
+                moveScore -= 5;
             }
+        }
 
-            for (let j = 0; j < previousMoves.length; j++) {
-                const prevMove = previousMoves[j]; // Use 'const' because this isn't reassigned
-                if (prevMove.from === move.from && prevMove.to === move.to) {
-                    moveScore -= 5;
+        if (depth > 0) {
+            const opponentMoves = AllValidMovesGenerator(PLAYER_ONE);
+            for (const oppMove of opponentMoves) {
+                if (isOpponentPieceAt(oppMove.to, PLAYER_TWO)) {
+                    console.log(`opponent piece st: ${oppMove.to}`);
+                    moveScore -= 20;
                 }
             }
+        }
 
-            //console.log("Before undoing move", JSON.stringify(simulatedArray));
-            unSimulateMove(move, simulatedArray);
+        unSimulateMove(move, simulatedArray);
 
-            if (moveScore > bestScore) {
-                bestScore = moveScore;
-                bestMove = move;
-            }
+        if (moveScore > bestScore) {
+            bestScore = moveScore;
+            bestMove = move;
         }
     }
 
     if (bestMove) {
         previousMoves.push(bestMove);
         if (previousMoves.length > 5) {
-            previousMoves.shift(); 
+            previousMoves.shift();
         }
     } else {
         const curBoard = createBoardArray();
@@ -521,11 +528,189 @@ function calculateBestMoveAI() {
         } else {
             alert(`Stalemate. It's a draw.`);
         }
-        
     }
 
     return bestMove;
 }
+
+function isOpponentPieceAt(toSquare, opponent) {
+    const allSquares = [...document.querySelectorAll('.square')];
+    const targerSquare = allSquares.find(square => square.getAttribute('data-coordinate') === toSquare);
+    return targerSquare.querySelector('.piece');
+}
+
+///////////////////Jan 8 23:55/////////////////////////
+// function calculateBestMoveAI(depth = 1) {
+//     const currentBoard = createBoardArray();
+//     const allMoves = AllValidMovesGenerator(PLAYER_TWO);
+//     let bestMove = null;
+//     let bestScore = -Infinity;
+
+//     if (!allMoves || allMoves.length === 0) {
+//         console.error("No moves generated.");
+//         return null;
+//     }
+
+//     for (let i = 0; i < allMoves.length; i++) {
+//         const move = allMoves[i];
+//         const simulatedArray = simulateMove(move, currentBoard);
+
+//         if (isKingInCheck(simulatedArray, PLAYER_TWO)) {
+//             unSimulateMove(move, simulatedArray);
+//             continue;
+//         }
+//         //console.log(`not in check`);
+//         let moveScore = evaluateBoardAI(simulatedArray);
+
+//         if (move.capturedPiece) {
+//             moveScore += 20;
+//         } else {
+//             moveScore += Math.random() * 0.5; 
+//         }
+
+//         // Penalize repetitive moves
+//         for (let j = 0; j < previousMoves.length; j++) {
+//             const prevMove = previousMoves[j];
+//             if (prevMove.from === move.from && prevMove.to === move.to) {
+//                 moveScore -= 5;
+//             }
+//         }
+
+//         if (depth > 0) {
+//             const opponentBestMove = calculateOpponentBestMove(simulatedArray, depth - 1);
+//             if (opponentBestMove) {
+//                 const opponentScore = evaluateBoardAI(simulateMove(opponentBestMove, simulatedArray));
+//                 moveScore -= opponentScore;
+//                 unSimulateMove(opponentBestMove, simulatedArray);
+//             }
+//         }
+
+//         unSimulateMove(move, simulatedArray);
+
+//         if (moveScore > bestScore) {
+//             bestScore = moveScore;
+//             bestMove = move;
+//         }
+//     }
+
+//     if (bestMove) {
+//         previousMoves.push(bestMove);
+//         if (previousMoves.length > 5) {
+//             previousMoves.shift();
+//         }
+//     } else {
+//         const curBoard = createBoardArray();
+//         if (isKingInCheck(curBoard, PLAYER_TWO)) {
+//             alert(`Checkmate! You win!`);
+//         } else {
+//             alert(`Stalemate. It's a draw.`);
+//         }
+//     }
+
+//     return bestMove;
+// }
+
+// function calculateOpponentBestMove(board, depth) {
+//     const opponentMoves = AllValidMovesGenerator(PLAYER_ONE);
+//     let bestScore = Infinity;
+//     let bestMove = null;
+
+//     for (let i = 0; i < opponentMoves.length; i++) {
+//         const move = opponentMoves[i];
+//         const simulatedArray = simulateMove(move, board);
+
+//         if (isKingInCheck(simulatedArray, PLAYER_ONE)) {
+//             unSimulateMove(move, simulatedArray);
+//             continue;
+//         }
+
+//         let moveScore = evaluateBoardAI(simulatedArray);
+
+//         if (depth > 0) {
+//             const aiBestMove = calculateBestMoveAI(depth - 1);
+//             if (aiBestMove) {
+//                 const aiScore = evaluateBoardAI(simulateMove(aiBestMove, simulatedArray));
+//                 moveScore += aiScore;
+//                 unSimulateMove(aiBestMove, simulatedArray);
+//             }
+//         }
+
+//         unSimulateMove(move, simulatedArray);
+
+//         if (moveScore < bestScore) {
+//             bestScore = moveScore;
+//             bestMove = move;
+//         }
+//     }
+
+//     return bestMove;
+// }
+
+// ############this works########################
+// function calculateBestMoveAI() {
+//     const currentBoard = createBoardArray();
+//     const allMoves = generateAllValidMovesAI();
+//     let bestMove = null;
+//     let bestScore = -Infinity; 
+
+//     if (!allMoves || allMoves.length === 0) {
+//         console.error("No moves generated.");
+//         return null;
+//     }
+
+//     for (let i = 0; i < allMoves.length; i++) {
+//         const move = allMoves[i];
+//         const simulatedArray = simulateMove(move, currentBoard);
+        
+//         if (isKingInCheck(simulatedArray, PLAYER_TWO)) {
+//             unSimulateMove(move, simulatedArray);
+//             continue;
+
+//         } else {
+//             let moveScore = evaluateBoardAI(simulatedArray);
+             
+//             const isCapturingMove = move.capturedPiece ? true : false; 
+
+//             if (isCapturingMove) {
+//                 moveScore += 20;
+//             } else {
+//                 moveScore += Math.random() * 0.5;
+//             }
+
+//             for (let j = 0; j < previousMoves.length; j++) {
+//                 const prevMove = previousMoves[j]; // Use 'const' because this isn't reassigned
+//                 if (prevMove.from === move.from && prevMove.to === move.to) {
+//                     moveScore -= 5;
+//                 }
+//             }
+
+//             //console.log("Before undoing move", JSON.stringify(simulatedArray));
+//             unSimulateMove(move, simulatedArray);
+
+//             if (moveScore > bestScore) {
+//                 bestScore = moveScore;
+//                 bestMove = move;
+//             }
+//         }
+//     }
+
+//     if (bestMove) {
+//         previousMoves.push(bestMove);
+//         if (previousMoves.length > 5) {
+//             previousMoves.shift(); 
+//         }
+//     } else {
+//         const curBoard = createBoardArray();
+//         if (isKingInCheck(curBoard, PLAYER_TWO)) {
+//             alert(`Checkmate! You win!`);
+//         } else {
+//             alert(`Stalemate. It's a draw.`);
+//         }
+        
+//     }
+
+//     return bestMove;
+// }
 
 function handleAIMove(move) {
     //console.log(`handleAIMove: ${move}`);

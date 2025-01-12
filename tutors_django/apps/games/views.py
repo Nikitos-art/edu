@@ -1,8 +1,11 @@
 from django.views.generic import TemplateView
-# from django.http import JsonResponse
-import chess
-# import torch
-# from .chess.chess_model_code import Model
+import torch
+import pickle
+import numpy as np
+from django.http import JsonResponse, HttpResponseBadRequest
+from chess import Board
+# from .chess.chess_model_code_1 import Model
+from .chess.chess_model_code_2 import ChessModel, board_to_matrix
 
 
 class GamesListView(TemplateView):
@@ -27,15 +30,72 @@ class HanziView(TemplateView):
         context['level'] = int(level) if level.isdigit() else 0
         return context
 
-model = None
+# model = None
 
+def prepare_input(board: Board):
+    matrix = board_to_matrix(board)
+    X_tensor = torch.tensor(matrix, dtype=torch.float32).unsqueeze(0)
+    return X_tensor
 
+# Load model and auxiliary data
+with open("/home/nikitos/Projects/edu/tutors_django/apps/games/chess/move_to_int_latest", "rb") as file:
+    move_to_int = pickle.load(file)
+
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+model = ChessModel(num_classes=len(move_to_int))
+model.load_state_dict(torch.load("/home/nikitos/Projects/edu/tutors_django/apps/games/chess/latest_chess_model.pth", map_location=device))
+model.to(device)
+model.eval()
+## STALE MATE IS NOT IMPLEMENTED! 
+int_to_move = {v: k for k, v in move_to_int.items()}
+
+def predict_move(board: Board):
+    """
+    Predict the best move for a given chess board.
+    """
+    X_tensor = prepare_input(board).to(device)
+    with torch.no_grad():
+        logits = model(X_tensor)
+
+    logits = logits.squeeze(0)  # Remove batch dimension
+    probabilities = torch.softmax(logits, dim=0).cpu().numpy()
+    legal_moves = list(board.legal_moves)
+    legal_moves_uci = [move.uci() for move in legal_moves]
+
+    # Sort moves by probabilities
+    sorted_indices = np.argsort(probabilities)[::-1]
+    for move_index in sorted_indices:
+        move = int_to_move[move_index]
+        if move in legal_moves_uci:
+            return move
+
+    return None
+
+def ai_move(request):
+    """
+    Django view to provide AI-generated moves.
+    """
+    fen = request.GET.get('fen')
+    if not fen:
+        return HttpResponseBadRequest("FEN string is required.")
+
+    try:
+        board = Board(fen)
+        best_move = predict_move(board)
+        if best_move:
+            return JsonResponse({"move": best_move})
+        else:
+            return JsonResponse({"error": "No valid move found."}, status=400)
+    except Exception as e:
+        return JsonResponse({"error": str(e)}, status=500)
+
+###########################################################
 # def load_model():
 #     """Load the trained chess model if not already loaded."""
 #     global model
 #     if model is None:
 #         model = Model()
-#         model.load_state_dict(torch.load('/home/nikitos/Projects/edu/tutors_django/apps/games/chess/chess_model_Jan6', 
+#         model.load_state_dict(torch.load('/home/nikitos/Projects/edu/tutors_django/apps/games/chess/chess_model.pth',
 #             weights_only=True))
 #         model.eval()
 

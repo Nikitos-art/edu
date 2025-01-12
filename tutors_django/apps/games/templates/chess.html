@@ -15,7 +15,7 @@
 
 <div id="chess-wraper-pre">
     <div id="gameModeSelector" class="game-mode-selector">
-        <button id="playAI">Play with AI</button>
+        <button id="playAI">Play with Computer</button>
         <button id="playHuman">Play with Another Player</button>
     </div>
 </div>
@@ -64,6 +64,6 @@
 
 </div>
 {% block script %}
-    <script src="{% static 'js/chess/game_logic_old.js' %}" defer type="module" crossorigin="anonymous"></script>
+    <script src="{% static 'js/chess/game_logic.js' %}" defer type="module" crossorigin="anonymous"></script>
 {% endblock %}
 {% endblock %}

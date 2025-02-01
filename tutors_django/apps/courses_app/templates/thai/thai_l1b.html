@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block head %}
+<meta name="keywords" content="Thai Language Practice">
+{% endblock %}
+
+{% block title %}Thai Language Practice{% endblock %}
+
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/thai.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@100..900&display=swap" rel="stylesheet">
+{% endblock %}
+
+
+{% block header %}
+    {% include 'includes/inc_header.html' %}
+{% endblock %}
+
+{% block site_content %}
+
+<div class="thai_wrapper">
+    <h1>Thai - Lesson 1 B</h1>
+    <div class="lang_dialogue_container">
+        
+        <div class="lang_dialog_elem">
+            <div class="image-container">
+                <img src="{% static 'img/thai_kon_a.png' %}" alt="thai_kon_a" class="thai_kon_a" loading="lazy">
+                <div class="bubble_text">
+                    <p class="bubble bubble-bottom-right">สวัสดีครับ<br>
+                        <span class="subtext">Sà-wàt-dii khráp</span>
+                    </p>                    
+                </div>
+            </div>
+        </div>
+
+        <div class="lang_dialog_elem">
+            <div class="image-container">
+                <img src="{% static 'img/thai_kon_b.png' %}" alt="thai_kon_b" class="thai_kon_b" loading="lazy">
+                <div class="bubble_text">
+                    <p class="bubble bubble-bottom-right">สวัสดีค่ะ<br>
+                        <span class="subtext">Sà-wàt-dii khà</span>
+                    </p>
+                </div>
+            </div>            
+        </div>
+
+        <div class="lang_dialog_elem">
+            <div class="image-container">
+                <img src="{% static 'img/thai_kon_a.png' %}" alt="thai_kon_a" class="thai_kon_a" loading="lazy">
+                <div class="bubble_text">
+                    <p class="bubble bubble-bottom-left">คุณมาจากประเทศอะไรครับ?<br>
+                        <span class="subtext">Khun maa jàak bprà-thèt à-rai kráp</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="lang_dialog_elem">
+            <div class="image-container">
+                <img src="{% static 'img/thai_kon_b.png' %}" alt="thai_kon_b" class="thai_kon_b" loading="lazy">
+                <div class="bubble_text">
+                    <p class="bubble bubble-bottom-right">ฉันมาจากประเทศไทยค่ะ<br>
+                        <span class="subtext">Chán maa jàak bprà-thèt Thai khà</span>
+                    </p>
+                </div>
+            </div>            
+        </div>
+
+        <div class="lang_dialog_elem">
+            <div class="image-container">
+                <img src="{% static 'img/thai_kon_a.png' %}" alt="thai_kon_a" class="thai_kon_a" loading="lazy">
+                <div class="bubble_text">
+                    <p class="bubble bubble-bottom-left">ยินดีที่ได้รู้จัก<br>
+                        <span class="subtext">Yin-dee thîi dâi rúu-jàk</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="lang_dialog_elem">
+            <div class="image-container">
+                <img src="{% static 'img/thai_kon_b.png' %}" alt="thai_kon_b" class="thai_kon_b" loading="lazy">
+                <div class="bubble_text">
+                    <p class="bubble bubble-bottom-right">ยินดีที่ได้รู้จักเช่นกัน<br>
+                        <span class="subtext">Yin-dee thîi dâi rúu-jàk chên-gan</span>
+                    </p>
+                </div>
+            </div>            
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
+
+{% block footer %}
+    {% include 'includes/inc_footer.html' %}
+{% endblock %}

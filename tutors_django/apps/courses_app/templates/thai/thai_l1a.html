@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block head %}
+<meta name="keywords" content="Thai Language Practice">
+{% endblock %}
+
+{% block title %}Thai Language Practice{% endblock %}
+
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/thai.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@100..900&display=swap" rel="stylesheet">
+{% endblock %}
+
+
+{% block header %}
+    {% include 'includes/inc_header.html' %}
+{% endblock %}
+
+{% block site_content %}
+
+<div class="thai_wrapper">
+    <h1>Thai - Lesson 1 A</h1>
+    <img src="{% static 'img/thai_kon_1.png' %}" alt="Thai Image" class="thai_l1" loading="lazy">
+
+    <div class="lang_container">
+
+        <div class="lang_elem" data-audio="{% static 'audio/sawatdee.wav' %}">
+            <p class="text_eng">Hello<br></p>
+            <p class="text_thai">สวัสดี<br></p>
+            <p class="text_transcript">Sà-wàt-dii</p>
+        </div>
+
+        <div class="lang_elem" data-audio="{% static 'audio/pom_chue.wav' %}">
+            <p class="text_eng">My name is<br></p>
+            <p class="text_thai">ผมชื่อ<br></p>
+            <p class="text_transcript">Phŏm chêu</p>
+        </div>
+        <div class="lang_elem" data-audio="{% static 'audio/pom_ma_jaak.wav' %}">
+            <p class="text_eng">I'm from<br></p>
+            <p class="text_thai">ผมมาจาก<br></p>
+            <p class="text_transcript">Phŏm maa jàak</p>
+        </div>
+        <div class="lang_elem" data-audio="{% static 'audio/pom_yu_pra.wav' %}">
+            <p class="text_eng">I've been in Thailand for<br></p>
+            <p class="text_thai">ผมอยู่ประเทศไทยมาแล้ว<br></p>
+            <p class="text_transcript">Phŏm yùu bprà-têet Thai maa láew</p>
+        </div>
+        <div class="lang_elem" data-audio="{% static 'audio/pom_choob.wav' %}">
+            <p class="text_eng">I like<br></p>
+            <p class="text_thai">ผมชอบ<br></p>
+            <p class="text_transcript">Phŏm chôp</p>        
+        </div>
+        <div class="lang_elem" data-audio="{% static 'audio/yin_dee.wav' %}">
+            <p class="text_eng">Nice to meet you<br></p>
+            <p class="text_thai">ยินดีที่ได้รู้จักครับ<br></p>
+            <p class="text_transcript">Yin-dee têe dâi róo-jàk khráp</p>            
+        </div>
+    </div>
+</div>
+
+
+{% block scripts %}
+    <script src="{% static 'js/thai_audio.js' %}" defer type="module" crossorigin="anonymous"></script>
+{% endblock %}
+{% endblock %}

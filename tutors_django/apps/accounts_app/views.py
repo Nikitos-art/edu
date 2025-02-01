@@ -45,6 +45,7 @@ class ResumeView(TemplateView):
     template_name = 'resume.html'
 
 
+
 def privacy_view(request):
     return render(request, 'privacy.html')
 

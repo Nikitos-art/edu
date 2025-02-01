@@ -8,6 +8,9 @@ from django.shortcuts import reverse
 from django.core.exceptions import ValidationError
 from django.contrib import messages
 # import os
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 def add_lesson(request):
@@ -88,3 +91,19 @@ class PyLogAnalyzerView(generic.TemplateView):
         except FileNotFoundError:
             context['file_content'] = "Error: File not found."
         return context
+
+
+class ThaiMainView(generic.TemplateView):
+    template_name = 'thai/thai_main.html'
+
+
+class ThaiL1AView(generic.TemplateView):
+    template_name = 'thai/thai_l1a.html'
+
+
+class ThaiL1BView(generic.TemplateView):
+    template_name = 'thai/thai_l1b.html'
+
+
+class ThaiAlphabetView(generic.TemplateView):
+    template_name = 'thai/thai_alpha.html'

@@ -48,9 +48,10 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            'apps.account_app/templates',
-            'apps.blog_app/templates',
-            'apps.games/templates',
+            # 'apps.account_app/templates',
+            # 'apps.blog_app/templates',
+            # 'apps.games/templates',
+            # 'apps.courses_app/templates'
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -116,6 +117,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR / 'apps/quiz_app/static'),
     os.path.join(BASE_DIR / 'apps/games/static'),
+    os.path.join(BASE_DIR / 'apps/courses_app/static'),
 ]
 
 

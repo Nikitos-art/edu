@@ -21,19 +21,23 @@ def inquiry_form(request):
     if request.method == 'POST':
         form = InquiryForm(request.POST)
         if form.is_valid():
-            # Get form data
+
             name = form.cleaned_data['name']
             email = form.cleaned_data['email']
             message = form.cleaned_data['message']
 
-            # List of words to check for
-            forbidden_words = ['win', 'won', 'winning', 'winnings', 'prize', 'bonus', '$', 'ø', 'Ваш', 'прайс', 'Salam', 'მინდოდა', 'Szia', 'Hola', 'Salut', 'a href']
+            forbidden_words = ['win', 'won', 'winning', 'winnings', 'prize', 'bonus', '$', 'ø', 'Ваш', 
+            'прайс', 'Salam', 'მინდოდა', 'Szia', 'Hola', 'Salut', 'a href', 'our account', 'payout',
+            'Telegram', 'æ', 'SEO', 'tonight', 'Your account', 'your account']
 
-            # Check if any forbidden word is in the message
+            banned_names = ['Antallnoli', 'Robertencop', 'Muhammadencop']
+
+            if name in banned_names:
+                return HttpResponse("Your banned.", status=403)
+
             if any(word in message.lower() for word in forbidden_words):
                 return HttpResponse("Bugger off.", status=404)
 
-            # Send an email
             subject = 'New Inquiry'
             message_body = f'Name: {name}\n' \
                            f'Email: {email}\n' \

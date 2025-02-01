@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block head %}
+    <meta name="keywords" content="Thai Language Practice">
+{% endblock %}
+
+{% block title %}Thai Language Practice{% endblock %}
+
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/thai_alphabet.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@100..900&display=swap" rel="stylesheet">
+{% endblock %}
+
+
+{% block header %}
+    {% include 'includes/inc_header.html' %}
+{% endblock %}
+
+{% block site_content %}
+
+    <div class="thai_wrapper">
+
+        <div class="alphabet_container">
+            
+            <div class="char_info">
+                <div class="letter_box">
+                    <p class="letter">
+                        ก
+                    </p>
+                    <p>
+                        g
+                    </p>
+                </div>
+                <div class="word_box">
+                    <p class="word">
+                        ไก่
+                    </p>
+                    <p>
+                        gaw: gai
+                    </p>
+                </div>
+                <div class="class_box">
+                    <p class="class">
+                        class: <span>M</span>
+                    </p>
+                    <p>
+                        Chicken
+                    </p>
+                </div>
+            </div>
+
+            <div class="chars_grid">
+                
+                <div class="chard_grid_char" onclick="characterSelection('ก')">ก</div>
+                <div class="chard_grid_char" onclick="characterSelection('ข')">ข</div>
+                <div class="chard_grid_char" onclick="characterSelection('ฃ')">ฃ</div>
+                <div class="chard_grid_char" onclick="characterSelection('ค')">ค</div>
+                <div class="chard_grid_char" onclick="characterSelection('ฅ')">ฅ</div>
+                <div class="chard_grid_char" onclick="characterSelection('ฆ')">ฆ</div>
+                <div class="chard_grid_char" onclick="characterSelection('ง')">ง</div>
+                <div class="chard_grid_char" onclick="characterSelection('จ')">จ</div>
+                <div class="chard_grid_char" onclick="characterSelection('ฉ')">ฉ</div>
+                <div class="chard_grid_char" onclick="characterSelection('ช')">ช</div>
+                <div class="chard_grid_char" onclick="characterSelection('ซ')">ซ</div>
+                <div class="chard_grid_char" onclick="characterSelection('ฌ')">ฌ</div>
+                <div class="chard_grid_char" onclick="characterSelection('ญ')">ญ</div>
+                <div class="chard_grid_char" onclick="characterSelection('ฎ')">ฎ</div>
+                <div class="chard_grid_char" onclick="characterSelection('ฏ')">ฏ</div>
+                <div class="chard_grid_char" onclick="characterSelection('ฐ')">ฐ</div>
+                <div class="chard_grid_char" onclick="characterSelection('ฑ')">ฑ</div>
+                <div class="chard_grid_char" onclick="characterSelection('ฒ')">ฒ</div>
+                <div class="chard_grid_char" onclick="characterSelection('ณ')">ณ</div>
+                <div class="chard_grid_char" onclick="characterSelection('ด')">ด</div>
+                <div class="chard_grid_char" onclick="characterSelection('ต')">ต</div>
+                <div class="chard_grid_char" onclick="characterSelection('ถ')">ถ</div>
+                <div class="chard_grid_char" onclick="characterSelection('ท')">ท</div>
+                <div class="chard_grid_char" onclick="characterSelection('ธ')">ธ</div>
+                <div class="chard_grid_char" onclick="characterSelection('น')">น</div>
+                <div class="chard_grid_char" onclick="characterSelection('บ')">บ</div>
+                <div class="chard_grid_char" onclick="characterSelection('ป')">ป</div>
+                <div class="chard_grid_char" onclick="characterSelection('ผ')">ผ</div>
+                <div class="chard_grid_char" onclick="characterSelection('ฝ')">ฝ</div>
+                <div class="chard_grid_char" onclick="characterSelection('พ')">พ</div>
+                <div class="chard_grid_char" onclick="characterSelection('ฟ')">ฟ</div>
+                <div class="chard_grid_char" onclick="characterSelection('ภ')">ภ</div>
+                <div class="chard_grid_char" onclick="characterSelection('ม')">ม</div>
+                <div class="chard_grid_char" onclick="characterSelection('ย')">ย</div>
+                <div class="chard_grid_char" onclick="characterSelection('ร')">ร</div>
+                <div class="chard_grid_char" onclick="characterSelection('ล')">ล</div>
+                <div class="chard_grid_char" onclick="characterSelection('ว')">ว</div>
+                <div class="chard_grid_char" onclick="characterSelection('ศ')">ศ</div>
+                <div class="chard_grid_char" onclick="characterSelection('ษ')">ษ</div>
+                <div class="chard_grid_char" onclick="characterSelection('ส')">ส</div>
+                <div class="chard_grid_char" onclick="characterSelection('ห')">ห</div>
+                <div class="chard_grid_char" onclick="characterSelection('ฬ')">ฬ</div>
+                <div class="chard_grid_char" onclick="characterSelection('อ')">อ</div>
+                <div class="chard_grid_char" onclick="characterSelection('ฮ')">ฮ</div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+{% block scripts %}
+    <script src="{% static 'js/thai_alpha.js' %}" defer type="module" crossorigin="anonymous"></script>
+{% endblock %}
+{% endblock %}

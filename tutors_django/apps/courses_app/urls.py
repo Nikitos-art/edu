@@ -1,7 +1,8 @@
 from django.urls import path
 from apps.courses_app.views import (
     CoursesView, PythonView, PyOneView, PyTwoView, PyBankAccView,
-    PyDataStructureListView, PyDataStructureDictView, PyAlgoAxisView, PyLogAnalyzerView
+    PyDataStructureListView, PyDataStructureDictView, PyAlgoAxisView, PyLogAnalyzerView, ThaiMainView,
+    ThaiL1AView, ThaiL1BView, ThaiAlphabetView
 )
 
 
@@ -17,4 +18,8 @@ urlpatterns = [
     path('python_data_structure_dict/', PyDataStructureDictView.as_view(), name='python_data_structure_dict'),
     path('python_algo_axis/', PyAlgoAxisView.as_view(), name='python_algo_axis'),
     path('python_log_analyzer/', PyLogAnalyzerView.as_view(), name='python_log_analyzer'),
+    path('thai/', ThaiMainView.as_view(), name='thai'),
+    path('thai_l1a/', ThaiL1AView.as_view(), name='thai_l1a'),
+    path('thai_l1b/', ThaiL1BView.as_view(), name='thai_l1b'),
+    path('thai_alphabet/', ThaiAlphabetView.as_view(), name='thai_alphabet')
 ]

@@ -12,7 +12,7 @@ from django.urls import re_path
 from django.core.asgi import get_asgi_application
 from channels.routing import ProtocolTypeRouter, URLRouter
 from channels.auth import AuthMiddlewareStack
-from games.chess.consumers import ChessConsumer
+from apps.games.chess.consumers import ChessConsumer
 
 from pathlib import Path
 from dotenv import load_dotenv

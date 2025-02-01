@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block head %}
+<meta name="keywords" content="Thai Language Practice">
+{% endblock %}
+
+{% block title %}Thai Language Practice{% endblock %}
+
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/thai.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@100..900&display=swap" rel="stylesheet">
+{% endblock %}
+
+
+{% block header %}
+    {% include 'includes/inc_header.html' %}
+{% endblock %}
+
+{% block site_content %}
+
+<div>
+    <a href="{% url 'courses_app:thai_l1a' %}">Thai Lesson 1a</a>
+</div>
+
+<div>
+    <a href="{% url 'courses_app:thai_l1b' %}">Thai Lesson 1b</a>
+</div>
+
+<div>
+    <a href="{% url 'courses_app:thai_alphabet' %}">Thai Alphabet (consonants)</a>
+</div>
+
+{% endblock %}
+
+
+{% block footer %}
+    {% include 'includes/inc_footer.html' %}
+{% endblock %}

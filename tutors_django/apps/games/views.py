@@ -38,12 +38,12 @@ def prepare_input(board: Board):
     return X_tensor
 
 # Load model and auxiliary data
-with open("/home/nikitos/Projects/edu/tutors_django/apps/games/chess/move_to_int_latest", "rb") as file:
+with open("/home/nikitos/Projects/edu/tutors_django/apps/games/chess/move_to_int_latest_122", "rb") as file:
     move_to_int = pickle.load(file)
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model = ChessModel(num_classes=len(move_to_int))
-model.load_state_dict(torch.load("/home/nikitos/Projects/edu/tutors_django/apps/games/chess/latest_chess_model.pth", map_location=device))
+model.load_state_dict(torch.load("/home/nikitos/Projects/edu/tutors_django/apps/games/chess/latest_chess_model_122.pth", map_location=device))
 model.to(device)
 model.eval()
 ## STALE MATE IS NOT IMPLEMENTED! 

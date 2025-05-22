@@ -1,0 +1,27 @@
+# Use official Python image
+FROM python:3.11
+
+# Set working directory
+WORKDIR /app
+
+# Install Poetry & Supervisord (only once)
+RUN pip install poetry supervisor  
+
+# Copy Poetry files first to leverage Docker caching
+COPY pyproject.toml poetry.lock ./
+
+# Install dependencies (including dev dependencies)
+RUN poetry config virtualenvs.create false && poetry install --no-root
+
+# Copy all project files
+COPY . .
+
+# Copy Supervisor config file
+COPY supervisord.conf /etc/supervisord.conf
+
+# Expose both Django & Daphne ports
+EXPOSE 8000 8001
+
+# Start both Django runserver & Daphne via Supervisor
+CMD ["/usr/local/bin/supervisord", "-n", "-c", "/etc/supervisord.conf"]
+

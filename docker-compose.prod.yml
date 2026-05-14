@@ -1,0 +1,67 @@
+version: '3.8'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.prod  # A separate production Dockerfile
+    container_name: django_prod
+    env_file: 
+      - .env
+    environment:
+      - DEBUG=0
+      - ALLOWED_HOSTS=yourdomain.com
+      - PYTHONPATH=/app/tutors_django
+    depends_on:
+      - db
+      - redis
+    volumes:
+      - static_volume:/app/static  # Store static files separately
+      - media_volume:/app/media  # Store user uploads separately
+    working_dir: /app
+    command: ["/usr/local/bin/supervisord", "-c", "/etc/supervisord.conf"]
+
+  db:
+    image: postgres:16.6
+    container_name: postgres_prod
+    env_file:
+      - .env
+    environment:
+      - DB_HOST=db
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres 
+      - POSTGRES_DB=edudb
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7.2
+    container_name: redis_prod
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - redisdata:/data
+    command: redis-server --save 60 1 --loglevel warning
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx_prod
+    restart: always
+    depends_on:
+      - web
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - static_volume:/app/static  # Serve static files
+      - media_volume:/app/media  # Serve user uploads
+      - ./certbot/www:/var/www/certbot  # For Let's Encrypt
+      - ./certbot/conf:/etc/letsencrypt  # For SSL certificates
+
+volumes:
+  pgdata:
+  redisdata:
+  static_volume:
+  media_volume:

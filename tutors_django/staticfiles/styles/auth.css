@@ -1,0 +1,141 @@
+
+main {
+    background: repeating-linear-gradient(180deg, #f0f0f0, #f0f0f0 2px, #ffffff 2px, #ffffff 20px);
+}
+
+.auth-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.privacy-register {
+    display: flex;
+}
+
+.privacy-box {
+    position: relative;
+    margin-top: 35px;
+    margin-left: 10px;
+}
+
+
+.log-form, .reg-form {
+    width: 35vw;
+    height: auto;
+    position: relative;
+    border-radius: 10px;
+    border: 2px solid rgba(255,255,255,0.1);
+    box-shadow: 0 0 40px rgba(8,7,16,0.6);
+    padding: 50px 35px;
+    margin-bottom: 50px;
+    margin-top: 50px;
+    border: 2px solid black;
+    filter: brightness(100%);
+    background-position: center;
+    background-size: auto;
+}
+
+
+.reg-form-content {
+    bottom: 20%;
+}
+
+#id_user_role {
+    width: 30%;
+}
+
+.log-h3, .reg-h3 {
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 42px;
+    text-align: center;
+    color: black;
+}
+
+.log-label, .reg-label {
+    display: block;
+    margin-top: 30px;
+    font-size: 16px;
+    font-weight: 500;
+    color: rgb(0, 0, 0);
+    font-weight: 600;
+}
+
+.reg-label {
+    margin-top: 12px;
+}
+
+.log-input, .reg-input {
+    display: block;
+    height: 50px;
+    width: 80%;
+    background-color: rgb(255, 255, 255);
+    color:black;
+    border-radius: 3px;
+    padding: 0 10px;
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: 300;
+}
+
+.reg-input {
+    margin-top: 15px;
+}
+
+::placeholder{
+    color: #000000;
+}
+
+.sub-btn {
+    display: flex;
+    color: black;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    background: hsl(187 75% 64%);
+    border-radius: 0.6rem;
+    font-weight: 700;
+    border: 0.35rem solid;
+    height: 50px;
+    width: 175px;
+    position: relative;
+    left: 15px;
+    transition: background-color 0.3s ease;
+    margin-right: 30px;
+    margin-top: 20px;
+}
+
+.sub-btn:hover {
+  background-color: hsl(211, 94%, 31%); 
+}
+
+#auth-btn-login {
+    width: 140px;
+    left: -2px;
+    top: 10px;
+}
+
+#auth-btn {
+    left: -2px;
+}
+
+#auth-svg {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  bottom: 2px;
+  padding-right: 10px;
+}
+
+@media screen and (max-width: 600px) {
+    .log-form, .reg-form {
+        width: 80%;
+    }
+}
+
+@media screen and (min-width: 601px) and (max-width: 900px) {
+    .log-form, .reg-form {
+        width: 60%;
+    }
+}

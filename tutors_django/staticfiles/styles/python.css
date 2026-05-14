@@ -1,0 +1,118 @@
+.py-heading {
+    display: inline-flex; 
+    align-items: center;
+    gap: 10px;
+}
+
+.py-img {
+    max-width: 50px; 
+    height: auto;
+}
+
+.task-container {
+    background: #f9f9f9;  
+    padding: 20px;  
+    margin: 20px 0 0 20px;  
+    max-width: 50em;
+    min-width: 20em; 
+}
+/* signal */
+
+.task-elem {
+    padding: 5px;  
+    margin: 2px 0 0 2px;  
+    border-radius: 8px;  
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.task-container h5 {
+    font-size: 1.2rem;  
+    font-weight: bold;
+    color: #333;  
+    margin-bottom: 10px;  
+}
+
+.task-container p {
+    font-size: 1rem;  
+    color: #666;  
+    line-height: 1.6;  
+}
+
+.task-elem:hover {
+    transform: translateY(-5px); 
+    box-shadow: 0 8px 16px hsl(187 75% 64%);
+}
+
+.py_container {
+    margin: 0;
+    height: auto;
+    display: flex;
+    align-items: center; 
+    flex-direction: column;
+}
+
+.py_header {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.py_item_list {
+    display: flex;
+    align-items: center;
+}
+
+.py_item {
+    border: 2px solid black;
+    margin: 10px;
+    padding: 10px;
+}
+
+.py_item:hover {
+    box-shadow: 0 8px 16px hsl(187 75% 64%);
+}
+
+/* code page */
+
+.py_console, .task-container, #output, #py_show_btn {
+    margin: 30px;
+}
+
+#yourcode {
+    resize: vertical; 
+}
+
+#py_show_btn {
+    position: relative;
+    left: 40%;
+}
+
+/* buttons */
+.py_btn {
+	/* display: flex; */
+	color: black;
+	/* padding: 0.25rem 5rem; */
+	text-decoration: none;
+	background: hsl(187 75% 64%);
+	border-radius: 0.6rem;
+	font-weight: 500;
+    border: 0.25rem solid;
+    /* height: 50px;
+    width: 150px; */
+    /* position: relative; */
+    /* margin-top: 5px; */
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+}
+
+.py_btn:hover {
+  background-color: hsl(211, 94%, 31%); 
+}
+/* buttons end */
+
+@media (max-width: 768px) { 
+    #yourcode {
+        max-width: 100%; 
+        font-size: 14px; 
+    }
+}

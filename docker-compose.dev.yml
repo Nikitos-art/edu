@@ -1,0 +1,125 @@
+version: "3.9"
+
+services:
+  # Django dev server (runserver) - port 8000
+  django:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: django_dev_runserver
+    env_file: .env
+    environment:
+      DEBUG: "1"
+      ALLOWED_HOSTS: "*"
+      PYTHONPATH: /app/tutors_django
+    depends_on:
+      - db
+      - redis
+    volumes:
+      - .:/app
+    working_dir: /app/tutors_django
+    command: python manage.py runserver 0.0.0.0:8000
+    ports:
+      - "8000:8000"
+
+  # Daphne ASGI server (WebSockets/Channels) - port 8002
+  daphne:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: django_dev_daphne
+    env_file: .env
+    environment:
+      DEBUG: "1"
+      ALLOWED_HOSTS: "*"
+      PYTHONPATH: /app/tutors_django
+    depends_on:
+      - db
+      - redis
+    volumes:
+      - .:/app
+    working_dir: /app/tutors_django
+    # NOTE: use the correct import path to your asgi application
+    command: daphne -b 0.0.0.0 -p 8001 config.asgi:application
+    ports:
+      - "8001:8001"
+
+  db:
+    image: postgres:16.6
+    container_name: postgres_dev
+    env_file: .env
+    environment:
+      POSTGRES_USER: ${PSQL_USER}
+      POSTGRES_PASSWORD: ${PSQL_PSWD}
+      POSTGRES_DB: ${PSQL_DB_NAME}
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7.2
+    container_name: redis_dev
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - redisdata:/data
+    command: redis-server --save 60 1 --loglevel warning
+
+volumes:
+  pgdata:
+  redisdata:
+
+
+# services:
+#   web:
+#     build:
+#       context: .
+#       dockerfile: Dockerfile.dev
+#     container_name: django_dev
+#     env_file: 
+#       - .env
+#     environment:
+#       - DEBUG=1
+#       - ALLOWED_HOSTS=*
+#       - PYTHONPATH=/app/tutors_django
+#     depends_on:
+#       - db
+#       - redis  # Ensure Redis starts before Django
+#     volumes:
+#       - .:/app
+#     working_dir: /app/tutors_django
+#     command: ["/usr/local/bin/supervisord", "-c", "/etc/supervisord.conf"]
+#     ports:
+#       - "8000:8000"
+#       - "8001:8001"
+
+#   db:
+#     image: postgres:16.6
+#     container_name: postgres_dev
+#     env_file:
+#       - .env
+#     environment:
+#       - DB_HOST=db
+#       - POSTGRES_USER=${PSQL_USER}
+#       - POSTGRES_PASSWORD=${PSQL_PSWD}
+#       - POSTGRES_DB=${PSQL_DB_NAME}
+#     ports:
+#       - "5432:5432"
+#     volumes:
+#       - pgdata:/var/lib/postgresql/data
+
+#   redis:
+#     image: redis:7.2
+#     container_name: redis_dev
+#     restart: always
+#     ports:
+#       - "6379:6379"
+#     volumes:
+#       - redisdata:/data
+#     command: redis-server --save 60 1 --loglevel warning
+
+# volumes:
+#   pgdata:
+#   redisdata:
